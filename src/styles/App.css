@@ -1,0 +1,39 @@
+/* import statements must come first https://developer.mozilla.org/en-US/docs/Web/CSS/@import*/
+@import "../bootstrap4/css/bootstrap.css";
+@import "../bootstrap4/css/bootstrap-grid.css";
+@import "../bootstrap4/css/bootstrap-reboot.css";
+
+
+/* my custom styles*/
+#cat-list li {
+  display: inline;
+  list-style-type: none;
+  padding-right: 20px;
+}
+
+
+/*below is default code from create-react-app*/
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
