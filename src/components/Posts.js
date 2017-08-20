@@ -12,20 +12,22 @@ class Posts extends Component {
             <div id="post-view">
 
                 <table className="table table-sm table-responsive">
+                    <thead>
+                    <tr>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>voteScore</th>
+                    </tr>
+                    </thead>
                     <tbody>
-                        <thead>
-                            <tr>
-                                <th><td>Author</td></th>
-                                <th><td>Category</td></th>
-                                <th><td>voteScore</td></th>
-                            </tr>
-                        </thead>
                         <tr><td>Post Title</td></tr>
                         <tr><td>this will be the post text</td></tr>
-                        <tr className="table-info">
-                            <td>id</td><td>timestamp</td>
-                        </tr>
                     </tbody>
+                    <tfoot>
+                    <tr className="table-info">
+                        <td>id</td><td>timestamp</td>
+                    </tr>
+                    </tfoot>
                 </table>
 
             </div>
