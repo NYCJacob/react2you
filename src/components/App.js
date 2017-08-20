@@ -31,7 +31,7 @@ class App extends Component {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    submitCategories = () => {
+    submitCategory = () => {
         this.props.store.dispatch(addCategory({
             name: this.input.value,
             path : this.input.value,

@@ -16,7 +16,7 @@ export function allCategories () {
 
 export  function addCategory( newCategory) {
     return {
-        type: ALL_CATEGORIES,
+        type: ADD_CATEGORY,
         newCategory : newCategory,
     }
 }
