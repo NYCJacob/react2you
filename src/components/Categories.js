@@ -6,17 +6,39 @@ import PropTypes from 'prop-types';
  * @constructor
  */
 class Categories extends Component {
+    state = {
+        categories: null
+    }
+
+    componentDidMount () {
+        const { store } = this.props
+
+        store.subscribe(() => {
+               this.setState( () => {
+                   categories: store.getState()
+               })
+            })
+    }
 
     render() {
         return (
             <div id="cat-view">
-
-               <ul id="cat-list">
-                   <li>Cat 1</li>
-                   <li>Cat 2</li>
-                   <li>Cat 3</li>
-                   <li>Cat 4</li>
-               </ul>
+                <div>
+                   <ul id="cat-list">
+                       <li>Cat 1</li>
+                       <li>Cat 2</li>
+                       <li>Cat 3</li>
+                       <li>Cat 4</li>
+                   </ul>
+                </div>
+                <div>
+                    <input
+                        type="'text"
+                        ref={(input) => this.input = input}
+                        placeholder="enter new category"
+                    />
+                    <button onClick={this.submitCategory}>Submit</button>
+                </div>
 
             </div>
         )

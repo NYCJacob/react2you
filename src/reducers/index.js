@@ -3,9 +3,11 @@ import { combineReducers } from 'redux'
 import {
     ALL_POSTS,
 } from '../actions'
+import {ADD_CATEGORY, ALL_CATEGORIES} from "../actions/index";
 
 
 // this is taken from server posts file
+
 const samplePosts = {
     "8xf0y6ziyjabvozdd253nd": {
         id: '8xf0y6ziyjabvozdd253nd',
@@ -29,8 +31,7 @@ const samplePosts = {
     }
 };
 
-const sampleCats = {
-    categories: [
+const sampleCats = [
         {
             name: 'react',
             path: 'react'
@@ -44,25 +45,32 @@ const sampleCats = {
             path: 'udacity'
         }
     ]
-};
 
-function managePosts (state = samplePosts, action) {
+
+const initialState = {samplePosts, sampleCats};
+
+function commentApp (state = initialState, action) {
     // const { day, recipe, meal } = action
 
     switch (action.type) {
         case ALL_POSTS :
             return state;
 
+        case ALL_CATEGORIES :
+            return state;
+
+        case ADD_CATEGORY :
+            return Object.assign({}, state, {
+                [sampleCats]: action.newCategory
+            })
 
         default :
             return state;
     }
 }
 
-function manageCategories () {
-    console.log('hit manageCategories');
-}
+
 
 export default combineReducers({
-    managePosts,
+    commentApp,
 })
