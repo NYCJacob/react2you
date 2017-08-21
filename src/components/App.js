@@ -34,7 +34,7 @@ class App extends Component {
     submitCategory = () => {
         this.props.store.dispatch(addCategory({
             name: this.input.value,
-            path : this.input.value,
+            pathName : this.input.value,
         }))
 
         this.input.value = ''

@@ -59,10 +59,13 @@ function commentApp (state = initialState, action) {
             return state;
 
         case ADD_CATEGORY :
-            console.log( action);
-            const { name, path } = action.newCategory;
-            console.log( name, path);
-            return Object.assign({}, state, {sampleCats : {name : name, path : path} } );
+            const { name, pathName } = action.newCategory;
+            console.log( name, pathName);
+            return Object.assign({}, state, {
+                sampleCats: [
+                    ...state.sampleCats,
+                    {name : name, path : pathName}
+            ]} )
 
         default :
             return state;
