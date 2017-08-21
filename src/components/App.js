@@ -14,14 +14,16 @@ class App extends Component {
         commentApp: this.props.store.getState().commentApp
     }
 
-    // componentDidMount () {
-    //     const { store } = this.props;
-    //
-    //     this.setState( () => {
-    //         store.getState().commentApp
-    //     })
-    //
-    // }
+    componentDidMount () {
+        const { store } = this.props;
+
+        store.subscribe(() => {
+            this.setState(() => ({
+                commentApp: store.getState()
+            }))
+        })
+
+    }
 
      // generate random integer for key index where no unique value available
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -51,7 +53,7 @@ class App extends Component {
                   {/*show categories*/}
                       <div id="cat-view">
                           <div>
-                              {/*{ console.log (this.state.commentApp.sampleCats)}*/}
+                              { console.log (this.state.commentApp.sampleCats)}
                               <ul id="cat-list">
                                   {
                                       this.state.commentApp.sampleCats.map( (categoryObj) => (
