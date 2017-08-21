@@ -50,7 +50,6 @@ const sampleCats = [
 const initialState = {samplePosts, sampleCats};
 
 function commentApp (state = initialState, action) {
-    // const { day, recipe, meal } = action
 
     switch (action.type) {
         case ALL_POSTS :
@@ -60,9 +59,10 @@ function commentApp (state = initialState, action) {
             return state;
 
         case ADD_CATEGORY :
-            return Object.assign({}, state, {
-                [sampleCats]: action.newCategory
-            })
+            console.log( action);
+            const { name, path } = action.newCategory;
+            console.log( name, path);
+            return Object.assign({}, state, {sampleCats : {name : name, path : path} } );
 
         default :
             return state;
