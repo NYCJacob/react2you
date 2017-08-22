@@ -11,13 +11,15 @@ import {addCategory} from "../actions/index";
 class App extends Component {
 
     state = {
-        commentApp: this.props.store.getState().commentApp
+        commentApp: this.props.store.getState()
+        // commentApp: null
     }
 
     componentDidMount () {
         const { store } = this.props;
 
         store.subscribe(() => {
+            console.log( store.getState() );
             this.setState(() => ({
                 commentApp: store.getState()
             }))
@@ -53,7 +55,7 @@ class App extends Component {
                   {/*show categories*/}
                       <div id="cat-view">
                           <div>
-                              { console.log (this.state.commentApp.sampleCats)}
+                              { console.log (this.state.commentApp)}
                               <ul id="cat-list">
                                   {
                                       this.state.commentApp.sampleCats.map( (categoryObj) => (

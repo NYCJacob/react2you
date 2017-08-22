@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+// import { combineReducers } from 'redux'
 
 import {
     ALL_POSTS,
@@ -60,7 +60,7 @@ function commentApp (state = initialState, action) {
 
         case ADD_CATEGORY :
             const { name, pathName } = action.newCategory;
-            console.log( name, pathName);
+            // console.log( name, pathName);
             return Object.assign({}, state, {
                 sampleCats: [
                     ...state.sampleCats,
@@ -74,6 +74,4 @@ function commentApp (state = initialState, action) {
 
 
 
-export default combineReducers({
-    commentApp,
-})
+export default commentApp
