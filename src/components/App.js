@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom'
+// import { Route } from 'react-router-dom'
 // App.css imports Bootsrap4 css files
 import '../styles/App.css';
 import {addCategory} from "../actions/index";
@@ -10,22 +10,7 @@ import {addCategory} from "../actions/index";
 
 class App extends Component {
 
-    state = {
-        commentApp: this.props.store.getState()
-        // commentApp: null
-    }
 
-    componentDidMount () {
-        const { store } = this.props;
-
-        store.subscribe(() => {
-            console.log( store.getState() );
-            this.setState(() => ({
-                commentApp: store.getState()
-            }))
-        })
-
-    }
 
      // generate random integer for key index where no unique value available
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -35,24 +20,17 @@ class App extends Component {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    submitCategory = () => {
-        this.props.store.dispatch(addCategory({
-            name: this.input.value,
-            pathName : this.input.value,
-        }))
-
-        this.input.value = ''
-    }
 
   render() {
 
     return (
       <div className="App">
+
           {/* Routes */}
-          <Route exact path="/" render={() => (
+{/*          <Route exact path="/" render={() => (
               <div>
                   <h1>Post, listen, react</h1>
-                  {/*show categories*/}
+                  show categories
                       <div id="cat-view">
                           <div>
                               { console.log (this.state.commentApp)}
@@ -75,14 +53,15 @@ class App extends Component {
                               <button onClick={this.submitCategory}>Submit</button>
                           </div>
                       </div>
-                  {/*show posts*/}
+                  show posts
                   <div>
 
                   </div>
               </div>
 
           )}
-          />
+          />*/}
+          <p>Hello World</p>
 
       </div>
     );
