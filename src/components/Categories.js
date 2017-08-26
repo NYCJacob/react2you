@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
+import { addCategory} from "../actions/index"
 
 
 /**
@@ -15,6 +16,14 @@ class Categories extends Component {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
     }
+
+    submitCategory = () => {
+        this.props.dispatch(addCategory({
+            name: this.input.value,
+            pathName : this.input.value,
+        }))
+        this.input.value = ''
+    };
 
     render() {
         return (
