@@ -20,24 +20,21 @@ class App extends Component {
 
 
   render() {
-         console.log('Props: ', this.props)
+      console.log('Props: ', this.props);
 
     return (
       <div className="App">
-
-          {/* Routes */}
-{/*          <Route exact path="/" render={() => (
               <div>
                   <h1>Post, listen, react</h1>
                   show categories
                       <div id="cat-view">
                           <div>
-                              { console.log (this.state.commentApp)}
                               <ul id="cat-list">
+                                                {/*TODO: using forEach did not work, because does not return array??*/}
                                   {
-                                      this.state.commentApp.sampleCats.map( (categoryObj) => (
+                                      this.props.categories.map( (category) => (
                                           <li key= {this.getRandomInt()}>
-                                              { categoryObj.name }
+                                              { category }
                                           </li>
                                       ) )
                                   }
@@ -58,8 +55,6 @@ class App extends Component {
                   </div>
               </div>
 
-          )}
-          />*/}
           <p>Hello World</p>
 
       </div>
@@ -69,8 +64,15 @@ class App extends Component {
 
 // mapStateToProps must return a plain object
 function mapStateToProps(commentApp) {
-    return {}
+    let catArray =  () => {
+        let cats = [];
+        commentApp.sampleCats.forEach((cat) => { cats.push(cat.name) } )
+        return cats;
+    }
 
+    return {
+        categories : catArray()
+    };
 }
 
 export default connect(mapStateToProps)(App);
