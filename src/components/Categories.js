@@ -10,6 +10,15 @@ class Categories extends Component {
         categories: null
     }
 
+    submitCategory = () => {
+        this.props.store.dispatch(addCategory({
+            name: this.input.value,
+            pathName : this.input.value,
+        }))
+
+        this.input.value = ''
+    }
+
     componentDidMount () {
         const { store } = this.props
 
