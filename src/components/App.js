@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 // import { Route } from 'react-router-dom'
 // App.css imports Bootsrap4 css files
 import '../styles/App.css';
@@ -9,9 +10,6 @@ import {addCategory} from "../actions/index";
 
 
 class App extends Component {
-
-
-
      // generate random integer for key index where no unique value available
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
      getRandomInt = (min = 1, max = 999999) =>  {
@@ -22,6 +20,7 @@ class App extends Component {
 
 
   render() {
+         console.log('Props: ', this.props)
 
     return (
       <div className="App">
@@ -68,4 +67,10 @@ class App extends Component {
   }
 }
 
-export default App;
+// mapStateToProps must return a plain object
+function mapStateToProps(commentApp) {
+    return {}
+
+}
+
+export default connect(mapStateToProps)(App);
