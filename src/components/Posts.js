@@ -49,12 +49,12 @@ class Posts extends Component {
 // mapStateToProps must return a plain object
 function mapStateToProps(commentApp) {
     let postsArray = [];
-    commentApp.samplePosts.forEach((post) => {
-        console.log(post);
-    })
-    return {
-        posts: postsArray
+    for (let key in commentApp.samplePosts) {
+        // console.log(commentApp.samplePosts[key]);
+        postsArray.push(commentApp.samplePosts[key])
     }
+    return { posts : postsArray };
+
 }
 
 export default connect(mapStateToProps)(Posts);
