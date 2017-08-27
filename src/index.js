@@ -5,11 +5,13 @@ import './styles/index.css';
 import App from './components/App';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore } from 'redux';
-import reducer from './reducers'
+// import reducer from './reducers'
+
+import rootReducer from './reducers'
 
 //if redux reducer exists invoke redux devtools
 const store = createStore(
-    reducer,
+    rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

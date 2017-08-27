@@ -1,4 +1,4 @@
-// import { combineReducers } from 'redux'
+import { combineReducers } from 'redux'
 
 import {
     ALL_POSTS,
@@ -47,14 +47,10 @@ const sampleCats = [
     ]
 
 
-const initialState = {samplePosts, sampleCats};
+// const initialState = {samplePosts, sampleCats};
 
-function commentApp (state = initialState, action) {
-
+function categoryReducer(state = sampleCats, action) {
     switch (action.type) {
-        case ALL_POSTS :
-            return state;
-
         case ALL_CATEGORIES :
             return state;
 
@@ -72,6 +68,15 @@ function commentApp (state = initialState, action) {
     }
 }
 
+function postReducer( state = samplePosts, action) {
+    switch (action.type) {
+        case ALL_POSTS :
+            return state;
+        default :
+            return state;
+    }
+}
 
 
-export default commentApp
+
+export default combineReducers({ categoryReducer, postReducer });

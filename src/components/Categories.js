@@ -57,10 +57,14 @@ class Categories extends Component {
 }
 
 // mapStateToProps must return a plain object
-function mapStateToProps(commentApp) {
+function mapStateToProps({ categoryReducer, postReducer }) {
+    console.log(categoryReducer)
     let catArray =  () => {
         let cats = [];
-        commentApp.sampleCats.forEach((cat) => { cats.push(cat.name) } )
+        // categoryReducer.forEach((cat) => { cats.push(cat.name) } )
+        for (let cat in categoryReducer) {
+            cats.push(cat.name);
+        }
         return cats;
     }
 
