@@ -20,7 +20,7 @@ class Posts extends Component {
         return (
             <div id="post-view">
                 {
-                this.props.posts.map( (post) => (
+                this.props.postsArray.map( (post) => (
                     <table className="table table-sm table-responsive" key= {this.getRandomInt()}>
                         <thead>
                         <tr>
@@ -58,7 +58,9 @@ class Posts extends Component {
 // }
 
 function mapStateToProps({ posts, categories }) {
-    return { posts, categories }
+    console.log( posts );
+    let postsArray =  Object.keys( posts ).map(key => posts[key]);
+    return { postsArray, categories }
 }
 
 export default connect(mapStateToProps)(Posts);
