@@ -35,7 +35,7 @@ class Categories extends Component {
                         {
                             this.props.categories.map( (category) => (
                                 <li key= {this.getRandomInt()}>
-                                    { category }
+                                    { category.name }
                                 </li>
                             ) )
                         }
@@ -57,20 +57,9 @@ class Categories extends Component {
 }
 
 // mapStateToProps must return a plain object
-function mapStateToProps({ categoryReducer, postReducer }) {
-    console.log(categoryReducer)
-    let catArray =  () => {
-        let cats = [];
-        for (let cat in categoryReducer) {
-            console.log(cat);
-            cats.push(cat.name);
-        }
-        return cats;
-    }
-    console.log(catArray());
-    return {
-        categories : catArray()
-    };
+function mapStateToProps({ categories }) {
+    console.log( categories );
+    return { categories }
 }
 
 export default connect(mapStateToProps)(Categories);

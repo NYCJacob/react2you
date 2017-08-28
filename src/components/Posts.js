@@ -21,7 +21,7 @@ class Posts extends Component {
             <div id="post-view">
                 {
                 this.props.postsArray.map( (post) => (
-                    <table className="table table-sm table-responsive" key= {this.getRandomInt()}>
+                    <table className="table table-sm table-responsive" key= {post.id}>
                         <thead>
                         <tr>
                             <th>{post.author}</th>
@@ -46,19 +46,9 @@ class Posts extends Component {
 }
 
 
-// mapStateToProps must return a plain object
-// function mapStateToProps({ categoryReducer, postReducer } ) {
-//     let postsArray = [];
-//     for (let key in postReducer.samplePosts) {
-//         // console.log(commentApp.samplePosts[key]);
-//         postsArray.push(postReducer.samplePosts[key])
-//     }
-//     return { posts : postsArray };
-//
-// }
-
 function mapStateToProps({ posts, categories }) {
     console.log( posts );
+    // https://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array#26166303
     let postsArray =  Object.keys( posts ).map(key => posts[key]);
     return { postsArray, categories }
 }
