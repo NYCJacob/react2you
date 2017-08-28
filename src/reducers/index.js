@@ -78,5 +78,5 @@ function postReducer( state = samplePosts, action) {
 }
 
 
-
-export default combineReducers({ categoryReducer, postReducer });
+export default combineReducers({ categories: categoryReducer, posts: postReducer });
+// export default combineReducers({ categoryReducer, postReducer });

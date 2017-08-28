@@ -47,14 +47,18 @@ class Posts extends Component {
 
 
 // mapStateToProps must return a plain object
-function mapStateToProps({ categoryReducer, postReducer } ) {
-    let postsArray = [];
-    for (let key in postReducer.samplePosts) {
-        // console.log(commentApp.samplePosts[key]);
-        postsArray.push(postReducer.samplePosts[key])
-    }
-    return { posts : postsArray };
+// function mapStateToProps({ categoryReducer, postReducer } ) {
+//     let postsArray = [];
+//     for (let key in postReducer.samplePosts) {
+//         // console.log(commentApp.samplePosts[key]);
+//         postsArray.push(postReducer.samplePosts[key])
+//     }
+//     return { posts : postsArray };
+//
+// }
 
+function mapStateToProps({ posts, categories }) {
+    return { posts, categories }
 }
 
 export default connect(mapStateToProps)(Posts);

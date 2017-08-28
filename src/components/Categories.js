@@ -61,13 +61,13 @@ function mapStateToProps({ categoryReducer, postReducer }) {
     console.log(categoryReducer)
     let catArray =  () => {
         let cats = [];
-        // categoryReducer.forEach((cat) => { cats.push(cat.name) } )
         for (let cat in categoryReducer) {
+            console.log(cat);
             cats.push(cat.name);
         }
         return cats;
     }
-
+    console.log(catArray());
     return {
         categories : catArray()
     };
