@@ -31,7 +31,9 @@ const samplePosts = {
     }
 };
 
-const sampleCats = [
+
+const defaultCategories = {
+    categories: [
         {
             name: 'react',
             path: 'react'
@@ -45,11 +47,13 @@ const sampleCats = [
             path: 'udacity'
         }
     ]
+}
+
 
 
 // const initialState = {samplePosts, sampleCats};
 
-function categoryReducer(state = sampleCats, action) {
+function categoryReducer(state = defaultCategories, action) {
     switch (action.type) {
         case ALL_CATEGORIES :
             return state;
