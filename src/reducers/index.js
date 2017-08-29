@@ -56,7 +56,7 @@ function categoryReducer(state = sampleCats, action) {
 
         case ADD_CATEGORY :
             const { name, pathName } = action.newCategory;
-            // console.log( name, pathName);
+            console.log( name, pathName);
             return Object.assign({}, state, {
                 sampleCats: [
                     ...state.sampleCats,
