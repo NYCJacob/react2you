@@ -9,7 +9,10 @@ import Posts from './Posts';
 
 class App extends Component {
 
-
+    componentDidMount() {
+        const { dispatch } = this.props
+        dispatch(fetchPosts())
+    }
 
     render() {
         console.log('Props: ', this.props);
