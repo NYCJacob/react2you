@@ -33,12 +33,19 @@ class Categories extends Component {
                     <ul id="cat-list">
                         {/*TODO: using forEach did not work, because does not return array??*/}
                         {
-                            this.props.categories.map( (category) => (
-                                <li key= {this.getRandomInt()}>
+                            this.props.categories.forEach( (category, idx) => (
+                                <li key={idx}>
                                     { category.name }
                                 </li>
                             ) )
                         }
+                        {/*{*/}
+                            {/*this.props.categories.map( (category) => (*/}
+                                {/*<li key= {this.getRandomInt()}>*/}
+                                    {/*{ category.name }*/}
+                                {/*</li>*/}
+                            {/*) )*/}
+                        {/*}*/}
                     </ul>
                 </div>
                 <div>
@@ -58,8 +65,11 @@ class Categories extends Component {
 
 // mapStateToProps must return a plain object
 function mapStateToProps({ categories }) {
-    console.log( categories );
-    return { categories }
+    console.log( categories.categories );
+    let catArray =  Object.keys( categories ).map(key => categories[key]);
+    console.log(catArray)
+
+    return { catArray }
 }
 
 export default connect(mapStateToProps)(Categories);
