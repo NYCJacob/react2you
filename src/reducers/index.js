@@ -33,7 +33,7 @@ const samplePosts = {
 
 
 const defaultCategories = {
-    categories: [
+    category: [
         {
             name: 'react',
             path: 'react'
@@ -82,5 +82,5 @@ function postReducer( state = samplePosts, action) {
 }
 
 
-export default combineReducers({ categories: categoryReducer, posts: postReducer });
+export default combineReducers({ categoriesList: categoryReducer, posts: postReducer });
 // export default combineReducers({ categoryReducer, postReducer });
