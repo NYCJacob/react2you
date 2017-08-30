@@ -6,9 +6,6 @@ import App from './components/App';
 import { BrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk'
 import { createStore, applyMiddleware, compose } from 'redux'
-
-// import reducer from './reducers'
-
 import rootReducer from './reducers'
 
 const logger = store => next => action => {

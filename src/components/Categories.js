@@ -40,13 +40,7 @@ class Categories extends Component {
                                 </li>
                             ) )
                         }
-                        {/*{*/}
-                            {/*this.props.categories.map( (category) => (*/}
-                                {/*<li key= {this.getRandomInt()}>*/}
-                                    {/*{ category.name }*/}
-                                {/*</li>*/}
-                            {/*) )*/}
-                        {/*}*/}
+
                     </ul>
                 </div>
                 <div>
