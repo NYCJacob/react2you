@@ -19,6 +19,7 @@ class Posts extends Component {
         console.log('Posts Props: ', this.props.posts);
         return (
             <div id="post-view">
+                {`Array length: ${this.props.postsArray.length}`}
                 {
                 this.props.postsArray.map( (post) => (
                     <table className="table table-sm table-responsive" key= {post.id}>

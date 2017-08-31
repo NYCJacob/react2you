@@ -44,14 +44,14 @@ export function fetchPosts() {
 
     const fetchParams = {
         method : 'GET',
-        headers : fetchHeaders,
+        headers : {"Content-Type": "application/json", 'Authorization': 'whatever-you-want'},
         mode : 'cors',
         cache : 'default'
     }
     return dispatch => {
         return fetch('http://localhost:5001/posts', fetchParams)
             .then(response => {
-                response.json()
+                return response.json()
             })
             .then(data => {
                 console.log(data)
