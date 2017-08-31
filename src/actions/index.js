@@ -34,15 +34,31 @@ function receivePosts(posts) {
     }
 }
 
-
+//  https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+// live help  fetch('/endpoint', { method: 'GET', headers}).then(response => response.json()).then(data => console.log(data))
 export function fetchPosts() {
-    return dispatch => {
-        return fetch(fetch('http://localhost:5001/posts', { headers: { 'Authorization': 'whatever-you-want' }}))
-            .then(response => {
-                console.log(response);
-                dispatch(receivePosts(response))
-            } )
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+
+
+    const fetchParams = {
+        method : 'GET',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default'
     }
+    return dispatch => {
+        return fetch('http://localhost:5001/posts', fetchParams)
+            .then(response => {
+                response.json()
+            })
+            .then(data => {
+                console.log(data)
+                dispatch(receivePosts( data ))
+            })
+    }
+
 }
 // end fetchPosts()
 

@@ -18,7 +18,8 @@ class App extends Component {
     // }
 
     componentDidMount() {
-        this.props.fetchPosts()
+        // this.props.fetchPosts()
+        this.props.dispatch(fetchPosts())
     }
 
 
@@ -41,10 +42,10 @@ class App extends Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchPosts }, dispatch);
+// const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchPosts }, dispatch);
 
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect()(App);
 
 
 
