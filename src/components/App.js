@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 // import { Route } from 'react-router-dom'
 // App.css imports Bootsrap4 css files
 import '../styles/App.css';
@@ -10,11 +11,16 @@ import Posts from './Posts';
 
 class App extends Component {
 
+    // componentDidMount() {
+    //     console.log(this.props);
+    //     const { dispatch } = this.props
+    //     dispatch(fetchPosts())
+    // }
+
     componentDidMount() {
-        console.log(this.props);
-        const { dispatch } = this.props
-        dispatch(fetchPosts())
+        this.props.fetchPosts()
     }
+
 
     render() {
         console.log('Props: ', this.props);
@@ -34,8 +40,11 @@ class App extends Component {
     }
 }
 
-function mapStateToProps( state ) {
-    return state
-}
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchPosts }, dispatch);
+
+
+export default connect(null, mapDispatchToProps)(App);
+
+
+
