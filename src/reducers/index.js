@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 
 import {
     ALL_POSTS,
+    RECEIVE_POSTS
 } from '../actions'
 import {ADD_CATEGORY, ALL_CATEGORIES} from "../actions/index";
 
@@ -76,11 +77,16 @@ function postReducer( state = samplePosts, action) {
     switch (action.type) {
         case ALL_POSTS :
             return state;
+        case RECEIVE_POSTS :
+            return Object.assign({}, state, {posts: action.posts})
         default :
             return state;
     }
 }
 
 
-export default combineReducers({ categoriesList: categoryReducer, posts: postReducer });
+const rootReducer = combineReducers({ categoriesList: categoryReducer, posts: postReducer });
 // export default combineReducers({ categoryReducer, postReducer });
+
+export default rootReducer
+

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 // import { Route } from 'react-router-dom'
 // App.css imports Bootsrap4 css files
 import '../styles/App.css';
-
+import { connect } from 'react-redux'
+import { fetchPosts } from '../actions'
 import Categories from './Categories';
 import Posts from './Posts';
 
@@ -10,6 +11,7 @@ import Posts from './Posts';
 class App extends Component {
 
     componentDidMount() {
+        console.log(this.props);
         const { dispatch } = this.props
         dispatch(fetchPosts())
     }
