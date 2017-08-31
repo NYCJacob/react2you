@@ -73,11 +73,12 @@ function categoryReducer(state = defaultCategories, action) {
     }
 }
 
-function postReducer( state = samplePosts, action) {
+function postReducer( state = {}, action) {
     switch (action.type) {
         case ALL_POSTS :
             return state;
         case RECEIVE_POSTS :
+            console.log(action.posts)
             return Object.assign({}, state, {posts: action.posts})
         default :
             return state;
