@@ -48,11 +48,14 @@ class Posts extends Component {
 
 
 function mapStateToProps({ posts, categories }) {
-    console.log( posts );
+    console.log( posts.posts );
     // https://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array#26166303
     let postsArray =  Object.keys( posts ).map(key => posts[key]);
-    // let postsArray =  posts.posts;
-    return { posts, categories }
+    // let postsArray =  [];
+    // posts.posts.map((post) => postsArray.push(post));
+    console.log( postsArray );
+
+    return { postsArray, categories }
 }
 
 export default connect(mapStateToProps)(Posts);

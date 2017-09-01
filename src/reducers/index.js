@@ -2,13 +2,13 @@ import { combineReducers } from 'redux'
 
 import {
     ALL_POSTS,
-    RECEIVE_POSTS
+    RECEIVE_POSTS,
+    RECEIVE_CATEGORIES
 } from '../actions'
 import {ADD_CATEGORY, ALL_CATEGORIES} from "../actions/index";
 
 
 // this is taken from server posts file
-
 const samplePosts = {
     "8xf0y6ziyjabvozdd253nd": {
         id: '8xf0y6ziyjabvozdd253nd',
@@ -32,7 +32,6 @@ const samplePosts = {
     }
 };
 
-
 const defaultCategories = {
     category: [
         {
@@ -50,13 +49,11 @@ const defaultCategories = {
     ]
 }
 
-
-
 // const initialState = {samplePosts, sampleCats};
 
 function categoryReducer(state = defaultCategories, action) {
     switch (action.type) {
-        case ALL_CATEGORIES :
+        case RECEIVE_CATEGORIES :
             return state;
 
         case ADD_CATEGORY :

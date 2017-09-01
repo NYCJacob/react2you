@@ -3,6 +3,7 @@ export const ALL_CATEGORIES = 'ALL_CATEGORIES'
 export const ADD_CATEGORY = 'ADD_CATEGORY'
 export const FETCH_POSTS = 'FETCH_POSTS'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 
 
 export function allPosts () {
@@ -34,6 +35,14 @@ function receivePosts(posts) {
     }
 }
 
+function receiveCategories(categories) {
+    return {
+        type: RECEIVE_CATEGORIES,
+        categoriesList: categories,
+        receivedAt: Date.now()
+    }
+}
+
 //  https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 // live help  fetch('/endpoint', { method: 'GET', headers}).then(response => response.json()).then(data => console.log(data))
 export function fetchPosts() {
@@ -44,7 +53,7 @@ export function fetchPosts() {
 
     const fetchParams = {
         method : 'GET',
-        headers : {"Content-Type": "application/json", 'Authorization': 'whatever-you-want'},
+        headers : fetchHeaders,
         mode : 'cors',
         cache : 'default'
     }
@@ -61,6 +70,34 @@ export function fetchPosts() {
 
 }
 // end fetchPosts()
+
+export function fetchCategories() {
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+
+
+    const fetchParams = {
+        method : 'GET',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default'
+    }
+    return dispatch => {
+        return fetch('http://localhost:5001/categories', fetchParams)
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+                dispatch(receiveCategories( data ))
+            })
+    }
+
+}
+// end fetchPosts()
+
+
 
 /*
 // this is from redux reddit example
