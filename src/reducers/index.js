@@ -51,10 +51,11 @@ const defaultCategories = {
 
 // const initialState = {samplePosts, sampleCats};
 
-function categoryReducer(state = defaultCategories, action) {
+function categoryReducer(state = {}, action) {
     switch (action.type) {
         case RECEIVE_CATEGORIES :
-            return state;
+            console.log(action.categories)
+            return Object.assign({}, state,  action.categories )
 
         case ADD_CATEGORY :
             const { name, pathName } = action.newCategory;
@@ -76,7 +77,7 @@ function postReducer( state = {}, action) {
             return state;
         case RECEIVE_POSTS :
             console.log(action.posts)
-            return Object.assign({}, state, {posts: action.posts})
+            return Object.assign({}, state,  action.posts )
         default :
             return state;
     }

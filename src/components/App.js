@@ -7,12 +7,14 @@ import { connect } from 'react-redux'
 import { fetchPosts } from '../actions'
 import Categories from './Categories';
 import Posts from './Posts';
+import {fetchCategories} from "../actions/index";
 
 
 class App extends Component {
 
     componentDidMount() {
         this.props.dispatch(fetchPosts())
+        this.props.dispatch(fetchCategories())
     }
 
 

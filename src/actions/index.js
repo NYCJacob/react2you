@@ -43,6 +43,34 @@ function receiveCategories(categories) {
     }
 }
 
+
+export function fetchCategories() {
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+
+
+    const fetchParams = {
+        method : 'GET',
+        headers : { "Authorization": "whatever-you-want", "Content-Type": "application/json" },
+        mode : 'cors',
+        cache : 'default'
+    }
+    return dispatch => {
+        return fetch('http://localhost:5001/categories', fetchParams)
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+                dispatch(receiveCategories( data ))
+            })
+    }
+
+}
+// end fetchCategories()
+
+
 //  https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 // live help  fetch('/endpoint', { method: 'GET', headers}).then(response => response.json()).then(data => console.log(data))
 export function fetchPosts() {
@@ -63,7 +91,7 @@ export function fetchPosts() {
                 return response.json()
             })
             .then(data => {
-                console.log(data)
+                console.log(data);
                 dispatch(receivePosts( data ))
             })
     }
@@ -71,31 +99,6 @@ export function fetchPosts() {
 }
 // end fetchPosts()
 
-export function fetchCategories() {
-    const fetchHeaders = new Headers();
-    fetchHeaders.append("Content-Type", "application/json");
-    fetchHeaders.append('Authorization', 'whatever-you-want');
-
-
-    const fetchParams = {
-        method : 'GET',
-        headers : fetchHeaders,
-        mode : 'cors',
-        cache : 'default'
-    }
-    return dispatch => {
-        return fetch('http://localhost:5001/categories', fetchParams)
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                console.log(data)
-                dispatch(receiveCategories( data ))
-            })
-    }
-
-}
-// end fetchPosts()
 
 
 

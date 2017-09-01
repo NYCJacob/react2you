@@ -22,21 +22,21 @@ class Posts extends Component {
 
                 {
                 this.props.postsArray.map( (post) => (
-                    <table className="table table-sm table-responsive" key= {post.id}>
+                    <table className="table table-responsive" key= {post.id}>
                         <thead>
                         <tr>
-                            <th>{post.author}</th>
-                            <th>{post.category}</th>
-                            <th>{post.voteScore}</th>
+                            <th>By: {post.author}</th>
+                            <th>Category: {post.category}</th>
+                            <th>Votes: {post.voteScore}</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr><td>{post.title}</td></tr>
-                            <tr><td>{post.body}</td></tr>
+                            <tr><td colSpan={3}>{post.title}</td></tr>
+                            <tr><td colSpan={3}>{post.body}</td></tr>
                         </tbody>
                         <tfoot>
                         <tr className="table-info">
-                            <td>{post.id}</td><td>{post.timestamp}</td>
+                            <td colSpan={2}>{post.id}</td><td>{post.timestamp}</td>
                         </tr>
                         </tfoot>
                     </table>
@@ -48,7 +48,7 @@ class Posts extends Component {
 
 
 function mapStateToProps({ posts, categories }) {
-    console.log( posts.posts );
+    console.log( posts );
     // https://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array#26166303
     let postsArray =  Object.keys( posts ).map(key => posts[key]);
     // let postsArray =  [];
