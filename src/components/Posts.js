@@ -19,7 +19,7 @@ class Posts extends Component {
         console.log('Posts Props: ', this.props.posts);
         return (
             <div id="post-view">
-                {`Array length: ${this.props.postsArray.length}`}
+
                 {
                 this.props.postsArray.map( (post) => (
                     <table className="table table-sm table-responsive" key= {post.id}>
@@ -51,7 +51,8 @@ function mapStateToProps({ posts, categories }) {
     console.log( posts );
     // https://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array#26166303
     let postsArray =  Object.keys( posts ).map(key => posts[key]);
-    return { postsArray, categories }
+    // let postsArray =  posts.posts;
+    return { posts, categories }
 }
 
 export default connect(mapStateToProps)(Posts);
