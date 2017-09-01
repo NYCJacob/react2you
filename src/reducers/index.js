@@ -84,7 +84,7 @@ function postReducer( state = {}, action) {
 }
 
 
-const rootReducer = combineReducers({ categoriesList: categoryReducer, posts: postReducer });
+const rootReducer = combineReducers({ categories: categoryReducer, posts: postReducer });
 // export default combineReducers({ categoryReducer, postReducer });
 
 export default rootReducer

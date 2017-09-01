@@ -38,7 +38,7 @@ function receivePosts(posts) {
 function receiveCategories(categories) {
     return {
         type: RECEIVE_CATEGORIES,
-        categoriesList: categories,
+        categories: categories,
         receivedAt: Date.now()
     }
 }
@@ -49,16 +49,16 @@ export function fetchCategories() {
     fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
 
-
     const fetchParams = {
         method : 'GET',
-        headers : { "Authorization": "whatever-you-want", "Content-Type": "application/json" },
+        headers : fetchHeaders,
         mode : 'cors',
         cache : 'default'
     }
     return dispatch => {
         return fetch('http://localhost:5001/categories', fetchParams)
             .then(response => {
+                console.log( response );
                 return response.json()
             })
             .then(data => {
@@ -72,7 +72,6 @@ export function fetchCategories() {
 
 
 //  https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-// live help  fetch('/endpoint', { method: 'GET', headers}).then(response => response.json()).then(data => console.log(data))
 export function fetchPosts() {
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");
@@ -88,10 +87,10 @@ export function fetchPosts() {
     return dispatch => {
         return fetch('http://localhost:5001/posts', fetchParams)
             .then(response => {
+                console.log( response );
                 return response.json()
             })
             .then(data => {
-                console.log(data);
                 dispatch(receivePosts( data ))
             })
     }
