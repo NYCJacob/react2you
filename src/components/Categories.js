@@ -32,7 +32,7 @@ class Categories extends Component {
                 <div>
                     <ul id="cat-list">
                         {/*TODO: using forEach did not work, because does not return array??*/}
-                        {console.log(this.props)}
+                        {console.log(this.props.categories)}
                         {/*{*/}
                             {/*this.props.categories.map( (category, idx) => (*/}
                                 {/*<li key={idx}>*/}
@@ -59,12 +59,12 @@ class Categories extends Component {
 }
 
 // mapStateToProps must return a plain object
-function mapStateToProps({ categories }) {
-    console.log( categories.categories );
+function mapStateToProps({ posts, categories }) {
+    console.log( categories );
     let catArray =  Object.keys( categories ).map(key => categories[key]);
     console.log(catArray)
     // return Object.keys( categories ).map(key => categories[key])
-    return catArray
+    return categories
 }
 
 export default connect(mapStateToProps)(Categories);
