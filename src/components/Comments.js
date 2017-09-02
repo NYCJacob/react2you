@@ -18,8 +18,13 @@ class Comments extends Component {
     render() {
 
         return (
-            <div>
-                <SingleComment/>
+            <div className="commentsDiv">
+                {
+                    this.props.comments.map( (comment) => (
+                        <SingleComment comment={comment}/>
+                    ))
+                }
+
             </div>
         )
     }
@@ -27,6 +32,9 @@ class Comments extends Component {
 
 function mapStateToProps( state ) {
     console.log( state.comments )
+    let commentsArray =  Object.keys( state.comments ).map(key => state.comments[key]);
+    console.log(commentsArray)
+    return { comments : commentsArray }
 }
 
 export default connect(mapStateToProps)(Comments)

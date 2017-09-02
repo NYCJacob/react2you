@@ -14,7 +14,13 @@ class SingleComment extends Component {
 
         return (
             <div>
-                <p>This is a comment</p>
+                {
+                   <div>
+                       <div>By: {this.props.comment.author}</div>
+                       <div>{this.props.comment.body}</div>
+                   </div>
+
+                }
             </div>
         )
     }
