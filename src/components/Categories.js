@@ -58,12 +58,12 @@ class Categories extends Component {
 }
 
 // mapStateToProps must return a plain object
-function mapStateToProps({ posts, categories }) {
-    console.log( categories.categories );
-    // let catArray =  Object.keys( categories ).map(key => categories[key]);
-    // let catArray = categories.categories;
+function mapStateToProps(state ) {
+    console.log( state.categories );
+    let catArray =  Object.keys( state.categories ).map(key => state.categories[key]);
+    // console.log(catArray)
     // return Object.keys( categories ).map(key => categories[key])
-    return { categories }
+    return { categories : catArray }
 }
 
 export default connect(mapStateToProps)(Categories);

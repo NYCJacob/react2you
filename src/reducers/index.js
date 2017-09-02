@@ -51,11 +51,13 @@ const defaultCategories = {
 
 // const initialState = {samplePosts, sampleCats};
 
-function categoryReducer(state = [], action) {
+function categoryReducer(state = {}, action) {
     switch (action.type) {
         case RECEIVE_CATEGORIES :
-            console.log(action.categories)
-            return Object.assign({}, state,  action.categories )
+            console.log(action.categories.categories)
+            let catArray = action.categories.categories.slice(0);
+            console.log(catArray)
+            return Object.assign({}, state,  action.categories.categories )
 
         case ADD_CATEGORY :
             const { name, pathName } = action.newCategory;
