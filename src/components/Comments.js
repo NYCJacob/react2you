@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchComments} from "../actions/index"
+import SingleComment from './SingleComment'
 
 
 /**
@@ -17,12 +18,15 @@ class Comments extends Component {
     render() {
 
         return (
-            <div id="comment-view">
-                <p>This is a comment</p>
+            <div>
+                <SingleComment/>
             </div>
         )
     }
 }
 
+function mapStateToProps( state ) {
+    console.log( state.comments )
+}
 
-export default connect()(Comments)
+export default connect(mapStateToProps)(Comments)

@@ -101,9 +101,10 @@ export function fetchPosts() {
 
 
 function receiveComments(comments) {
+    console.log('received comments', comments)
     return {
         type: RECEIVE_COMMENTS,
-        comments,
+        comments : comments,
         receivedAt: Date.now()
     }
 }

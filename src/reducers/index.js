@@ -86,10 +86,18 @@ function postReducer( state = {}, action) {
     }
 }
 
+function commentsReducer( state = {}, action) {
+    switch (action.type) {
+        case RECEIVE_COMMENTS:
+            console.log('commentReducer RECEIVE:  ',  action.comments )
+            return Object.assign({}, state, action.comments );
+        default :
+            return state;
+    }
+}
 
 
-
-const rootReducer = combineReducers({ categories: categoryReducer, posts: postReducer });
+const rootReducer = combineReducers({ categories: categoryReducer, posts: postReducer, comments: commentsReducer });
 // export default combineReducers({ categoryReducer, postReducer });
 
 export default rootReducer
