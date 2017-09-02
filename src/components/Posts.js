@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import Comments from './Comments'
 /**
  * @description Creates a list of all posts ordered by voteScore (highest score first)
  * @constructor
@@ -40,7 +40,9 @@ class Posts extends Component {
                         </tr>
                         </tfoot>
                     </table>
+
                 ))}
+
             </div>
     )
     }
@@ -48,12 +50,11 @@ class Posts extends Component {
 
 
 function mapStateToProps({ posts, categories }) {
-    console.log( posts );
+    // console.log( posts );
     // https://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array#26166303
     let postsArray =  Object.keys( posts ).map(key => posts[key]);
-    // let postsArray =  [];
+    console.log( typeof postsArray )
     // posts.posts.map((post) => postsArray.push(post));
-    console.log( postsArray );
 
     return { postsArray, categories }
 }
