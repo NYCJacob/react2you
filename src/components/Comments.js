@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { fetchComments} from "../actions/index"
 
 
 /**
@@ -9,6 +10,9 @@ import PropTypes from 'prop-types';
  */
 
 class Comments extends Component {
+    componentDidMount() {
+        this.props.dispatch(fetchComments(this.props.postId))
+    }
 
     render() {
 
@@ -21,4 +25,4 @@ class Comments extends Component {
 }
 
 
-export default Comments;
+export default connect()(Comments)

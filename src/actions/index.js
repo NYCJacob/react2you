@@ -4,6 +4,7 @@ export const ADD_CATEGORY = 'ADD_CATEGORY'
 export const FETCH_POSTS = 'FETCH_POSTS'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
+export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 
 
 export function allPosts () {
@@ -99,24 +100,43 @@ export function fetchPosts() {
 // end fetchPosts()
 
 
-
-
-/*
-// this is from redux reddit example
-function __fetchPosts(subreddit) {
-    return dispatch => {
-        dispatch(requestPosts(subreddit))
-        return fetch(`https://www.reddit.com/r/${subreddit}.json`)
-            .then(response => response.json())
-            .then(json => dispatch(receivePosts(subreddit, json)))
+function receiveComments(comments) {
+    return {
+        type: RECEIVE_COMMENTS,
+        comments,
+        receivedAt: Date.now()
     }
 }
 
-function __receivePosts(subreddit, json) {
-    return {
-        type: RECEIVE_POSTS,
-        subreddit,
-        posts: json.data.children.map(child => child.data),
-        receivedAt: Date.now()
+
+/*
+*  GET /posts/:id/comments
+ */
+export function fetchComments(id) {
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+
+
+    const fetchParams = {
+        method : 'GET',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default'
     }
-}*/
+    return dispatch => {
+        return fetch(`http://localhost:5001/posts/${id}/comments`, fetchParams)
+            .then(response => {
+                console.log( response );
+                return response.json()
+            })
+            .then(data => {
+                dispatch(receiveComments( data ))
+            })
+    }
+
+}
+// end fetchComments()
+
+
+

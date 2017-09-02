@@ -3,7 +3,8 @@ import { combineReducers } from 'redux'
 import {
     ALL_POSTS,
     RECEIVE_POSTS,
-    RECEIVE_CATEGORIES
+    RECEIVE_CATEGORIES,
+    RECEIVE_COMMENTS
 } from '../actions'
 import {ADD_CATEGORY, ALL_CATEGORIES} from "../actions/index";
 
@@ -84,6 +85,8 @@ function postReducer( state = {}, action) {
             return state;
     }
 }
+
+
 
 
 const rootReducer = combineReducers({ categories: categoryReducer, posts: postReducer });

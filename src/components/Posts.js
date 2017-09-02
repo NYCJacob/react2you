@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Comments from './Comments'
+
+
 /**
  * @description Creates a list of all posts ordered by voteScore (highest score first)
  * @constructor
  */
-
 class Posts extends Component {
     //TODO: need to move getRand to Provider
     getRandomInt = (min = 1, max = 999999) =>  {
@@ -16,13 +17,13 @@ class Posts extends Component {
     }
 
     render() {
-        console.log('Posts Props: ', this.props.posts);
         return (
             <div id="post-view">
-
                 {
+
                 this.props.postsArray.map( (post) => (
-                    <table className="table table-responsive" key= {post.id}>
+                    <div>
+                    <table className="table table-sm table-responsive" key= {post.id}>
                         <thead>
                         <tr>
                             <th>By: {post.author}</th>
@@ -40,8 +41,13 @@ class Posts extends Component {
                         </tr>
                         </tfoot>
                     </table>
+                    <div>
+                        <Comments postId={post.id}>this is the comments </Comments>
+                    </div>
+                    </div>
+                ))
+                }
 
-                ))}
 
             </div>
     )
