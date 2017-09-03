@@ -19,11 +19,11 @@ class Comments extends Component {
 
         return (
             <div className="commentsDiv">
-                {/*{*/}
-                    {/*this.props.comments.map( (comment) => (*/}
-                        {/*<SingleComment comment={comment} />*/}
-                    {/*))*/}
-                {/*}*/}
+                {
+                   this.props.comments.length !== 0 ? this.props.comments.map( (comment) => (
+                        <SingleComment comment={comment} />
+                    )) : <p>no comments</p>
+                }
 
             </div>
         )
