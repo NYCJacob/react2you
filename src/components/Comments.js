@@ -19,22 +19,31 @@ class Comments extends Component {
 
         return (
             <div className="commentsDiv">
-                {
-                    this.props.comments.map( (comment) => (
-                        <SingleComment comment={comment} />
-                    ))
-                }
+                {/*{*/}
+                    {/*this.props.comments.map( (comment) => (*/}
+                        {/*<SingleComment comment={comment} />*/}
+                    {/*))*/}
+                {/*}*/}
 
             </div>
         )
     }
 }
 
-function mapStateToProps( state ) {
-    console.log( state.comments )
+function mapStateToProps( state, props ) {
+    console.log( state.comments );
     let commentsArray =  Object.keys( state.comments ).map(key => state.comments[key]);
-    console.log(commentsArray)
-    return { comments : commentsArray }
+    console.log(commentsArray);
+    let commentsKey = props.postId + '-comments';
+    console.log( state.comments[commentsKey] );
+    let postComments = [];
+    if (state.comments[commentsKey]){
+        postComments = state.comments[commentsKey];
+    } else {
+        postComments.push({'body': 'no comments'});
+    }
+    console.log( postComments);
+    return { comments : postComments };
 }
 
 export default connect(mapStateToProps)(Comments)
