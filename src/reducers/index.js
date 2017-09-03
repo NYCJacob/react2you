@@ -79,7 +79,6 @@ function postReducer( state = {}, action) {
         case ALL_POSTS :
             return state;
         case RECEIVE_POSTS :
-            console.log(action.posts)
             return Object.assign({}, state,  action.posts )
         default :
             return state;
@@ -89,8 +88,9 @@ function postReducer( state = {}, action) {
 function commentsReducer( state = {}, action) {
     switch (action.type) {
         case RECEIVE_COMMENTS:
-            console.log('commentReducer RECEIVE:  ',  action.comments )
-            return Object.assign({}, state, action.comments );
+            console.log('commentReducer RECEIVE:  ',  action.comments );
+            let commentKey = action.parentId +  '-comments';
+            return Object.assign({}, state,  { [commentKey] : action.comments} );
         default :
             return state;
     }
