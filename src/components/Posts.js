@@ -26,14 +26,14 @@ class Posts extends Component {
                     <table className="table table-sm table-responsive" key= {post.id}>
                         <thead>
                         <tr>
-                            <th>By: {post.author}</th>
-                            <th>Category: {post.category}</th>
-                            <th>Votes: {post.voteScore}</th>
+                            <th className="post-author">By: {post.author}</th>
+                            <th className="post-category">Category: {post.category}</th>
+                            <th className="post-votes">Votes: {post.voteScore}</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr><td colSpan={3}>{post.title}</td></tr>
-                            <tr><td colSpan={3}>{post.body}</td></tr>
+                            <tr><td colSpan={3} className="post-title">{post.title}</td></tr>
+                            <tr><td colSpan={3} className="post-body">{post.body}</td></tr>
                         </tbody>
                         <tfoot>
                         <tr className="table-info">
@@ -42,7 +42,7 @@ class Posts extends Component {
                         </tfoot>
                     </table>
                     <div>
-                        <Comments postId={post.id}>this is the comments </Comments>
+                        <Comments postId={post.id} />
                     </div>
                     </div>
                 ))

@@ -100,11 +100,12 @@ export function fetchPosts() {
 // end fetchPosts()
 
 
-function receiveComments(comments) {
+function receiveComments(id, comments) {
     console.log('received comments', comments)
     return {
         type: RECEIVE_COMMENTS,
         comments : comments,
+        parentId : id,
         receivedAt: Date.now()
     }
 }
@@ -132,7 +133,7 @@ export function fetchComments(id) {
                 return response.json()
             })
             .then(data => {
-                dispatch(receiveComments( data ))
+                dispatch(receiveComments( id, data ))
             })
     }
 

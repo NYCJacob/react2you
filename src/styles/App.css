@@ -16,6 +16,27 @@
   margin: auto;
 }
 
+.post-votes {
+  text-align: right;
+}
+
+.table-info {
+  font-size: small;
+}
+
+
+.comment-text {
+  font-size: small;
+  border-bottom: dashed;
+}
+
+.comment-text > .comment-author {
+  text-align: left;
+}
+
+.comment-text > .comment-body {
+  text-align: left;
+}
 
 
 /*below is default code from create-react-app*/

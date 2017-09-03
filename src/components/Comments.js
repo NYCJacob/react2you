@@ -21,7 +21,7 @@ class Comments extends Component {
             <div className="commentsDiv">
                 {
                     this.props.comments.map( (comment) => (
-                        <SingleComment comment={comment}/>
+                        <SingleComment comment={comment} />
                     ))
                 }
 

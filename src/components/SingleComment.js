@@ -15,9 +15,9 @@ class SingleComment extends Component {
         return (
             <div>
                 {
-                   <div>
-                       <div>By: {this.props.comment.author}</div>
-                       <div>{this.props.comment.body}</div>
+                   <div className="comment-text">
+                       <div className="comment-author">By: {this.props.comment.author}</div>
+                       <div className="comment-body" >{this.props.comment.body}</div>
                    </div>
 
                 }
