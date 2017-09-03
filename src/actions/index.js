@@ -5,6 +5,7 @@ export const FETCH_POSTS = 'FETCH_POSTS'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
+export const SORT_VOTES = 'SORT_VOTES'
 
 
 export function allPosts () {
@@ -26,15 +27,6 @@ export  function addCategory( newCategory) {
     }
 }
 
-
-
-function receivePosts(posts) {
-    return {
-        type: RECEIVE_POSTS,
-        posts: posts,
-        receivedAt: Date.now()
-    }
-}
 
 function receiveCategories(categories) {
     return {
@@ -71,6 +63,20 @@ export function fetchCategories() {
 }
 // end fetchCategories()
 
+
+export function sortVote() {
+    return {
+        type: SORT_VOTES
+    }
+}
+
+function receivePosts(posts) {
+    return {
+        type: RECEIVE_POSTS,
+        posts: posts,
+        receivedAt: Date.now()
+    }
+}
 
 //  https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 export function fetchPosts() {

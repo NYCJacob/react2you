@@ -6,7 +6,7 @@ import {
     RECEIVE_CATEGORIES,
     RECEIVE_COMMENTS
 } from '../actions'
-import {ADD_CATEGORY, ALL_CATEGORIES} from "../actions/index";
+import {ADD_CATEGORY, ALL_CATEGORIES, SORT_VOTES} from "../actions/index";
 
 
 // this is taken from server posts file
@@ -79,7 +79,18 @@ function postReducer( state = {}, action) {
         case ALL_POSTS :
             return state;
         case RECEIVE_POSTS :
-            return Object.assign({}, state,  action.posts )
+            //  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+            action.posts.sort(function(a, b) {
+                return b.voteScore - a.voteScore;
+            });
+            return Object.assign({}, state,  action.posts );
+
+        case SORT_VOTES :
+            console.log(state)
+            let willSortPosts = Object.assign({}, state);
+            console.log(willSortPosts)
+            return state
+
         default :
             return state;
     }

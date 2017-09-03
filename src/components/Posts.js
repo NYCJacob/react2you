@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Comments from './Comments'
+import { sortVote} from "../actions/index"
 
 
 /**
@@ -9,41 +10,27 @@ import Comments from './Comments'
  * @constructor
  */
 class Posts extends Component {
-    //TODO: need to move getRand to Provider
-    getRandomInt = (min = 1, max = 999999) =>  {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
+
+    sortPostsByVote = () => {
+        this.props.dispatch(sortVote())
+    };
 
     render() {
         return (
             <div id="post-view">
+                <div className="row">
+                    <div className="col-sm-6">Title</div>
+                    <div className="col-sm">Category</div>
+                    <div className="col-sm"><a onClick={this.sortPostsByVote()}>Vote Score</a></div>
+                </div>
                 {
-
                 this.props.postsArray.map( (post) => (
-                    <div>
-                    <table className="table table-sm table-responsive" key= {post.id}>
-                        <thead>
-                        <tr>
-                            <th className="post-author">By: {post.author}</th>
-                            <th className="post-category">Category: {post.category}</th>
-                            <th className="post-votes">Votes: {post.voteScore}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td colSpan={3} className="post-title">{post.title}</td></tr>
-                            <tr><td colSpan={3} className="post-body">{post.body}</td></tr>
-                        </tbody>
-                        <tfoot>
-                        <tr className="table-info">
-                            <td colSpan={2}>{post.id}</td><td>{post.timestamp}</td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                    <div>
-                        <Comments postId={post.id} />
-                    </div>
+                    <div className="post-listing container-fluid" >
+                        <div className="row">
+                            <div className="col-sm-8">{post.title}</div>
+                            <div className="col-sm">{post.category}</div>
+                            <div className="col-sm">{post.voteScore}</div>
+                        </div>
                     </div>
                 ))
                 }
