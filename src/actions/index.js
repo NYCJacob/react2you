@@ -67,11 +67,6 @@ export function sortVote() {
     }
 }
 
-export function editPost() {
-    return {
-        type: EDIT_POST
-    }
-}
 
 export function closePost() {
     return {

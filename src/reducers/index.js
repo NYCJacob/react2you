@@ -7,7 +7,6 @@ import {
     RECEIVE_COMMENTS,
     GET_POST_DETAILS,
     CLOSE_POST,
-    EDIT_POST
 } from '../actions'
 import {ADD_CATEGORY,  SORT_VOTES} from "../actions/index";
 
@@ -58,8 +57,6 @@ function postReducer( state = {
         case CLOSE_POST :
             return Object.assign({}, state,  { openPost : false } );
 
-        case EDIT_POST :
-            return Object.assign({}, state,  { editPost : true } );
 
         case SORT_VOTES :
             console.log(state)
