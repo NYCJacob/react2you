@@ -8,7 +8,7 @@ export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const SORT_VOTES = 'SORT_VOTES'
 export const GET_POST_DETAILS = 'GET_POST_DETAILS'
 export const CLOSE_POST = 'CLOSE_POST'
-
+export const EDIT_POST = 'EDIT_POST'
 
 export function allPosts () {
     return {
@@ -64,6 +64,12 @@ export function fetchCategories() {
 export function sortVote() {
     return {
         type: SORT_VOTES
+    }
+}
+
+export function editPost() {
+    return {
+        type: EDIT_POST
     }
 }
 

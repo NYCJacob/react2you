@@ -6,7 +6,8 @@ import {
     RECEIVE_CATEGORIES,
     RECEIVE_COMMENTS,
     GET_POST_DETAILS,
-    CLOSE_POST
+    CLOSE_POST,
+    EDIT_POST
 } from '../actions'
 import {ADD_CATEGORY,  SORT_VOTES} from "../actions/index";
 
@@ -33,7 +34,14 @@ function categoryReducer(state = {}, action) {
     }
 }
 
-function postReducer( state = {openPost : false, openTarget : null, items : []}, action) {
+function postReducer( state = {
+    openPost : false,
+    editPost : false,
+    openTarget : null,
+    items : []
+    },
+                      action) {
+
     switch (action.type) {
         case ALL_POSTS :
             return state;
@@ -49,6 +57,9 @@ function postReducer( state = {openPost : false, openTarget : null, items : []},
 
         case CLOSE_POST :
             return Object.assign({}, state,  { openPost : false } );
+
+        case EDIT_POST :
+            return Object.assign({}, state,  { editPost : true } );
 
         case SORT_VOTES :
             console.log(state)
