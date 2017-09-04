@@ -23,17 +23,17 @@ class Posts extends Component {
                     <div className="col-sm">Category</div>
                     <div className="col-sm"><a onClick={this.sortPostsByVote()}>Vote Score</a></div>
                 </div>
-                {
-                this.props.postsArray.map( (post) => (
-                    <div className="post-listing container-fluid" >
-                        <div className="row">
-                            <div className="col-sm-8">{post.title}</div>
-                            <div className="col-sm">{post.category}</div>
-                            <div className="col-sm">{post.voteScore}</div>
-                        </div>
-                    </div>
-                ))
-                }
+                {/*{*/}
+                {/*this.props.postsArray.map( (post) => (*/}
+                    {/*<div className="post-listing container-fluid" >*/}
+                        {/*<div className="row">*/}
+                            {/*<div className="col-sm-8">{post.title}</div>*/}
+                            {/*<div className="col-sm">{post.category}</div>*/}
+                            {/*<div className="col-sm">{post.voteScore}</div>*/}
+                        {/*</div>*/}
+                    {/*</div>*/}
+                {/*))*/}
+                {/*}*/}
 
 
             </div>
@@ -43,13 +43,14 @@ class Posts extends Component {
 
 
 function mapStateToProps({ posts, categories }) {
-    // console.log( posts );
+    console.log( posts );
     // https://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array#26166303
     let postsArray =  Object.keys( posts ).map(key => posts[key]);
     console.log( typeof postsArray )
     // posts.posts.map((post) => postsArray.push(post));
 
-    return { postsArray, categories }
+    return  { 'open' : posts.openPost, 'items': posts.items}
+    // return { posts, categories }
 }
 
 export default connect(mapStateToProps)(Posts);

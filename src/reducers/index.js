@@ -74,7 +74,7 @@ function categoryReducer(state = {}, action) {
     }
 }
 
-function postReducer( state = {}, action) {
+function postReducer( state = {openPost : false, items : []}, action) {
     switch (action.type) {
         case ALL_POSTS :
             return state;
@@ -83,7 +83,7 @@ function postReducer( state = {}, action) {
             action.posts.sort(function(a, b) {
                 return b.voteScore - a.voteScore;
             });
-            return Object.assign({}, state,  action.posts );
+            return Object.assign({}, state,  { openPost : false, items : action.posts } );
 
         case SORT_VOTES :
             console.log(state)
