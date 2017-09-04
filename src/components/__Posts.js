@@ -9,12 +9,7 @@ import Comments from './Comments'
  * @constructor
  */
 class Posts extends Component {
-    //TODO: need to move getRand to Provider
-    getRandomInt = (min = 1, max = 999999) =>  {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
+
 
     render() {
         return (

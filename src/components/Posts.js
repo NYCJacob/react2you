@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Comments from './Comments'
 import { sortVote, getPostDetails} from "../actions/index"
+import SinglePost from './SinglePost'
 
 
 /**
@@ -15,14 +15,14 @@ class Posts extends Component {
         this.props.dispatch(sortVote())
     };
 
-    openPost = () => {
-        this.props.dispatch(getPostDetails())
+    openPost = (postId) => {
+        this.props.dispatch(getPostDetails(postId))
     }
 
     render() {
         return (
             <div>
-                <div id="post-view">
+                <div id="posts-view">
                     <div className="row">
                         <div className="col-sm-6">Title</div>
                         <div className="col-sm">Category</div>
@@ -32,7 +32,7 @@ class Posts extends Component {
                     this.props.items.map( (post) => (
                         <div className="post-listing container-fluid" >
                             <div className="row">
-                                <div className="col-sm-8"><a href="#" onClick={this.openPost}>{post.title}</a></div>
+                                <div className="col-sm-8"><a href="#" onClick={this.openPost(post.id)}>{post.title}</a></div>
                                 <div className="col-sm">{post.category}</div>
                                 <div className="col-sm">{post.voteScore}</div>
                             </div>
@@ -41,7 +41,7 @@ class Posts extends Component {
                     }
                 </div>
 
-                {this.props.open &&  <h2>Opening...</h2>}
+                {this.props.open &&  <SinglePost/>}
 
 
             </div>

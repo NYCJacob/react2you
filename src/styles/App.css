@@ -11,9 +11,10 @@
   padding-right: 20px;
 }
 
-#post-view {
-  width: 60vw;
+#posts-view {
+  width: 75vw;
   margin: auto;
+  font-size: smaller;
 }
 
 .post-votes {

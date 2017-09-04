@@ -44,12 +44,12 @@ class Categories extends Component {
                 </div>
                 <div>
 
-                    <input
-                        type="'text"
-                        ref={(input) => this.input = input}
-                        placeholder="enter new category"
-                    />
-                    <button onClick={this.submitCategory}>Submit</button>
+                    {/*<input*/}
+                        {/*type="'text"*/}
+                        {/*ref={(input) => this.input = input}*/}
+                        {/*placeholder="enter new category"*/}
+                    {/*/>*/}
+                    {/*<button onClick={this.submitCategory}>Submit</button>*/}
                 </div>
 
             </div>
@@ -59,7 +59,6 @@ class Categories extends Component {
 
 // mapStateToProps must return a plain object
 function mapStateToProps(state ) {
-    console.log( state.categories );
     let catArray =  Object.keys( state.categories ).map(key => state.categories[key]);
     // console.log(catArray)
     // return Object.keys( categories ).map(key => categories[key])

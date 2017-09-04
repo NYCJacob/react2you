@@ -7,51 +7,8 @@ import {
     RECEIVE_COMMENTS,
     GET_POST_DETAILS
 } from '../actions'
-import {ADD_CATEGORY, ALL_CATEGORIES, SORT_VOTES} from "../actions/index";
+import {ADD_CATEGORY,  SORT_VOTES} from "../actions/index";
 
-
-// this is taken from server posts file
-const samplePosts = {
-    "8xf0y6ziyjabvozdd253nd": {
-        id: '8xf0y6ziyjabvozdd253nd',
-        timestamp: 1467166872634,
-        title: 'Udacity is the best place to learn React',
-        body: 'Everyone says so after all.',
-        author: 'thingtwo',
-        category: 'react',
-        voteScore: 6,
-        deleted: false
-    },
-    "6ni6ok3ym7mf1p33lnez": {
-        id: '6ni6ok3ym7mf1p33lnez',
-        timestamp: 1468479767190,
-        title: 'Learn Redux in 10 minutes!',
-        body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-        author: 'thingone',
-        category: 'redux',
-        voteScore: -5,
-        deleted: false
-    }
-};
-
-const defaultCategories = {
-    category: [
-        {
-            name: 'react',
-            path: 'react'
-        },
-        {
-            name: 'redux',
-            path: 'redux'
-        },
-        {
-            name: 'udacity',
-            path: 'udacity'
-        }
-    ]
-}
-
-// const initialState = {samplePosts, sampleCats};
 
 function categoryReducer(state = {}, action) {
     switch (action.type) {
@@ -75,7 +32,7 @@ function categoryReducer(state = {}, action) {
     }
 }
 
-function postReducer( state = {openPost : false, items : []}, action) {
+function postReducer( state = {openPost : false, openTarget : null, items : []}, action) {
     switch (action.type) {
         case ALL_POSTS :
             return state;
@@ -87,8 +44,7 @@ function postReducer( state = {openPost : false, items : []}, action) {
             return Object.assign({}, state,  { openPost : false, items : action.posts } );
 
         case GET_POST_DETAILS :
-            console.log("get post details")
-            return Object.assign({}, state,  { openPost : true } );
+            return Object.assign({}, state,  { openPost : true , openTarget : action.openTarget} );
 
 
         case SORT_VOTES :

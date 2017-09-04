@@ -15,11 +15,6 @@ export function allPosts () {
     }
 }
 
-export function allCategories () {
-    return {
-        type: ALL_CATEGORIES
-    }
-}
 
 export  function addCategory( newCategory) {
     return {
@@ -72,9 +67,10 @@ export function sortVote() {
 }
 
 
-export function getPostDetails() {
+export function getPostDetails(postId) {
     return {
-        type: GET_POST_DETAILS
+        type: GET_POST_DETAILS,
+        openTarget : postId
     }
 }
 
