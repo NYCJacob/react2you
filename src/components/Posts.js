@@ -23,17 +23,17 @@ class Posts extends Component {
                     <div className="col-sm">Category</div>
                     <div className="col-sm"><a onClick={this.sortPostsByVote()}>Vote Score</a></div>
                 </div>
-                {/*{*/}
-                {/*this.props.postsArray.map( (post) => (*/}
-                    {/*<div className="post-listing container-fluid" >*/}
-                        {/*<div className="row">*/}
-                            {/*<div className="col-sm-8">{post.title}</div>*/}
-                            {/*<div className="col-sm">{post.category}</div>*/}
-                            {/*<div className="col-sm">{post.voteScore}</div>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
-                {/*))*/}
-                {/*}*/}
+                {
+                this.props.items.map( (post) => (
+                    <div className="post-listing container-fluid" >
+                        <div className="row">
+                            <div className="col-sm-8">{post.title}</div>
+                            <div className="col-sm">{post.category}</div>
+                            <div className="col-sm">{post.voteScore}</div>
+                        </div>
+                    </div>
+                ))
+                }
 
 
             </div>
