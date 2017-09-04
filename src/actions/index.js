@@ -9,6 +9,7 @@ export const SORT_VOTES = 'SORT_VOTES'
 export const GET_POST_DETAILS = 'GET_POST_DETAILS'
 export const CLOSE_POST = 'CLOSE_POST'
 export const EDIT_POST = 'EDIT_POST'
+export const CANCEL_EDIT = 'CANCEL_EDIT'
 
 export function allPosts () {
     return {
@@ -67,6 +68,17 @@ export function sortVote() {
     }
 }
 
+export function cancelEdit() {
+    return {
+        type: CANCEL_EDIT
+    }
+}
+
+export function editPost() {
+    return {
+        type: EDIT_POST
+    }
+}
 
 export function closePost() {
     return {
