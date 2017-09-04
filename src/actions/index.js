@@ -7,6 +7,7 @@ export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const SORT_VOTES = 'SORT_VOTES'
 export const GET_POST_DETAILS = 'GET_POST_DETAILS'
+export const CLOSE_POST = 'CLOSE_POST'
 
 
 export function allPosts () {
@@ -66,7 +67,13 @@ export function sortVote() {
     }
 }
 
+export function closePost() {
+    return {
+        type: CLOSE_POST
+    }
+}
 
+// dispatched by openPost
 export function getPostDetails(postId) {
     return {
         type: GET_POST_DETAILS,

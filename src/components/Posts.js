@@ -22,26 +22,37 @@ class Posts extends Component {
     render() {
         return (
             <div>
-                <div id="posts-view">
-                    <div className="row">
-                        <div className="col-sm-6">Title</div>
-                        <div className="col-sm">Category</div>
-                        <div className="col-sm"><a onClick={this.sortPostsByVote()}>Vote Score</a></div>
-                    </div>
-                    {
-                    this.props.items.map( (post) => (
-                        <div className="post-listing container-fluid" >
-                            <div className="row">
-                                <div className="col-sm-8"><a href="#" onClick={() => this.openPost(post.id)}>{post.title}</a></div>
-                                <div className="col-sm">{post.category}</div>
-                                <div className="col-sm">{post.voteScore}</div>
-                            </div>
-                        </div>
-                    ))
-                    }
-                </div>
+                { !this.props.open && <div id="posts-view">
 
-                {this.props.open &&  <SinglePost/>}
+                            <div className="row">
+                                <div className="col-sm-6">Title</div>
+                                <div className="col-sm">Category</div>
+                                <div className="col-sm"><a onClick={this.sortPostsByVote()}>Vote Score</a></div>
+                            </div>
+
+                        {
+                            this.props.items.map((post) => (
+                            <div className="post-listing container-fluid">
+                            <div className="row">
+                            <div className="col-sm-8"><a href="#"
+                            onClick={() => this.openPost(post.id)}>{post.title}</a>
+                            </div>
+                            <div className="col-sm">{post.category}</div>
+                            <div className="col-sm">{post.voteScore}</div>
+                            </div>
+                            </div>
+                            ))
+
+                        }
+
+                    </div>
+                }
+                {this.props.open &&
+                <div>
+                    {/*<PostTree />*/}
+                    <SinglePost/>
+                </div>
+                }
 
 
             </div>

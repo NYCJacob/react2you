@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Comments from './Comments'
+import { closePost } from '../actions'
 
 
 /**
@@ -14,10 +15,12 @@ class SinglePost extends Component {
     render() {
         return (
             <div className="singlePost-view">
-                <h2> single post componenet </h2>
                 {
                     <div>
-                        <table className="table table-sm table-responsive" key= {this.props.id}>
+                        <button onClick={this.props.closeSinglePost}>Close</button>
+                        <h3 className="post-title">{this.props.title} </h3>
+
+                        <table className="table table-sm table-responsive">
                         <thead>
                         <tr>
                         <th className="post-author">By: {this.props.author}</th>
@@ -26,7 +29,6 @@ class SinglePost extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr><td colSpan={3} className="post-title">{this.props.title}</td></tr>
                         <tr><td colSpan={3} className="post-body">{this.props.body}</td></tr>
                         </tbody>
                         <tfoot>
@@ -36,6 +38,7 @@ class SinglePost extends Component {
                         </tfoot>
                         </table>
                     <Comments postId={this.props.id} />
+
                     </div>
                     
                 }
@@ -53,4 +56,10 @@ function mapStateToProps(state) {
     return targetPost
 }
 
-export default connect(mapStateToProps)(SinglePost);
+function mapDispatchToProps(dispatch){
+    return{
+        closeSinglePost : () => dispatch(closePost())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SinglePost);
