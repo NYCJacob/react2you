@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Comments from './Comments'
-import { sortVote} from "../actions/index"
+import { sortVote, getPostDetails} from "../actions/index"
 
 
 /**
@@ -14,6 +14,10 @@ class Posts extends Component {
     sortPostsByVote = () => {
         this.props.dispatch(sortVote())
     };
+
+    openPost = () => {
+        this.props.dispatch(getPostDetails())
+    }
 
     render() {
         return (
@@ -27,7 +31,7 @@ class Posts extends Component {
                 this.props.items.map( (post) => (
                     <div className="post-listing container-fluid" >
                         <div className="row">
-                            <div className="col-sm-8">{post.title}</div>
+                            <div className="col-sm-8"><a href="#" onClick={this.openPost}>{post.title}</a></div>
                             <div className="col-sm">{post.category}</div>
                             <div className="col-sm">{post.voteScore}</div>
                         </div>

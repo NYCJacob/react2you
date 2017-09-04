@@ -4,7 +4,8 @@ import {
     ALL_POSTS,
     RECEIVE_POSTS,
     RECEIVE_CATEGORIES,
-    RECEIVE_COMMENTS
+    RECEIVE_COMMENTS,
+    GET_POST_DETAILS
 } from '../actions'
 import {ADD_CATEGORY, ALL_CATEGORIES, SORT_VOTES} from "../actions/index";
 
@@ -84,6 +85,11 @@ function postReducer( state = {openPost : false, items : []}, action) {
                 return b.voteScore - a.voteScore;
             });
             return Object.assign({}, state,  { openPost : false, items : action.posts } );
+
+        case GET_POST_DETAILS :
+            console.log("get post details")
+            return Object.assign({}, state,  { openPost : true } );
+
 
         case SORT_VOTES :
             console.log(state)

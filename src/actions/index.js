@@ -6,6 +6,7 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const SORT_VOTES = 'SORT_VOTES'
+export const GET_POST_DETAILS = 'GET_POST_DETAILS'
 
 
 export function allPosts () {
@@ -67,6 +68,13 @@ export function fetchCategories() {
 export function sortVote() {
     return {
         type: SORT_VOTES
+    }
+}
+
+
+export function getPostDetails() {
+    return {
+        type: GET_POST_DETAILS
     }
 }
 
