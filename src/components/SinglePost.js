@@ -18,10 +18,10 @@ class SinglePost extends Component {
                 {
                     <div>
                         <button onClick={this.props.closeSinglePost}>Close</button>
-                        <h3 className="post-title">{this.props.title} </h3>
 
                         <table className="table table-sm table-responsive">
                         <thead>
+                        <tr><h3 className="post-title">{this.props.title} </h3></tr>
                         <tr>
                         <th className="post-author">By: {this.props.author}</th>
                         <th className="post-category">Category: {this.props.category}</th>
