@@ -15,7 +15,7 @@ class Posts extends Component {
         this.props.dispatch(sortVote())
     };
 
-    openPost = (postId) => {
+    openPost(postId)  {
         this.props.dispatch(getPostDetails(postId))
     }
 
@@ -32,7 +32,7 @@ class Posts extends Component {
                     this.props.items.map( (post) => (
                         <div className="post-listing container-fluid" >
                             <div className="row">
-                                <div className="col-sm-8"><a href="#" onClick={this.openPost(post.id)}>{post.title}</a></div>
+                                <div className="col-sm-8"><a href="#" onClick={() => this.openPost(post.id)}>{post.title}</a></div>
                                 <div className="col-sm">{post.category}</div>
                                 <div className="col-sm">{post.voteScore}</div>
                             </div>
