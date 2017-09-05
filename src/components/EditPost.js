@@ -27,11 +27,11 @@ class EditPost extends Component {
                         <form onSubmit={ this.submit }>
                             <div>
                                 <label htmlFor="firstName">Post Title</label>
-                                <Field name="firstName" component="input" type="text" />
+                                <Field name="title" component="input" type="text" />
                             </div>
                             <div>
                                 <label htmlFor="lastName">Post Body</label>
-                                <Field name="lastName" component="input" type="text" />
+                                <Field name="body" component="input" type="text" />
                             </div>
                             <button type="submit">Submit</button>
                         </form>
@@ -45,8 +45,10 @@ class EditPost extends Component {
 
 function mapStateToProps(state) {
     console.log(state);
-    // let postToEdit = state.posts.items.find()
-    return { editable : state.posts.editing }
+    // let postToEdit = state.posts.items.find
+    let targetPost =   state.posts.items.find((item) => item.id === state.posts.openTarget)
+    console.log( targetPost );
+    return { editable : state.posts.editing, initialValues :  state.posts.items.find((item) => item.id === state.posts.openTarget) }
 }
 
 function mapDispatchToProps(dispatch){
