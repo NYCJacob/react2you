@@ -8,6 +8,7 @@ import thunk from 'redux-thunk'
 import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from './reducers'
 
+
 const logger = store => next => action => {
       console.group(action.type)
       console.info('dispatching', action)
@@ -17,7 +18,7 @@ const logger = store => next => action => {
           return result
         }
 
-    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 
 //if redux reducer exists invoke redux devtools

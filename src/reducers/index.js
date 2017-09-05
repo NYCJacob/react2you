@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux'
 
+// redux-form imports
+import { reducer as formReducer } from 'redux-form'
+
+
 import {
     ALL_POSTS,
     RECEIVE_POSTS,
@@ -88,7 +92,7 @@ function commentsReducer( state = {}, action) {
 }
 
 
-const rootReducer = combineReducers({ categories: categoryReducer, posts: postReducer, comments: commentsReducer });
+const rootReducer = combineReducers({ categories: categoryReducer, posts: postReducer, comments: commentsReducer, form: formReducer });
 // export default combineReducers({ categoryReducer, postReducer });
 
 export default rootReducer
