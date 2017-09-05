@@ -12,7 +12,9 @@ import { closePost, editPost} from '../actions'
  */
 class SinglePost extends Component {
 
-
+    handleSubmit = (data) => {
+        window.alert('Data submitted! ' + JSON.stringify(data));
+    }
 
     render() {
         const { title, author, category, voteScore, body, id, timestamp } = this.props.targetPost;
@@ -50,16 +52,7 @@ class SinglePost extends Component {
 
                 { this.props.editable &&
                 <div>
-                    <EditPost postData={ {
-                        title: title,
-                        author: author,
-                        category: category,
-                        voteScore: voteScore,
-                        body: body,
-                        id: id,
-                        timestamp: timestamp
-                        }}
-                    />
+                    <EditPost onSubmit={this.handleSubmit}/>
                 </div>
                 }
             </div>

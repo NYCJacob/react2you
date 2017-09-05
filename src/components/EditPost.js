@@ -12,19 +12,19 @@ import { Field, reduxForm } from 'redux-form'
 class EditPost extends Component {
 
     submit = ( values ) => {
-        console.log( values );
+        console.log( values  );
     }
 
     render() {
-        const { title, author, category, voteScore, body, id, timestamp } = this.props.postData;
-        // const { handleSubmit } = this.props;
+        // const { title, author, category, voteScore, body, id, timestamp } = this.props.postData;
+        const { handleSubmit } = this.props;
 
         return (
 
             <div className="editPost-view">
                 { this.props.editable &&
                     <div>
-                        <form onSubmit={ this.submit }>
+                        <form  onSubmit={handleSubmit}>
                             <div>
                                 <label htmlFor="firstName">Post Title</label>
                                 <Field name="title" component="input" type="text" />
@@ -44,10 +44,10 @@ class EditPost extends Component {
 
 
 function mapStateToProps(state) {
-    console.log(state);
+    // console.log(state);
     // let postToEdit = state.posts.items.find
-    let targetPost =   state.posts.items.find((item) => item.id === state.posts.openTarget)
-    console.log( targetPost );
+    // let targetPost =   state.posts.items.find((item) => item.id === state.posts.openTarget)
+    // console.log( targetPost );
     return { editable : state.posts.editing, initialValues :  state.posts.items.find((item) => item.id === state.posts.openTarget) }
 }
 
