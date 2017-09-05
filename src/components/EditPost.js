@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {cancelEdit} from "../actions/index"
-
+// redux form import
+import { Field, reduxForm } from 'redux-form'
 
 /**
  * @description
@@ -13,33 +14,16 @@ class EditPost extends Component {
 
     render() {
         const { title, author, category, voteScore, body, id, timestamp } = this.props.postData;
+        const { handleSubmit } = this.props;
 
         return (
 
             <div className="editPost-view">
                 { this.props.editable &&
                     <div>
-                        {/*<button className="btn btn-sm" onClick={this.props.closeSinglePost}>X</button>*/}
-
-                        <table className="table table-sm table-responsive">
-                            <thead>
-                            <tr><th colSpan={3}><h3 className="post-title"><input value={title}></input> </h3></th></tr>
-                            </thead>
-                            <tbody>
-                            <tr><td colSpan={3} className="post-body"><textarea value={body} ></textarea></td></tr>
-                            <tr><td><button className="btn-sm" >Save</button> </td> <td><button className="btn-sm" onClick={this.props.cancelEdit}>Cancel</button> </td></tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th className="post-author">By: {author}</th>
-                                <th className="post-category">Category: {category}</th>
-                                <th className="post-votes">Votes: {voteScore}</th>
-                            </tr>
-                            <tr className="table-info">
-                                <td colSpan={2}>{id}</td><td>{timestamp}</td>
-                            </tr>
-                            </tfoot>
-                        </table>
+                        <form onSubmit={ handleSubmit }>
+                            { /* form body*/ }
+                        </form>
 
                     </div>
                 }
@@ -59,5 +43,10 @@ function mapDispatchToProps(dispatch){
         cancelEdit : () => dispatch(cancelEdit()),
     }
 }
+
+EditPost = reduxForm({
+    // a unique name for the form
+    form: 'EditPostForm'
+})(EditPost)
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditPost);
