@@ -16,7 +16,7 @@ class EditPost extends Component {
     }
 
     render() {
-        // const { title, author, category, voteScore, body, id, timestamp } = this.props.postData;
+        const { title, author, category, voteScore, body, id, timestamp } = this.props.postData;
         const { handleSubmit } = this.props;
 
         return (
@@ -24,17 +24,36 @@ class EditPost extends Component {
             <div className="editPost-view">
                 { this.props.editable &&
                     <div>
+
                         <form  onSubmit={handleSubmit}>
-                            <div>
-                                <label htmlFor="firstName">Post Title</label>
-                                <Field name="title" component="input" type="text" />
-                            </div>
-                            <div>
-                                <label htmlFor="lastName">Post Body</label>
-                                <Field name="body" component="input" type="text" />
-                            </div>
-                            <button type="submit">Submit</button>
+
+                            <table className="table table-sm table-responsive">
+                                <thead>
+                                <tr><th colSpan={3}>
+                                    <label htmlFor="firstName">Post Title</label>
+                                    <Field name="title" component="input" type="text" />
+                                </th></tr>
+                                <tr>
+                                    <th className="post-author">By: {author}</th>
+                                    <th className="post-category">Category: {category}</th>
+                                    <th className="post-votes">Votes: {voteScore}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr><td colSpan={3} className="post-body">
+                                    <label htmlFor="lastName">Post Body</label>
+                                    <Field name="body" component="input" type="text" />
+                                </td></tr>
+                                </tbody>
+                                <tfoot>
+                                <tr className="table-info">
+                                    <td colSpan={2}>{id}</td><td>{timestamp}</td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            <button type="submit">Save</button><button onClick={this.props.cancelEdit}>Cancel</button>
                         </form>
+
                     </div>
                 }
             </div>
