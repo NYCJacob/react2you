@@ -14,7 +14,7 @@ class SinglePost extends Component {
 
     handleSubmit = (data) => {
         console.log(data);
-        this.props.updatePost(data);
+        updatePost(data);
     }
 
     render() {

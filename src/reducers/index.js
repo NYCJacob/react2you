@@ -68,6 +68,7 @@ function postReducer( state = {
             return Object.assign({}, state,  { editing : true } );
 
         case UPDATED_POST :
+            console.log(action);
             return Object.assign({}, state, { items: [ action.updatedPost]} );
 
         case CANCEL_EDIT :

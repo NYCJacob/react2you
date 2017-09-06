@@ -140,28 +140,38 @@ function  updatedPost( updated ) {
 
 }
 
+
+// PUT /posts/:id
+// USAGE:
+//     Edit the details of an existing post
+// PARAMS:
+//     title - String
+//      body - String
+
 export function updatePost(data) {
+    console.log(data)
     const fetchHeaders = new Headers();
-    fetchHeaders.append("Content-Type", "application/json");
+    // fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
 
     const fetchParams = {
-        method : 'POST',
+        method : 'PUT',
         headers : fetchHeaders,
         mode : 'cors',
-        cache : 'default'
+        cache : 'default',
+        title : data.title,
+        body : data.body
     }
-    // let url = `http://localhost:5001/posts/${data.id}`;
-    let url = `http://localhost:5001/posts/`;
-    console.log(data);
+    let url = `http://localhost:5001/posts/${data.id}`;
     return dispatch => {
         return fetch(url, fetchParams)
-            .then(response => {
-                console.log( response );
-                return response.json()
-            })
-            .then(data => {
-                dispatch(updatedPost( data ))
+            // .then(response => {
+            //     console.log( response );
+            //     return response.json()
+            // })
+            .then(() => {
+                console.log('put success');
+                // dispatch(updatedPost( data ))
             })
     }
 }

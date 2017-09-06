@@ -30,7 +30,7 @@ class EditPost extends Component {
                             <table className="table table-sm table-responsive">
                                 <thead>
                                 <tr><th colSpan={3}>
-                                    <label htmlFor="firstName">Post Title</label>
+                                    <label htmlFor="title">Post Title</label>
                                     <Field name="title" component="input" type="text" />
                                 </th></tr>
                                 <tr>
@@ -41,7 +41,7 @@ class EditPost extends Component {
                                 </thead>
                                 <tbody>
                                 <tr><td colSpan={3} className="post-body">
-                                    <label htmlFor="lastName">Post Body</label>
+                                    <label htmlFor="body">Post Body</label>
                                     <Field name="body" component="input" type="text" />
                                 </td></tr>
                                 </tbody>
@@ -51,7 +51,8 @@ class EditPost extends Component {
                                 </tr>
                                 </tfoot>
                             </table>
-                            <button type="submit">Save</button><button onClick={this.props.cancelEdit}>Cancel</button>
+                            <button type="submit">Save</button>
+                            <div onClick={this.props.cancelEdit}>Cancel</div>
                         </form>
 
                     </div>
