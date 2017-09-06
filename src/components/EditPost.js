@@ -63,7 +63,7 @@ class EditPost extends Component {
     }
 }
 
-
+//TODO: figure out how to use tenary statment for returns
 function mapStateToProps(state) {
     // console.log(state);
     // let postToEdit = state.posts.items.find

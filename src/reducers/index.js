@@ -63,8 +63,9 @@ function postReducer( state = {
         case GET_POST_DETAILS :
             return Object.assign({}, state,  { openPost : true , openTarget : action.openTarget} );
 
+        //    close post also resets openTarget to prevent populating newPost form with data
         case CLOSE_POST :
-            return Object.assign({}, state,  { openPost : false } );
+            return Object.assign({}, state,  { openPost : false, openTarget : null } );
 
         case NEW_POST :
             return Object.assign({}, state, {newPostForm: true });
