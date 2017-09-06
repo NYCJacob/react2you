@@ -10,6 +10,7 @@ export const GET_POST_DETAILS = 'GET_POST_DETAILS'
 export const CLOSE_POST = 'CLOSE_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const CANCEL_EDIT = 'CANCEL_EDIT'
+export const UPDATED_POST = 'UPDATED_POST'
 
 export function allPosts () {
     return {
@@ -128,6 +129,42 @@ export function fetchPosts() {
 
 }
 // end fetchPosts()
+
+function  updatedPost( updated ) {
+    console.log( updated)
+    return {
+        type : UPDATED_POST,
+        updatedPost : updated,
+        updatedAt : Date.now()
+    }
+
+}
+
+export function updatePost(data) {
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+
+    const fetchParams = {
+        method : 'POST',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default'
+    }
+    // let url = `http://localhost:5001/posts/${data.id}`;
+    let url = `http://localhost:5001/posts/`;
+    console.log(data);
+    return dispatch => {
+        return fetch(url, fetchParams)
+            .then(response => {
+                console.log( response );
+                return response.json()
+            })
+            .then(data => {
+                dispatch(updatedPost( data ))
+            })
+    }
+}
 
 
 function receiveComments(id, comments) {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Comments from './Comments'
 import EditPost from './EditPost'
-import { closePost, editPost} from '../actions'
+import { closePost, editPost, updatePost} from '../actions'
 
 
 /**
@@ -13,7 +13,8 @@ import { closePost, editPost} from '../actions'
 class SinglePost extends Component {
 
     handleSubmit = (data) => {
-        window.alert('Data submitted! ' + JSON.stringify(data));
+        console.log(data);
+        this.props.updatePost(data);
     }
 
     render() {
@@ -83,7 +84,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return{
         closeSinglePost : () => dispatch(closePost()),
-        editPost : () => dispatch(editPost())
+        editPost : () => dispatch(editPost()),
+        updatePost : () => dispatch(updatePost())
     }
 }
 
