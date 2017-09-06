@@ -60,9 +60,15 @@ class EditPost extends Component {
                                     </th>
                                     <th className="post-category">
                                         <label htmlFor="category">Category</label>
-                                        <Field name="category" component="input" type="text" />
+                                        <Field name="category" component="input" type="text" list="postCategories" />
+                                        <datalist id="postCategories">
+                                            {this.props.categories.map((category) => (
+                                                <option value={category.name}></option>
+                                            ))
+                                            }
+                                        </datalist>
                                     </th>
-                                    {/*<th className="post-votes">Votes: 0</th>*/}
+
                                 </tr>
                                 }
                                 </thead>
@@ -106,11 +112,10 @@ class EditPost extends Component {
 
 //TODO: figure out how to use tenary statment for returns
 function mapStateToProps(state) {
-    // console.log(state);
-    // let postToEdit = state.posts.items.find
-    // let targetPost =   state.posts.items.find((item) => item.id === state.posts.openTarget)
-    // console.log( targetPost );
-    return { editable : state.posts.editing, initialValues :  state.posts.items.find((item) => item.id === state.posts.openTarget) }
+    return { editable : state.posts.editing,
+        initialValues :  state.posts.items.find((item) => item.id === state.posts.openTarget),
+        categories: Object.keys( state.categories ).map(key => state.categories[key])
+    }
 }
 
 function mapDispatchToProps(dispatch){

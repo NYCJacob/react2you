@@ -1,3 +1,5 @@
+const uuidv4 = require('uuid/v4');
+
 export const ALL_POSTS = 'ALL_POSTS'
 export const ALL_CATEGORIES = 'ALL_CATEGORIES'
 export const ADD_CATEGORY = 'ADD_CATEGORY'
@@ -152,7 +154,6 @@ function  updatedPost( updated ) {
 // PUT /posts/:id
 // USAGE: Edit the details of an existing post
 // PARAMS: title - String body - String
-
 export function updatePost(data) {
     console.log(data)
     const fetchHeaders = new Headers();
@@ -198,17 +199,31 @@ export function SendNewPost(data) {
     fetchHeaders.append('Authorization', 'whatever-you-want');
 
     const fetchParams = {
-        method : 'PUT',
+        method : 'POST',
         headers : fetchHeaders,
         mode : 'cors',
         cache : 'default',
-        id : '',
+        id : uuidv4(),
         timestamp : Date.now(),
         title : data.title,
         body : data.body,
         author : data.author,
         category : data.category
     }
+
+    let url = `http://localhost:5001/posts`;
+    return dispatch => {
+        return fetch(url, fetchParams)
+        // .then(response => {
+        //     console.log( response );
+        //     return response.json()
+        // })
+            .then(() => {
+                console.log('post new post success');
+                // dispatch(updatedPost( data ))
+            })
+    }
+
 }
 
 
