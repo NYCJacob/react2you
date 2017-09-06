@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { sortVote, getPostDetails, newPost} from "../actions/index"
+import { sortVote, getPostDetails, newPost, SendNewPost} from "../actions/index"
 import SinglePost from './SinglePost'
 import EditPost from './EditPost'
 
@@ -12,6 +12,7 @@ import EditPost from './EditPost'
 class Posts extends Component {
     handleSubmit = (data) => {
         console.log(data);
+        SendNewPost(data);
     }
 
     render() {
@@ -50,7 +51,7 @@ class Posts extends Component {
                 </div>
                 }
                 {this.props.newPostForm &&
-                    <div>
+                    <div className="newPostForm-container">
                         new post form
                         <EditPost onSubmit={this.handleSubmit} newPost={this.props.newPostForm} postData={ {
                             title: '',

@@ -137,6 +137,7 @@ export function fetchPosts() {
 }
 // end fetchPosts()
 
+// updatedPost is dispatached by updatePost
 function  updatedPost( updated ) {
     console.log( updated)
     return {
@@ -149,11 +150,8 @@ function  updatedPost( updated ) {
 
 
 // PUT /posts/:id
-// USAGE:
-//     Edit the details of an existing post
-// PARAMS:
-//     title - String
-//      body - String
+// USAGE: Edit the details of an existing post
+// PARAMS: title - String body - String
 
 export function updatePost(data) {
     console.log(data)
@@ -182,6 +180,37 @@ export function updatePost(data) {
             })
     }
 }
+
+
+// POST /posts
+// USAGE: Add a new post
+// PARAMS:
+//     id - UUID should be fine, but any unique id will work
+// timestamp - timestamp in whatever format you like, you can use Date.now() if you like
+// title - String
+// body - String
+// author - String
+// category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.
+export function SendNewPost(data) {
+    console.log( data );
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+
+    const fetchParams = {
+        method : 'PUT',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default',
+        id : '',
+        timestamp : Date.now(),
+        title : data.title,
+        body : data.body,
+        author : data.author,
+        category : data.category
+    }
+}
+
 
 
 function receiveComments(id, comments) {

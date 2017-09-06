@@ -17,9 +17,18 @@
   font-size: smaller;
 }
 
-.editPost-view {
-  width: 75vw;
-}
+
+
+/*.editPost-view {*/
+  /*width: 75vw;*/
+  /*margin: auto;*/
+  /*font-size: smaller;*/
+/*}*/
+/*.newPostForm-container {*/
+  /*width: 75vw;*/
+  /*margin: auto;*/
+  /*font-size: smaller;*/
+/*}*/
 
 .singlePost-view {
   width: 75vw;
@@ -32,7 +41,7 @@
 }
 
 .table-info {
-  font-size: small;
+  font-size: x-small;
 }
 
 

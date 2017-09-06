@@ -29,26 +29,67 @@ class EditPost extends Component {
 
                             <table className="table table-sm table-responsive">
                                 <thead>
-                                <tr><th colSpan={3}>
-                                    <label htmlFor="title">Post Title</label>
-                                    <Field name="title" component="input" type="text" />
-                                </th></tr>
+                                {this.props.newPost &&
                                 <tr>
-                                    <th className="post-author">By: {author}</th>
-                                    <th className="post-category">Category: {category}</th>
-                                    <th className="post-votes">Votes: {voteScore}</th>
+                                    <th colSpan={3}>
+                                        <label htmlFor="title">Post Title</label>
+                                        <Field name="title" component="input" size="50" type="text"/>
+                                    </th>
                                 </tr>
+                                }
+                                {this.props.editable &&
+                                <tr>
+                                    <th colSpan={3}>
+                                        <label htmlFor="title">Post Title</label>
+                                        <Field name="title" component="input" size="50" type="text"/>
+                                    </th>
+                                </tr>
+                                }
+                                {this.props.editable &&
+                                    <tr>
+                                        <th className="post-author">By: {author}</th>
+                                        <th className="post-category">Category: {category}</th>
+                                        <th className="post-votes">Votes: {voteScore}</th>
+                                    </tr>
+                                }
+                                {this.props.newPost &&
+                                <tr>
+                                    <th className="post-author">
+                                        <label htmlFor="author">Author</label>
+                                        <Field name="author" component="input" type="text" />
+                                    </th>
+                                    <th className="post-category">
+                                        <label htmlFor="category">Category</label>
+                                        <Field name="category" component="input" type="text" />
+                                    </th>
+                                    {/*<th className="post-votes">Votes: 0</th>*/}
+                                </tr>
+                                }
                                 </thead>
                                 <tbody>
                                 <tr><td colSpan={3} className="post-body">
                                     <label htmlFor="body">Post Body</label>
-                                    <Field name="body" component="textarea" type="text" />
+                                    <Field name="body" component="textarea" cols="50" rows="5" type="text" />
                                 </td></tr>
                                 </tbody>
                                 <tfoot>
-                                <tr className="table-info">
-                                    <td colSpan={2}>{id}</td><td>{timestamp}</td>
-                                </tr>
+                                {this.props.editable &&
+                                    <tr className="table-info">
+                                        <td colSpan={2}>{id}</td>
+                                        <td>{timestamp}</td>
+                                    </tr>
+                                }
+                                {/*{this.props.newPost &&*/}
+                                {/*<tr className="table-info">*/}
+                                    {/*<td>*/}
+                                        {/*<label htmlFor="postId">Post ID</label>*/}
+                                        {/*<Field name="postId" component="input" type="number" />*/}
+                                    {/*</td>*/}
+                                    {/*<td><label htmlFor="timeStamp">TimeStamp</label>*/}
+                                        {/*<Field name="timeStamp" component="input" type="number" /></td>*/}
+                                {/*</tr>*/}
+                                {/*}*/}
+
                                 <tr>
                                     <td><button type="submit">Save</button></td>
                                     <td><button onClick={this.props.cancelEdit}>Cancel</button></td>
