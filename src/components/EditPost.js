@@ -22,8 +22,8 @@ class EditPost extends Component {
         return (
 
             <div className="editPost-view">
-                { this.props.editable &&
-                    <div>
+                { this.props.editable || this.props.newPostForm }
+                {    <div className="container-fluid">
 
                         <form  onSubmit={handleSubmit}>
 
@@ -42,19 +42,20 @@ class EditPost extends Component {
                                 <tbody>
                                 <tr><td colSpan={3} className="post-body">
                                     <label htmlFor="body">Post Body</label>
-                                    <Field name="body" component="input" type="text" />
+                                    <Field name="body" component="textarea" type="text" />
                                 </td></tr>
                                 </tbody>
                                 <tfoot>
                                 <tr className="table-info">
                                     <td colSpan={2}>{id}</td><td>{timestamp}</td>
                                 </tr>
+                                <tr>
+                                    <td><button type="submit">Save</button></td>
+                                    <td><button onClick={this.props.cancelEdit}>Cancel</button></td>
+                                </tr>
                                 </tfoot>
                             </table>
-                            <button type="submit">Save</button>
-                            <div onClick={this.props.cancelEdit}>Cancel</div>
                         </form>
-
                     </div>
                 }
             </div>
@@ -81,15 +82,6 @@ EditPost = reduxForm({
     // a unique name for the form
     form: 'EditPostForm'
 })(EditPost)
-
-//  redux form example init from state
-// You have to connect() to any reducers that you wish to connect to yourself
-// InitializeFromStateForm = connect(
-//     state => ({
-//         initialValues: state.account.data // pull initial values from account reducer
-//     }),
-//     { load: loadAccount } // bind account loading action creator
-// )(InitializeFromStateForm)
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditPost);

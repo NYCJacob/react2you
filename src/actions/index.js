@@ -11,6 +11,7 @@ export const CLOSE_POST = 'CLOSE_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const CANCEL_EDIT = 'CANCEL_EDIT'
 export const UPDATED_POST = 'UPDATED_POST'
+export const NEW_POST = 'NEW_POST'
 
 export function allPosts () {
     return {
@@ -78,6 +79,12 @@ export function cancelEdit() {
 export function editPost() {
     return {
         type: EDIT_POST
+    }
+}
+
+export function newPost() {
+    return {
+        type: NEW_POST
     }
 }
 

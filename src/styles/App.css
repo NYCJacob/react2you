@@ -17,6 +17,16 @@
   font-size: smaller;
 }
 
+.editPost-view {
+  width: 75vw;
+}
+
+.singlePost-view {
+  width: 75vw;
+  margin: auto;
+  font-size: smaller;
+}
+
 .post-votes {
   text-align: right;
 }

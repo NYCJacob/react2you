@@ -13,7 +13,8 @@ import {
     CLOSE_POST,
     EDIT_POST,
     CANCEL_EDIT,
-    UPDATED_POST
+    UPDATED_POST,
+    NEW_POST
 } from '../actions'
 import {ADD_CATEGORY,  SORT_VOTES} from "../actions/index";
 
@@ -43,6 +44,7 @@ function categoryReducer(state = {}, action) {
 function postReducer( state = {
     openPost : false,
     editing : false,
+    newPostForm : false,
     openTarget : null,
     items : []
     },
@@ -64,6 +66,9 @@ function postReducer( state = {
         case CLOSE_POST :
             return Object.assign({}, state,  { openPost : false } );
 
+        case NEW_POST :
+            return Object.assign({}, state, {newPostForm: true });
+
         case EDIT_POST :
             return Object.assign({}, state,  { editing : true } );
 
@@ -72,7 +77,7 @@ function postReducer( state = {
             return Object.assign({}, state, { items: [ action.updatedPost]} );
 
         case CANCEL_EDIT :
-            return Object.assign({}, state,  { editing : false } );
+            return Object.assign({}, state,  { editing : false, newPostForm : false } );
 
 
         case SORT_VOTES :
