@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import './styles/index.css';
+// fontawesone sprite sheet
+import './sprites/regular.svg'
 import App from './components/App';
 import { BrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk'

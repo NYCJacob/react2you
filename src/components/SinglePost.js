@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import Comments from './Comments'
 import EditPost from './EditPost'
 import { closePost, editPost, updatePost} from '../actions'
@@ -14,7 +15,7 @@ class SinglePost extends Component {
 
     handleSubmit = (data) => {
         console.log(data);
-        updatePost(data);
+        this.props.updatePost(data);
     }
 
     render() {
@@ -26,6 +27,12 @@ class SinglePost extends Component {
                 { !this.props.editable &&
                     <div>
                         <button className="btn btn-sm" onClick={this.props.closeSinglePost}>X</button>
+                        {/*<div>*/}
+                            {/*<svg viewBox="0 0 100 100" class="icon ">*/}
+                                {/*<use xlink:href="#window-close"></use>*/}
+                            {/*</svg>*/}
+
+                        {/*</div>*/}
 
                         <table className="table table-sm table-responsive">
                         <thead>
@@ -33,7 +40,7 @@ class SinglePost extends Component {
                         <tr>
                         <th className="post-author">By: {author}</th>
                         <th className="post-category">Category: {category}</th>
-                        <th className="post-votes">Votes: {voteScore}</th>
+                        <th className="post-votes"><button className="btn btn-sm btn-primary">Votes: {voteScore}</button></th>
                         </tr>
                         </thead>
                         <tbody>

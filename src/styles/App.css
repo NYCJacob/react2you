@@ -58,6 +58,10 @@
   text-align: left;
 }
 
+.icon {
+  width: 48px;
+  height: 48px;
+}
 
 /*below is default code from create-react-app*/
 .App {

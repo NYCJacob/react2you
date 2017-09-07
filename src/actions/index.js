@@ -155,9 +155,9 @@ function  updatedPost( updated ) {
 // USAGE: Edit the details of an existing post
 // PARAMS: title - String body - String
 export function updatePost(data) {
-    console.log(data)
+    console.log(data);
     const fetchHeaders = new Headers();
-    // fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
 
     const fetchParams = {
@@ -168,16 +168,13 @@ export function updatePost(data) {
         title : data.title,
         body : data.body
     }
+    // http://localhost:5001/posts/8xf0y6ziyjabvozdd253nd?title='new title'&body='new body'
     let url = `http://localhost:5001/posts/${data.id}`;
     return dispatch => {
         return fetch(url, fetchParams)
-            // .then(response => {
-            //     console.log( response );
-            //     return response.json()
-            // })
             .then(() => {
                 console.log('put success');
-                // dispatch(updatedPost( data ))
+                dispatch(updatedPost( data ))
             })
     }
 }
