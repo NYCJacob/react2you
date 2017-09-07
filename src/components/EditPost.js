@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {cancelEdit} from "../actions/index"
 // redux form import
-import { Field, reduxForm } from 'redux-form'
+import { SubmissionError, Field, reduxForm } from 'redux-form'
+
 
 /**
  * @description
@@ -59,14 +60,14 @@ class EditPost extends Component {
                                         <Field name="author" component="input" type="text" />
                                     </th>
                                     <th className="post-category">
-                                        <label htmlFor="category">Category</label>
-                                        <Field name="category" component="input" type="text" list="postCategories" />
-                                        <datalist id="postCategories">
+                                        <label htmlFor="category"></label>
+                                        <Field name="category" component="select">
+                                            <option>Select Category</option>
                                             {this.props.categories.map((category) => (
-                                                <option value={category.name}></option>
+                                                <option value={category.name}>{category.name}</option>
                                             ))
                                             }
-                                        </datalist>
+                                        </Field>
                                     </th>
 
                                 </tr>
