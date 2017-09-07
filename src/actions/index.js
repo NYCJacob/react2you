@@ -191,30 +191,30 @@ export function SendNewPost(data) {
     fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
 
-    const fetchParams = {
-        method : 'POST',
-        headers : fetchHeaders,
-        mode : 'cors',
-        cache : 'default',
+    const dataBody = {
         id : uuidv4(),
         timestamp : Date.now(),
         title : data.title,
         body : data.body,
         author : data.author,
         category : data.category
+    };
+
+    const fetchParams = {
+        method : 'POST',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default',
+        body : JSON.stringify( dataBody)
     }
 
     let url = `http://localhost:5001/posts`;
     return dispatch => {
         return fetch(url, fetchParams)
-        // .then(response => {
-        //     console.log( response );
-        //     return response.json()
-        // })
             .then(() => {
                 console.log('post new post success');
-                // dispatch(updatedPost( data ))
             })
+            .then(dispatch(fetchPosts()))
     }
 
 }

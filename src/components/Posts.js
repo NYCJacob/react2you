@@ -12,7 +12,7 @@ import EditPost from './EditPost'
 class Posts extends Component {
     handleSubmit = (data) => {
         console.log(data);
-        SendNewPost(data);
+        this.props.sendNewPost(data);
     }
 
     render() {
@@ -53,7 +53,7 @@ class Posts extends Component {
                 {this.props.newPostForm &&
                     <div className="newPostForm-container">
                         new post form
-                        <EditPost onSubmit={this.handleSubmit} newPost={this.props.newPostForm} postData={ {
+                        <EditPost onSubmit={this.handleSubmit.bind(this)} newPost={this.props.newPostForm} postData={ {
                             title: '',
                             author: '',
                             category: '',
@@ -87,7 +87,8 @@ function mapDispatchToProps(dispatch) {
     return{
         openPost : (postId) => dispatch(getPostDetails(postId)),
         newPost : () => dispatch(newPost()),
-        sortPostsByVote : () => dispatch(sortVote())
+        sortPostsByVote : () => dispatch(sortVote()),
+        sendNewPost : (data) => dispatch(SendNewPost(data))
     }
 }
 
