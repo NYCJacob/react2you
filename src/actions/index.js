@@ -151,31 +151,27 @@ function  updatedPost( updated ) {
 }
 
 
-// PUT /posts/:id
-// USAGE: Edit the details of an existing post
-// PARAMS: title - String body - String
 export function updatePost(data) {
     console.log(data);
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
-
+    let dataBody = { title: data.title, body: data.body }
     const fetchParams = {
         method : 'PUT',
         headers : fetchHeaders,
         mode : 'cors',
         cache : 'default',
-        title : data.title,
-        body : data.body
+        body : JSON.stringify( dataBody)
     }
-    // http://localhost:5001/posts/8xf0y6ziyjabvozdd253nd?title='new title'&body='new body'
     let url = `http://localhost:5001/posts/${data.id}`;
     return dispatch => {
         return fetch(url, fetchParams)
             .then(() => {
-                console.log('put success');
+                // console.log('put success');
                 dispatch(updatedPost( data ))
             })
+            .then(dispatch(fetchPosts()))   // fetch returns saved object and re-writes store so need to fetch again
     }
 }
 

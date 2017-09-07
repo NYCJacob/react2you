@@ -27,12 +27,6 @@ class SinglePost extends Component {
                 { !this.props.editable &&
                     <div>
                         <button className="btn btn-sm" onClick={this.props.closeSinglePost}>X</button>
-                        {/*<div>*/}
-                            {/*<svg viewBox="0 0 100 100" class="icon ">*/}
-                                {/*<use xlink:href="#window-close"></use>*/}
-                            {/*</svg>*/}
-
-                        {/*</div>*/}
 
                         <table className="table table-sm table-responsive">
                         <thead>
@@ -92,7 +86,7 @@ function mapDispatchToProps(dispatch) {
     return{
         closeSinglePost : () => dispatch(closePost()),
         editPost : () => dispatch(editPost()),
-        updatePost : () => dispatch(updatePost())
+        updatePost : (data) => dispatch(updatePost(data))
     }
 }
 
