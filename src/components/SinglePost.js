@@ -61,7 +61,7 @@ class SinglePost extends Component {
                 { this.props.editable &&
                 <div>
 
-                    <EditPost onSubmit={this.handleSubmit} postData={ {
+                    <EditPost onSubmit={this.handleSubmit.bind(this)} postData={ {
                         title: title,
                         author: author,
                         category: category,
