@@ -59,7 +59,7 @@ function postReducer( state = {
             action.posts.sort(function(a, b) {
                 return b.voteScore - a.voteScore;
             });
-            return Object.assign({}, state,  { openPost : false, items : action.posts } );
+            return Object.assign({}, state,  { openPost : false, items : action.posts, newPostForm : false, openTarget: null } );
 
         case GET_POST_DETAILS :
             return Object.assign({}, state,  { openPost : true , openTarget : action.openTarget} );
