@@ -78,10 +78,11 @@ function postReducer( state = {
             console.log(action);
             return Object.assign({}, state, { items: [ action.updatedPost]} );
 
-        case UPDATED_POST :
+        case DELETE_POST :
             console.log(action);
-            // return Object.assign({}, state, { items: [ action.updatedPost]} );
-            return state;
+            let priorPosts = state.items;
+            let newPostsState = priorPosts.filter( post => post.id !== action.deletePostId);
+            return Object.assign({}, state, { openTarget : null, items: newPostsState} );
 
         case CANCEL_EDIT :
             return Object.assign({}, state,  { editing : false, newPostForm : false } );
@@ -90,8 +91,8 @@ function postReducer( state = {
         case SORT_VOTES :
             console.log(state)
             let willSortPosts = Object.assign({}, state);
-            console.log(willSortPosts)
-            return state
+            console.log(willSortPosts);
+            return state;
 
         default :
             return state;

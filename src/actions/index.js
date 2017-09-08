@@ -119,7 +119,6 @@ export function fetchPosts() {
     fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
 
-
     const fetchParams = {
         method : 'GET',
         headers : fetchHeaders,
@@ -129,11 +128,11 @@ export function fetchPosts() {
     return dispatch => {
         return fetch('http://localhost:5001/posts', fetchParams)
             .then(response => {
-                console.log( response );
                 return response.json()
             })
             .then(data => {
-                dispatch(receivePosts( data ))
+                console.log( data );
+                dispatch(receivePosts( data.filter(post => post.deleted === false ) ))
             })
     }
 
@@ -151,7 +150,7 @@ function  updatedPost( updated ) {
 
 }
 
-// deletePost is dispatached by updatePost
+//
 function  deletePost( postId ) {
     return {
         type : DELETE_POST,
@@ -181,12 +180,13 @@ export function updatePost(data) {
                 // console.log('put success');
                 dispatch(updatedPost( data ))
             })
-            .then(dispatch(fetchPosts()))   // fetch returns saved object and re-writes store so need to fetch again
+            .then(() => {
+            dispatch(fetchPosts())
+            })   // fetch returns saved object and re-writes store so need to fetch again
     }
 }
 
-export function deletePostAction(postId) {
-    console.log(postId);
+export function deletePostAction( postId) {
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
@@ -196,10 +196,12 @@ export function deletePostAction(postId) {
         mode : 'cors',
         cache : 'default',
     }
+
     let url = `http://localhost:5001/posts/${postId}`;
     return dispatch => {
         return fetch(url, fetchParams)
             .then(() => {
+            console.log("will deletPost", postId);
             dispatch(deletePost( postId))
             })
             .then(dispatch(fetchPosts()))   // fetch returns saved object and re-writes store so need to fetch again

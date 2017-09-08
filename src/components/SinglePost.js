@@ -18,6 +18,7 @@ class SinglePost extends Component {
         this.props.updatePost(data);
     }
 
+
     render() {
         const { title, author, category, voteScore, body, id, timestamp } = this.props.targetPost;
 
@@ -40,7 +41,7 @@ class SinglePost extends Component {
                         <tbody>
                         <tr><td colSpan={3} className="post-body">{body}</td></tr>
                         <tr><td><button className="btn-sm" onClick={this.props.editPost}>Edit</button> </td></tr>
-                        <tr><td><button className="btn-sm" onClick={this.props.deletePost(id)}>Delete</button> </td></tr>
+                        <tr><td><button className="btn-sm" onClick={() => this.props.deletePost(id)}>Delete</button> </td></tr>
                         </tbody>
                         <tfoot>
                         <tr className="table-info">
@@ -92,4 +93,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SinglePost);
+export default connect(mapStateToProps, mapDispatchToProps)(SinglePost)

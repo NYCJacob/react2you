@@ -45,10 +45,9 @@ class Posts extends Component {
                     </div>
                 }
                 {this.props.open &&
-                <div>
-                    {/*<PostTree />*/}
-                    <SinglePost/>
-                </div>
+                    <div>
+                        <SinglePost/>
+                    </div>
                 }
                 {this.props.newPostForm &&
                     <div className="newPostForm-container">
