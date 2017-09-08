@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Comments from './Comments'
 import EditPost from './EditPost'
-import { closePost, editPost, updatePost} from '../actions'
+import { closePost, editPost, updatePost, deletePostAction} from '../actions'
 
 
 /**
@@ -40,6 +40,7 @@ class SinglePost extends Component {
                         <tbody>
                         <tr><td colSpan={3} className="post-body">{body}</td></tr>
                         <tr><td><button className="btn-sm" onClick={this.props.editPost}>Edit</button> </td></tr>
+                        <tr><td><button className="btn-sm" onClick={this.props.deletePost(id)}>Delete</button> </td></tr>
                         </tbody>
                         <tfoot>
                         <tr className="table-info">
@@ -86,7 +87,8 @@ function mapDispatchToProps(dispatch) {
     return{
         closeSinglePost : () => dispatch(closePost()),
         editPost : () => dispatch(editPost()),
-        updatePost : (data) => dispatch(updatePost(data))
+        updatePost : (data) => dispatch(updatePost(data)),
+        deletePost : (postId) => dispatch(deletePostAction(postId))
     }
 }
 

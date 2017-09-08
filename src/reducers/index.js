@@ -14,7 +14,8 @@ import {
     EDIT_POST,
     CANCEL_EDIT,
     UPDATED_POST,
-    NEW_POST
+    NEW_POST,
+    DELETE_POST
 } from '../actions'
 import {ADD_CATEGORY,  SORT_VOTES} from "../actions/index";
 
@@ -76,6 +77,10 @@ function postReducer( state = {
         case UPDATED_POST :
             console.log(action);
             return Object.assign({}, state, { items: [ action.updatedPost]} );
+
+        case UPDATED_POST :
+            console.log(action);
+            // return Object.assign({}, state, { items: [ action.updatedPost]} );
 
         case CANCEL_EDIT :
             return Object.assign({}, state,  { editing : false, newPostForm : false } );

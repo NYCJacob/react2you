@@ -14,6 +14,7 @@ export const EDIT_POST = 'EDIT_POST'
 export const CANCEL_EDIT = 'CANCEL_EDIT'
 export const UPDATED_POST = 'UPDATED_POST'
 export const NEW_POST = 'NEW_POST'
+export const DELETE_POST = 'DELETE_POST'
 
 export function allPosts () {
     return {
@@ -150,13 +151,22 @@ function  updatedPost( updated ) {
 
 }
 
+// deletePost is dispatached by updatePost
+function  deletePost( postId ) {
+    return {
+        type : DELETE_POST,
+        deletePostId : postId,
+        updatedAt : Date.now()
+    }
+
+}
 
 export function updatePost(data) {
     console.log(data);
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
-    let dataBody = { title: data.title, body: data.body }
+    let dataBody = { title: data.title, body: data.body };
     const fetchParams = {
         method : 'PUT',
         headers : fetchHeaders,
@@ -175,16 +185,27 @@ export function updatePost(data) {
     }
 }
 
+export function deletePostAction(postId) {
+    console.log(postId);
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+    const fetchParams = {
+        method : 'DELETE',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default',
+    }
+    let url = `http://localhost:5001/posts/${postId}`;
+    return dispatch => {
+        return fetch(url, fetchParams)
+            .then(() => {
+            dispatch(deletePost( postId))
+            })
+            .then(dispatch(fetchPosts()))   // fetch returns saved object and re-writes store so need to fetch again
+    }
+}
 
-// POST /posts
-// USAGE: Add a new post
-// PARAMS:
-//     id - UUID should be fine, but any unique id will work
-// timestamp - timestamp in whatever format you like, you can use Date.now() if you like
-// title - String
-// body - String
-// author - String
-// category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.
 export function SendNewPost(data) {
     console.log( data );
     const fetchHeaders = new Headers();
@@ -206,7 +227,7 @@ export function SendNewPost(data) {
         mode : 'cors',
         cache : 'default',
         body : JSON.stringify( dataBody)
-    }
+    };
 
     let url = `http://localhost:5001/posts`;
     return dispatch => {
