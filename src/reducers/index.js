@@ -81,6 +81,7 @@ function postReducer( state = {
         case UPDATED_POST :
             console.log(action);
             // return Object.assign({}, state, { items: [ action.updatedPost]} );
+            return state;
 
         case CANCEL_EDIT :
             return Object.assign({}, state,  { editing : false, newPostForm : false } );
