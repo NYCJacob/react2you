@@ -71,7 +71,6 @@ function postReducer( state = {
                                 return -1;
                             return 0;
                         }
-
                         sortingPosts.sort(compare);
                         break;
                     // by vote ascending
@@ -84,14 +83,36 @@ function postReducer( state = {
                                 return -1;
                             return 0;
                         }
-
                         sortingPosts.sort(compare);
                         break;
                     // by category
+                    case 2:
+                        // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript#1129270
+                    function compare(a,b) {
+                        if (a.category < b.category)
+                            return 1;
+                        if (a.category > b.category)
+                            return -1;
+                        return 0;
+                    }
+                        sortingPosts.sort(compare);
+                        break;
+                    // by vote ascending
+                    case -2:
+                        // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript#1129270
+                    function compare(a,b) {
+                        if (b.category < a.category)
+                            return 1;
+                        if (b.category > a.category)
+                            return -1;
+                        return 0;
+                    }
 
+                        sortingPosts.sort(compare);
+                        break;
 
                 }
-            console.log(sortingPosts);
+                // end switch
             return Object.assign({}, state,  { openPost : false, items : sortingPosts, newPostForm : false, openTarget: null } );
 
         case SET_SORTKEY :

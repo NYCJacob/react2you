@@ -24,9 +24,14 @@ class Posts extends Component {
                                  <button className="btn btn-sm btn-primary" onClick={() => this.props.newPost()}>New Post</button>
                              </div>
                              <div className="col-sm">Title</div>
-                             <div className="col-sm text-right"><span>Category</span><span>&#9650;&#9660;</span></div>
+                             <div className="col-sm text-right">
+                                 <span>Category</span>
+                                 <span className="voting" onClick={() => this.props.sorter( 2, this.props.items)}>&#9650;</span>
+                                 <span>|</span>
+                                 <span className="voting" onClick={() => this.props.sorter( -2, this.props.items)}>&#9660;</span>
+                             </div>
                              <div className="col-sm">
-                                 <a>Votes</a>
+                                 <span>Votes</span>
                                  <span className="voting" onClick={() => this.props.sorter( 1, this.props.items)}>&#9650;</span>
                                  <span>|</span>
                                  <span className="voting" onClick={() => this.props.sorter( -1, this.props.items)}>&#9660;</span>
@@ -95,7 +100,7 @@ function mapDispatchToProps(dispatch) {
         sendNewPost : (data) => dispatch(SendNewPost(data)),
         vote : (postId, vote) => dispatch( sendVote(postId, vote)),
         sorter : (sortKey, posts) => {
-            dispatch( setSortKey(sortKey));
+            dispatch( setSortKey(sortKey));  // setting sort key did not trigger a render
             dispatch(receivePosts(posts));
         }
     }
