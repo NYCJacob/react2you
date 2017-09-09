@@ -67,9 +67,11 @@ export function fetchCategories() {
 // end fetchCategories()
 
 
-export function sortVote() {
+export function sortVote( items, voteSort ) {
     return {
-        type: SORT_VOTES
+        type: SORT_VOTES,
+        posts: items,
+        sort : voteSort
     }
 }
 

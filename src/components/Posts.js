@@ -20,23 +20,23 @@ class Posts extends Component {
             <div>
                 { (!this.props.open && !this.props.newPostForm) && <div id="posts-view">
                          <div className="row">
-                             <div className="col-sm-3 text-left">
+                             <div className="col-sm text-left">
                                  <button className="btn btn-sm btn-primary" onClick={() => this.props.newPost()}>New Post</button>
                              </div>
-                             <div className="col-sm-3">Title</div>
-                             <div className="col-sm-3">Category</div>
-                             <div className="col-sm-3"><a onClick={() => this.props.sortPostsByVote()}>Vote Score</a></div>
+                             <div className="col-sm">Title</div>
+                             <div className="col-sm text-right"><span>Category</span><span>&#9650;&#9660;</span></div>
+                             <div className="col-sm"><a>Votes</a><span onClick={() => this.props.sortPostsByVote(this.props.items, this.props.voteSort)}>&#9650;&#9660;</span></div>
                          </div>
 
                         {
                             this.props.items.map((post) => (
                             <div className="post-listing container-fluid" key={post.id}>
                                 <div className="row">
-                                    <div className="col-sm-8"><a href="#"
+                                    <div className="col-sm-8 text-left"><a href="#"
                                     onClick={() => this.props.openPost(post.id)}>{post.title}</a>
                                     </div>
-                                    <div className="col-sm">{post.category}</div>
-                                    <div className="col-sm">{post.voteScore}</div>
+                                    <div className="col-sm text-left">{post.category}</div>
+                                    <div className="col-sm text-left">{post.voteScore}</div>
                                 </div>
                             </div>
                             ))
@@ -75,18 +75,15 @@ function mapStateToProps({ posts, categories }) {
     console.log( posts );
     // https://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array#26166303
     let postsArray =  Object.keys( posts ).map(key => posts[key]);
-    console.log( typeof postsArray )
-    // posts.posts.map((post) => postsArray.push(post));
 
     return  { 'open' : posts.openPost, 'newPostForm' : posts.newPostForm, 'items': posts.items}
-    // return { posts, categories }
 }
 
 function mapDispatchToProps(dispatch) {
     return{
         openPost : (postId) => dispatch(getPostDetails(postId)),
         newPost : () => dispatch(newPost()),
-        sortPostsByVote : () => dispatch(sortVote()),
+        sortPostsByVote : (items, voteSort) => dispatch(sortVote( items, voteSort )),  //items is the array of posts in the posts reducer
         sendNewPost : (data) => dispatch(SendNewPost(data))
     }
 }

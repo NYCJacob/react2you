@@ -43,6 +43,7 @@ function categoryReducer(state = {}, action) {
 }
 
 function postReducer( state = {
+    voteSort : true,   // true is highest first false is reverse
     openPost : false,
     editing : false,
     newPostForm : false,
@@ -55,10 +56,6 @@ function postReducer( state = {
         case ALL_POSTS :
             return state;
         case RECEIVE_POSTS :
-            //  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-            action.posts.sort(function(a, b) {
-                return b.voteScore - a.voteScore;
-            });
             return Object.assign({}, state,  { openPost : false, items : action.posts, newPostForm : false, openTarget: null } );
 
         case GET_POST_DETAILS :
@@ -89,10 +86,21 @@ function postReducer( state = {
 
 
         case SORT_VOTES :
-            console.log(state)
-            let willSortPosts = Object.assign({}, state);
-            console.log(willSortPosts);
-            return state;
+            //todo: why is this not flipping the boolean value of voteSort???
+            // action.voteSort = !action.voteSort;
+            console.log( action.voteSort );
+            if (action.voteSort === true) {
+                action.voteSort = false;
+                action.posts.sort(function(a, b) {
+                    return b.voteScore - a.voteScore;
+                });
+            } else {
+                action.voteSort = true;
+                action.posts.sort(function(a, b) {   // ascending order
+                    return a.voteScore - b.voteScore;
+                });
+            }
+            return Object.assign({}, state, { items : action.posts, voteSort : action.voteSort });
 
         default :
             return state;
