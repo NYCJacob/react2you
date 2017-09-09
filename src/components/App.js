@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 // import { Route } from 'react-router-dom'
 // App.css imports Bootsrap4 css files
 import '../styles/App.css';

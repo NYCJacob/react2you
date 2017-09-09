@@ -3,8 +3,8 @@ import { combineReducers } from 'redux'
 // redux-form imports
 import { reducer as formReducer } from 'redux-form'
 
-
 import {
+    ADD_CATEGORY,
     ALL_POSTS,
     RECEIVE_POSTS,
     RECEIVE_CATEGORIES,
@@ -16,9 +16,9 @@ import {
     UPDATED_POST,
     NEW_POST,
     DELETE_POST,
-    POST_VOTE
+    POST_VOTE,
+    SET_SORTKEY
 } from '../actions'
-import {ADD_CATEGORY,  SORT_VOTES} from "../actions/index";
 
 
 function categoryReducer(state = {}, action) {
@@ -44,20 +44,58 @@ function categoryReducer(state = {}, action) {
 }
 
 function postReducer( state = {
-    voteSort : true,   // true is highest first false is reverse
     openPost : false,
     editing : false,
     newPostForm : false,
     openTarget : null,
+    sortKey : 1,    // 1 is default voteScore, 2 is by category, negative reverses sort
     items : []
-    },
-                      action) {
+    }, action) {
 
     switch (action.type) {
         case ALL_POSTS :
             return state;
         case RECEIVE_POSTS :
-            return Object.assign({}, state,  { openPost : false, items : action.posts, newPostForm : false, openTarget: null } );
+            // sort logic
+                console.log( action );
+                let sortingPosts = action.posts;
+                console.log(sortingPosts);
+                switch (state.sortKey) {
+                    // by vote descending
+                    case 1:
+                        // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript#1129270
+                        function compare(a,b) {
+                            if (a.voteScore < b.voteScore)
+                                return 1;
+                            if (a.voteScore > b.voteScore)
+                                return -1;
+                            return 0;
+                        }
+
+                        sortingPosts.sort(compare);
+                        break;
+                    // by vote ascending
+                    case -1:
+                        // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript#1129270
+                        function compare(a,b) {
+                            if (b.voteScore < a.voteScore)
+                                return 1;
+                            if (b.voteScore > a.voteScore)
+                                return -1;
+                            return 0;
+                        }
+
+                        sortingPosts.sort(compare);
+                        break;
+                    // by category
+
+
+                }
+
+            return Object.assign({}, state,  { openPost : false, items : sortingPosts, newPostForm : false, openTarget: null } );
+
+        case SET_SORTKEY :
+            return {...state, sortKey : action.key };
 
         case GET_POST_DETAILS :
             return Object.assign({}, state,  { openPost : true , openTarget : action.openTarget} );
@@ -85,22 +123,7 @@ function postReducer( state = {
         case CANCEL_EDIT :
             return Object.assign({}, state,  { editing : false, newPostForm : false } );
 
-        case SORT_VOTES :
-            //todo: why is this not flipping the boolean value of voteSort???
-            // action.voteSort = !action.voteSort;
-            console.log( action );
-            if (action.voteSort === true) {
-                action.voteSort = false;
-                action.posts.sort(function(a, b) {
-                    return b.voteScore - a.voteScore;
-                });
-            } else {
-                action.voteSort = true;
-                action.posts.sort(function(a, b) {   // ascending order
-                    return a.voteScore - b.voteScore;
-                });
-            }
-            return Object.assign({}, state, { items : action.posts, voteSort : action.voteSort });
+
 
         case POST_VOTE :
             // let votedPost =  state.items.find( post => post.id === action.postId);

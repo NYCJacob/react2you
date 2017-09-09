@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { sortVote, getPostDetails, newPost, SendNewPost, sendVote} from "../actions/index"
+import { getPostDetails, newPost, SendNewPost, sendVote, setSortKey} from "../actions/index"
 import SinglePost from './SinglePost'
 import EditPost from './EditPost'
 
@@ -25,7 +25,12 @@ class Posts extends Component {
                              </div>
                              <div className="col-sm">Title</div>
                              <div className="col-sm text-right"><span>Category</span><span>&#9650;&#9660;</span></div>
-                             <div className="col-sm"><a>Votes</a><span className="sorting" onClick={() => this.props.sortPostsByVote(this.props.voteSort)}>&#9650;&#9660;</span></div>
+                             <div className="col-sm">
+                                 <a>Votes</a>
+                                 <span className="voting" onClick={() => this.props.sorter( 1)}>&#9650;</span>
+                                 <span>|</span>
+                                 <span className="voting" onClick={() => this.props.sorter( -1)}>&#9660;</span>
+                             </div>
                          </div>
 
                         {
@@ -38,8 +43,8 @@ class Posts extends Component {
                                     <div className="col-sm-2 text-left">{post.category}</div>
                                     <div className="col-sm-2 text-right">{post.voteScore}</div>
                                     <div className="col-sm-1">
-                                        <span className="voting" onClick={() => this.props.vote(post.id, 1)}>&#9650;</span>
-                                        <span className="voting" onClick={() => this.props.vote(post.id, -1)}>&#9660;</span>
+                                        <span onClick={() => this.props.vote(post.id, 1)}>&#9650;</span>
+                                        <span onClick={() => this.props.vote(post.id, -1)}>&#9660;</span>
                                     </div>
                                 </div>
                             </div>
@@ -78,18 +83,18 @@ class Posts extends Component {
 function mapStateToProps({ posts, categories }) {
     console.log( posts );
     // https://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array#26166303
-    let postsArray =  Object.keys( posts ).map(key => posts[key]);
+    // let postsArray =  Object.keys( posts ).map(key => posts[key]);
 
-    return  { 'open' : posts.openPost, 'newPostForm' : posts.newPostForm, 'items': posts.items}
+    return  { 'sortKey' : posts.sortKey, 'open' : posts.openPost, 'newPostForm' : posts.newPostForm, 'items': posts.items}
 }
 
 function mapDispatchToProps(dispatch) {
     return{
         openPost : (postId) => dispatch(getPostDetails(postId)),
         newPost : () => dispatch(newPost()),
-        sortPostsByVote : (voteSort) => dispatch(sortVote( voteSort )),  //items is the array of posts in the posts reducer
         sendNewPost : (data) => dispatch(SendNewPost(data)),
-        vote : (postId, vote) => dispatch( sendVote(postId, vote))
+        vote : (postId, vote) => dispatch( sendVote(postId, vote)),
+        sorter : (sortKey) => dispatch( setSortKey(sortKey))
     }
 }
 

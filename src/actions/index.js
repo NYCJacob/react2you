@@ -7,7 +7,7 @@ export const FETCH_POSTS = 'FETCH_POSTS'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
-export const SORT_VOTES = 'SORT_VOTES'
+export const SORT = 'SORT'
 export const GET_POST_DETAILS = 'GET_POST_DETAILS'
 export const CLOSE_POST = 'CLOSE_POST'
 export const EDIT_POST = 'EDIT_POST'
@@ -16,6 +16,8 @@ export const UPDATED_POST = 'UPDATED_POST'
 export const NEW_POST = 'NEW_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const POST_VOTE = 'POST_VOTE'
+export const SORTER = 'SORTER'
+export const SET_SORTKEY = 'SET_SORTKEY'
 
 export function allPosts () {
     return {
@@ -76,10 +78,11 @@ export function postVoting(postId, vote) {
     }
 }
 
-export function sortVote( voteSort ) {
+
+export function setSortKey(sortKey) {
     return {
-        type: SORT_VOTES,
-        sort : voteSort
+        type: SET_SORTKEY,
+        key : sortKey
     }
 }
 
@@ -140,9 +143,14 @@ export function fetchPosts() {
             .then(response => {
                 return response.json()
             })
+            // .then(data => {
+            //     console.log( data );
+            //     dispatch(sorterAction( data.filter(post => post.deleted === false ) ))
+            //
+            // })
             .then(data => {
                 console.log( data );
-                dispatch(receivePosts( data.filter(post => post.deleted === false ) ))
+                dispatch(receivePosts( data ))
             })
     }
 
@@ -279,7 +287,6 @@ export function SendNewPost(data) {
     }
 
 }
-
 
 
 function receiveComments(id, comments) {
