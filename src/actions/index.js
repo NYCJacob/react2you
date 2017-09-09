@@ -69,6 +69,30 @@ export function fetchCategories() {
 }
 // end fetchCategories()
 
+export function fetchCategoryPosts(category) {
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+
+    const fetchParams = {
+        method : 'GET',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default'
+    }
+    return dispatch => {
+        return fetch(`http://localhost:5001/${category}/posts`, fetchParams)
+            .then(response => {
+                console.log( response );
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+                dispatch(receivePosts( data ))
+            })
+    }
+}
+
 
 export function postVoting(postId, vote) {
     return {
@@ -143,11 +167,6 @@ export function fetchPosts() {
             .then(response => {
                 return response.json()
             })
-            // .then(data => {
-            //     console.log( data );
-            //     dispatch(sorterAction( data.filter(post => post.deleted === false ) ))
-            //
-            // })
             .then(data => {
                 console.log( data );
                 dispatch(receivePosts( data ))

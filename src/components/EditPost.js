@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {cancelEdit} from "../actions/index"
 // redux form import
-import { SubmissionError, Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 
 
 /**
@@ -17,7 +17,7 @@ class EditPost extends Component {
     }
 
     render() {
-        const { title, author, category, voteScore, body, id, timestamp } = this.props.postData;
+        const { author, category, voteScore, id, timestamp } = this.props.postData;
         const { handleSubmit } = this.props;
 
         return (

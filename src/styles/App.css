@@ -5,10 +5,16 @@
 
 
 /* my custom styles*/
-#cat-list li {
+/*#cat-list li {*/
+  /*display: inline;*/
+  /*list-style-type: none;*/
+  /*padding-right: 20px;*/
+/*}*/
+
+/*why does bootstrap4 set nav to block y default?*/
+#cat-view .nav-link {
   display: inline;
-  list-style-type: none;
-  padding-right: 20px;
+  margin: auto;
 }
 
 #posts-view {

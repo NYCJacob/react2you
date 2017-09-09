@@ -49,7 +49,8 @@ function postReducer( state = {
     newPostForm : false,
     openTarget : null,
     sortKey : 1,    // 1 is default voteScore, 2 is by category, negative reverses sort
-    items : []
+    items : [],
+    postView : 1      //postView 1=all posts 2
     }, action) {
 
     switch (action.type) {
@@ -64,52 +65,54 @@ function postReducer( state = {
                     // by vote descending
                     case 1:
                         // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript#1129270
-                        function compare(a,b) {
+                        function compareVoteAscending(a,b) {
                             if (a.voteScore < b.voteScore)
                                 return 1;
                             if (a.voteScore > b.voteScore)
                                 return -1;
                             return 0;
                         }
-                        sortingPosts.sort(compare);
+                        sortingPosts.sort(compareVoteAscending);
                         break;
                     // by vote ascending
                     case -1:
                         // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript#1129270
-                        function compare(a,b) {
+                        function compareVoteDescending(a,b) {
                             if (b.voteScore < a.voteScore)
                                 return 1;
                             if (b.voteScore > a.voteScore)
                                 return -1;
                             return 0;
                         }
-                        sortingPosts.sort(compare);
+                        sortingPosts.sort(compareVoteDescending);
                         break;
                     // by category
                     case 2:
                         // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript#1129270
-                    function compare(a,b) {
-                        if (a.category < b.category)
-                            return 1;
-                        if (a.category > b.category)
-                            return -1;
-                        return 0;
-                    }
-                        sortingPosts.sort(compare);
+                        function compareCategoryAscending(a,b) {
+                            if (a.category < b.category)
+                                return 1;
+                            if (a.category > b.category)
+                                return -1;
+                            return 0;
+                        }
+                        sortingPosts.sort(compareCategoryAscending);
                         break;
                     // by vote ascending
                     case -2:
                         // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript#1129270
-                    function compare(a,b) {
-                        if (b.category < a.category)
-                            return 1;
-                        if (b.category > a.category)
-                            return -1;
-                        return 0;
-                    }
-
-                        sortingPosts.sort(compare);
+                        function compareCategoryDescending(a,b) {
+                            if (b.category < a.category)
+                                return 1;
+                            if (b.category > a.category)
+                                return -1;
+                            return 0;
+                        }
+                        sortingPosts.sort(compareCategoryDescending);
                         break;
+
+                    default :
+                        return 0;
 
                 }
                 // end switch

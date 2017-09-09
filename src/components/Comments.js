@@ -31,9 +31,6 @@ class Comments extends Component {
 }
 
 function mapStateToProps( state, props ) {
-    console.log( state.comments );
-    let commentsArray =  Object.keys( state.comments ).map(key => state.comments[key]);
-    // console.log(commentsArray);
     let commentsKey = props.postId + '-comments';
     console.log( state.comments[commentsKey] );
     let postComments = [];
