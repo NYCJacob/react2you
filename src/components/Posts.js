@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { sortVote, getPostDetails, newPost, SendNewPost} from "../actions/index"
+import { sortVote, getPostDetails, newPost, SendNewPost, postVoting} from "../actions/index"
 import SinglePost from './SinglePost'
 import EditPost from './EditPost'
 
@@ -32,11 +32,15 @@ class Posts extends Component {
                             this.props.items.map((post) => (
                             <div className="post-listing container-fluid" key={post.id}>
                                 <div className="row">
-                                    <div className="col-sm-8 text-left"><a href="#"
+                                    <div className="col-sm-7 text-left"><a href="#"
                                     onClick={() => this.props.openPost(post.id)}>{post.title}</a>
                                     </div>
-                                    <div className="col-sm text-left">{post.category}</div>
-                                    <div className="col-sm text-left">{post.voteScore}</div>
+                                    <div className="col-sm-2 text-left">{post.category}</div>
+                                    <div className="col-sm-2 text-right">{post.voteScore}</div>
+                                    <div className="col-sm-1">
+                                        <span onClick={() => this.props.vote(post.id, 1)}>&#9650;</span>
+                                        <span onClick={() => this.props.vote(post.id, -1)}>&#9660;</span>
+                                    </div>
                                 </div>
                             </div>
                             ))
@@ -84,7 +88,8 @@ function mapDispatchToProps(dispatch) {
         openPost : (postId) => dispatch(getPostDetails(postId)),
         newPost : () => dispatch(newPost()),
         sortPostsByVote : (items, voteSort) => dispatch(sortVote( items, voteSort )),  //items is the array of posts in the posts reducer
-        sendNewPost : (data) => dispatch(SendNewPost(data))
+        sendNewPost : (data) => dispatch(SendNewPost(data)),
+        vote : (postId, vote) => dispatch( postVoting(postId, vote))
     }
 }
 

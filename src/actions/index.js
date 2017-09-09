@@ -15,6 +15,7 @@ export const CANCEL_EDIT = 'CANCEL_EDIT'
 export const UPDATED_POST = 'UPDATED_POST'
 export const NEW_POST = 'NEW_POST'
 export const DELETE_POST = 'DELETE_POST'
+export const POST_VOTE = 'POST_VOTE'
 
 export function allPosts () {
     return {
@@ -66,6 +67,14 @@ export function fetchCategories() {
 }
 // end fetchCategories()
 
+
+export function postVoting(postId, vote) {
+    return {
+        type : POST_VOTE,
+        vote : vote,
+        postId : postId
+    }
+}
 
 export function sortVote( items, voteSort ) {
     return {

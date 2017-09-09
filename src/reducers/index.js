@@ -15,7 +15,8 @@ import {
     CANCEL_EDIT,
     UPDATED_POST,
     NEW_POST,
-    DELETE_POST
+    DELETE_POST,
+    POST_VOTE
 } from '../actions'
 import {ADD_CATEGORY,  SORT_VOTES} from "../actions/index";
 
@@ -84,7 +85,6 @@ function postReducer( state = {
         case CANCEL_EDIT :
             return Object.assign({}, state,  { editing : false, newPostForm : false } );
 
-
         case SORT_VOTES :
             //todo: why is this not flipping the boolean value of voteSort???
             // action.voteSort = !action.voteSort;
@@ -101,6 +101,12 @@ function postReducer( state = {
                 });
             }
             return Object.assign({}, state, { items : action.posts, voteSort : action.voteSort });
+
+        case POST_VOTE :
+            let votedPost =  state.items.filter( post => post.id === action.postId);
+            votedPost[0].voteScore += action.vote;
+            console.log( votedPost );
+            return Object.assign({}, state, { items: votedPost } );
 
         default :
             return state;
