@@ -103,15 +103,17 @@ function postReducer( state = {
             return Object.assign({}, state, { items : action.posts, voteSort : action.voteSort });
 
         case POST_VOTE :
-            let votedPost =  state.items.filter( post => post.id === action.postId);
-            votedPost[0].voteScore += action.vote;
+            let votedPost =  state.items.find( post => post.id === action.postId);
             console.log( votedPost );
-            return Object.assign({}, state, { items: votedPost } );
+            // return Object.assign({}, state, { items: [ ...state.items,  state.items[] ] } );
+            return state;
 
         default :
             return state;
     }
 }
+
+
 
 function commentsReducer( state = {}, action) {
     switch (action.type) {
