@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Comments from './Comments'
 import EditPost from './EditPost'
-import { closePost, editPost, updatePost, deletePostAction} from '../actions'
+import { closePost, editPost, updatePost, deletePostAction, sendVote} from '../actions'
 
 
 /**
@@ -33,15 +33,20 @@ class SinglePost extends Component {
                         <thead>
                         <tr><th colSpan={3}><h3 className="post-title">{title} </h3></th></tr>
                         <tr>
-                        <th className="post-author">By: {author}</th>
-                        <th className="post-category">Category: {category}</th>
-                        <th className="post-votes"><button className="btn btn-sm btn-primary">Votes: {voteScore}</button></th>
+                            <th className="post-author">By: {author}</th>
+                            <th className="post-category">Category: {category}</th>
+                            <th className="post-votes">Votes: {voteScore} </th>
+                            <span className="voting" onClick={() => this.props.vote(id, 1)}>&#9650;</span>
+                            <span>||</span>
+                            <span className="voting" onClick={() => this.props.vote(id, -1)}>&#9660;</span>
                         </tr>
                         </thead>
                         <tbody>
                         <tr><td colSpan={3} className="post-body">{body}</td></tr>
-                        <tr><td><button className="btn-sm" onClick={this.props.editPost}>Edit</button> </td></tr>
-                        <tr><td><button className="btn-sm" onClick={() => this.props.deletePost(id)}>Delete</button> </td></tr>
+                        <tr>
+                            <td><button className="btn-sm" onClick={this.props.editPost}>Edit</button> </td>
+                            <td><button className="btn-sm" onClick={() => this.props.deletePost(id)}>Delete</button> </td>
+                        </tr>
                         </tbody>
                         <tfoot>
                         <tr className="table-info">
@@ -89,7 +94,8 @@ function mapDispatchToProps(dispatch) {
         closeSinglePost : () => dispatch(closePost()),
         editPost : () => dispatch(editPost()),
         updatePost : (data) => dispatch(updatePost(data)),
-        deletePost : (postId) => dispatch(deletePostAction(postId))
+        deletePost : (postId) => dispatch(deletePostAction(postId)),
+        vote : (postId, vote) => dispatch( sendVote(postId, vote))
     }
 }
 

@@ -25,7 +25,7 @@ class Posts extends Component {
                              </div>
                              <div className="col-sm">Title</div>
                              <div className="col-sm text-right"><span>Category</span><span>&#9650;&#9660;</span></div>
-                             <div className="col-sm"><a>Votes</a><span onClick={() => this.props.sortPostsByVote(this.props.items, this.props.voteSort)}>&#9650;&#9660;</span></div>
+                             <div className="col-sm"><a>Votes</a><span className="sorting" onClick={() => this.props.sortPostsByVote(this.props.voteSort)}>&#9650;&#9660;</span></div>
                          </div>
 
                         {
@@ -38,8 +38,8 @@ class Posts extends Component {
                                     <div className="col-sm-2 text-left">{post.category}</div>
                                     <div className="col-sm-2 text-right">{post.voteScore}</div>
                                     <div className="col-sm-1">
-                                        <span onClick={() => this.props.vote(post.id, 1)}>&#9650;</span>
-                                        <span onClick={() => this.props.vote(post.id, -1)}>&#9660;</span>
+                                        <span className="voting" onClick={() => this.props.vote(post.id, 1)}>&#9650;</span>
+                                        <span className="voting" onClick={() => this.props.vote(post.id, -1)}>&#9660;</span>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@ function mapDispatchToProps(dispatch) {
     return{
         openPost : (postId) => dispatch(getPostDetails(postId)),
         newPost : () => dispatch(newPost()),
-        sortPostsByVote : (items, voteSort) => dispatch(sortVote( items, voteSort )),  //items is the array of posts in the posts reducer
+        sortPostsByVote : (voteSort) => dispatch(sortVote( voteSort )),  //items is the array of posts in the posts reducer
         sendNewPost : (data) => dispatch(SendNewPost(data)),
         vote : (postId, vote) => dispatch( sendVote(postId, vote))
     }

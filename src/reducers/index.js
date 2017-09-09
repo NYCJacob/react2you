@@ -88,7 +88,7 @@ function postReducer( state = {
         case SORT_VOTES :
             //todo: why is this not flipping the boolean value of voteSort???
             // action.voteSort = !action.voteSort;
-            console.log( action.voteSort );
+            console.log( action );
             if (action.voteSort === true) {
                 action.voteSort = false;
                 action.posts.sort(function(a, b) {

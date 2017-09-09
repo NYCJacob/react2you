@@ -76,10 +76,9 @@ export function postVoting(postId, vote) {
     }
 }
 
-export function sortVote( items, voteSort ) {
+export function sortVote( voteSort ) {
     return {
         type: SORT_VOTES,
-        posts: items,
         sort : voteSort
     }
 }

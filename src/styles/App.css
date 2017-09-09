@@ -58,9 +58,14 @@
   text-align: left;
 }
 
-.icon {
-  width: 48px;
-  height: 48px;
+.voting:hover {
+ background-color: #28a745;
+  cursor: pointer;
+}
+
+.sorting:hover {
+  background-color: #17a2b8;
+  cursor: pointer;
 }
 
 /*below is default code from create-react-app*/
