@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import {fetchCategoryPosts, fetchPosts} from "../actions/index"
+import {fetchCategoryPosts, fetchPosts, masterFetchPosts} from "../actions/index"
 
 
 /**
@@ -23,7 +23,7 @@ class Categories extends Component {
             <div id="cat-view">
                 <div>
                     <nav id="cat-list" className="nav nav-pills flex-column flex-sm-row">
-                        <a className="flex-sm-fill text-sm-center nav-link" href="#" onClick={() => this.props.handleCategoryPosts('all')}>
+                        <a className="flex-sm-fill text-sm-center nav-link" href="#" onClick={() => this.props.handleCategoryPosts(null)}>
                             All
                         </a>
                         {
@@ -50,7 +50,8 @@ function mapStateToProps(state ) {
 function mapDispatchToProps(dispatch) {
     return{
         handleCategoryPosts : (category) => {
-            category !== 'all' ? dispatch(fetchCategoryPosts(category)) : dispatch(fetchPosts())
+            category !== null ? dispatch(fetchCategoryPosts(category)) : dispatch(fetchPosts())
+            // dispatch(masterFetchPosts(category))
         }
     }
 }

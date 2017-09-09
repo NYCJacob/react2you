@@ -17,7 +17,8 @@ import {
     NEW_POST,
     DELETE_POST,
     POST_VOTE,
-    SET_SORTKEY
+    SET_SORTKEY,
+    MASTER_FETCH
 } from '../actions'
 
 
@@ -50,12 +51,22 @@ function postReducer( state = {
     openTarget : null,
     sortKey : 1,    // 1 is default voteScore, 2 is by category, negative reverses sort
     items : [],
-    postView : 1      //postView 1=all posts 2
+    postView : -1      //postView -1=all posts
     }, action) {
 
     switch (action.type) {
         case ALL_POSTS :
             return state;
+
+        case MASTER_FETCH :
+            if (action.categoryView === null){
+                // fetch all posts
+
+            }else {
+                // fetch category posts
+
+            }
+
         case RECEIVE_POSTS :
             // sort logic
                 console.log( action );
@@ -146,7 +157,6 @@ function postReducer( state = {
 
         case CANCEL_EDIT :
             return Object.assign({}, state,  { editing : false, newPostForm : false } );
-
 
 
         case POST_VOTE :

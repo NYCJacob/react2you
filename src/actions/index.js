@@ -18,6 +18,7 @@ export const DELETE_POST = 'DELETE_POST'
 export const POST_VOTE = 'POST_VOTE'
 export const SORTER = 'SORTER'
 export const SET_SORTKEY = 'SET_SORTKEY'
+export const MASTER_FETCH = 'MASTER_FETCH'
 
 export function allPosts () {
     return {
@@ -176,9 +177,19 @@ export function fetchPosts() {
 }
 // end fetchPosts()
 
+
+//  https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+export function masterFetchPosts(category) {
+    return {
+        type : MASTER_FETCH,
+        categoryView : category,
+        updatedAt : Date.now()
+    }
+
+}
+
 // updatedPost is dispatached by updatePost
 function  updatedPost( updated ) {
-    console.log( updated)
     return {
         type : UPDATED_POST,
         updatedPost : updated,
