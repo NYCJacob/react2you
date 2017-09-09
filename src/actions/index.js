@@ -118,7 +118,7 @@ export function getPostDetails(postId) {
     }
 }
 
-function receivePosts(posts) {
+export function receivePosts(posts) {
     return {
         type: RECEIVE_POSTS,
         posts: posts,

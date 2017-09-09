@@ -91,7 +91,7 @@ function postReducer( state = {
 
 
                 }
-
+            console.log(sortingPosts);
             return Object.assign({}, state,  { openPost : false, items : sortingPosts, newPostForm : false, openTarget: null } );
 
         case SET_SORTKEY :

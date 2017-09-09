@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getPostDetails, newPost, SendNewPost, sendVote, setSortKey} from "../actions/index"
+import { getPostDetails, newPost, SendNewPost, sendVote, setSortKey, receivePosts} from "../actions/index"
 import SinglePost from './SinglePost'
 import EditPost from './EditPost'
 
@@ -27,9 +27,9 @@ class Posts extends Component {
                              <div className="col-sm text-right"><span>Category</span><span>&#9650;&#9660;</span></div>
                              <div className="col-sm">
                                  <a>Votes</a>
-                                 <span className="voting" onClick={() => this.props.sorter( 1)}>&#9650;</span>
+                                 <span className="voting" onClick={() => this.props.sorter( 1, this.props.items)}>&#9650;</span>
                                  <span>|</span>
-                                 <span className="voting" onClick={() => this.props.sorter( -1)}>&#9660;</span>
+                                 <span className="voting" onClick={() => this.props.sorter( -1, this.props.items)}>&#9660;</span>
                              </div>
                          </div>
 
@@ -94,7 +94,10 @@ function mapDispatchToProps(dispatch) {
         newPost : () => dispatch(newPost()),
         sendNewPost : (data) => dispatch(SendNewPost(data)),
         vote : (postId, vote) => dispatch( sendVote(postId, vote)),
-        sorter : (sortKey) => dispatch( setSortKey(sortKey))
+        sorter : (sortKey, posts) => {
+            dispatch( setSortKey(sortKey));
+            dispatch(receivePosts(posts));
+        }
     }
 }
 
