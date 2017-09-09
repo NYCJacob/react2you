@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { sortVote, getPostDetails, newPost, SendNewPost, postVoting} from "../actions/index"
+import { sortVote, getPostDetails, newPost, SendNewPost, sendVote} from "../actions/index"
 import SinglePost from './SinglePost'
 import EditPost from './EditPost'
 
@@ -89,7 +89,7 @@ function mapDispatchToProps(dispatch) {
         newPost : () => dispatch(newPost()),
         sortPostsByVote : (items, voteSort) => dispatch(sortVote( items, voteSort )),  //items is the array of posts in the posts reducer
         sendNewPost : (data) => dispatch(SendNewPost(data)),
-        vote : (postId, vote) => dispatch( postVoting(postId, vote))
+        vote : (postId, vote) => dispatch( sendVote(postId, vote))
     }
 }
 

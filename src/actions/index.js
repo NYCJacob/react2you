@@ -171,6 +171,34 @@ function  deletePost( postId ) {
 
 }
 
+export function sendVote(postId, vote) {
+    console.log( 'sendVote action');
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+
+    let dataBody;
+    vote === 1 ? dataBody = {option : 'upVote'} : dataBody = {option: 'downVote'};
+
+    const fetchParams = {
+        method : 'POST',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default',
+        body : JSON.stringify( dataBody )
+    };
+    let url = `http://localhost:5001/posts/${postId}`;
+    return dispatch => {
+        return fetch(url, fetchParams)
+            .then(() => {
+                console.log('post vote success');
+                dispatch(postVoting(postId, vote))
+            })
+            .then(dispatch(fetchPosts()))
+    }
+
+}
+
 export function updatePost(data) {
     console.log(data);
     const fetchHeaders = new Headers();
