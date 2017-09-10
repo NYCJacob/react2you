@@ -22,13 +22,19 @@ class App extends Component {
         return (
             <div className="App">
 
-                <div>
-                    <h1>Post, listen, react</h1>
-                    <Categories/>
-                </div>
-                <div>
-                    <Posts/>
-                </div>
+                <Route exact path="/" render{() => (
+                    <div>
+                        <div>
+                            <h1>Post, listen, react</h1>
+                            <Categories/>
+                        </div>
+                        <div>
+                        <Posts/>
+                        </div>
+                    </div>
+                )}/>
+
+
 
             </div>
         );
