@@ -11,14 +11,19 @@ import { Field, reduxForm } from 'redux-form'
  * @constructor
  */
 class EditPost extends Component {
+    compoenentDidMount() {
 
-    submit = ( values ) => {
-        console.log( values  );
+    }
+
+
+    handleSubmit = (data) => {
+        console.log(data);
+        this.props.sendNewPost(data);
     }
 
     render() {
-        const { author, category, voteScore, id, timestamp } = this.props.postData;
-        const { handleSubmit } = this.props;
+        const { author='', category='', voteScore='', id='', timestamp='' } = this.props.postData;
+        // const { handleSubmit } = this.props;
 
         return (
 
@@ -26,7 +31,7 @@ class EditPost extends Component {
                 { this.props.editable || this.props.newPostForm }
                 {    <div className="container-fluid">
 
-                        <form  onSubmit={handleSubmit}>
+                        <form  onSubmit={this.handleSubmit}>
 
                             <table className="table table-sm table-responsive">
                                 <thead>

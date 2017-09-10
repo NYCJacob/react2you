@@ -19,12 +19,12 @@ class Posts extends Component {
     render() {
         return (
             <div>
-
-
-                { (!this.props.open && !this.props.newPostForm) && <div id="posts-view">
+                <div id="posts-view">
                          <div className="row">
                              <div className="col-sm text-left">
-                                 <button className="btn btn-sm btn-primary" onClick={() => this.props.newPost()}>New Post</button>
+                                 <Link to="/newpost">
+                                    <button className="btn btn-sm btn-primary" onClick={() => this.props.newPost()}>New Post</button>
+                                 </Link>
                              </div>
                              <div className="col-sm">Title</div>
                              <div className="col-sm text-right">
@@ -40,14 +40,12 @@ class Posts extends Component {
                                  <span className="voting" onClick={() => this.props.sorter( -1, this.props.items)}>&#9660;</span>
                              </div>
                          </div>
-
                         {
                             this.props.items.map((post) => (
                             <div className="post-listing container-fluid" key={post.id}>
                                 <div className="row">
                                     <div className="col-sm-7 text-left">
                                         <Link to={`/${post.category}/${post.id}`} onClick={() => this.props.openPost(post.id)} >{post.title}</Link>
-                                        {/*<Link to='/singlepost'  onClick={() => this.props.openPost(post.id)}>{post.title}</Link>*/}
                                     </div>
                                     <div className="col-sm-2 text-left">{post.category}</div>
                                     <div className="col-sm-2 text-right">{post.voteScore}</div>
@@ -60,31 +58,7 @@ class Posts extends Component {
                             ))
                         }
 
-                    </div>
-                }
-
-                {/* THE BELOW WAS THE UI LOGIC PRE ROUTER TO SHOW SINGLE POST VIEW*/}
-                {/*{this.props.open &&*/}
-                {/*<div>*/}
-                {/*<SinglePost/>*/}
-                {/*</div>*/}
-                {/*}*/}
-
-                {this.props.newPostForm &&
-                    <div className="newPostForm-container">
-                        new post form
-                        <EditPost onSubmit={this.handleSubmit.bind(this)} newPost={this.props.newPostForm} postData={ {
-                            title: '',
-                            author: '',
-                            category: '',
-                            voteScore: '',
-                            body: '',
-                            id: '',
-                            timestamp: ''
-                        }}/>
-                    </div>
-                }
-
+                </div>
 
             </div>
     )

@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { fetchPosts } from '../actions'
 import Categories from './Categories';
 import Posts from './Posts';
+import EditPost  from './EditPost'
 import {fetchCategories} from "../actions/index";
 import SinglePost from "./SinglePost";
 
@@ -28,7 +29,7 @@ class App extends Component {
                 </div>
                     <Route exact path="/" component={Posts}/>
                     <Route path="/:category/:postId" component={SinglePost} />
-
+                    <Route path="/newpost" component={EditPost} />
 
             </div>
         );
