@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom'
 
 import Comments from './Comments'
 import EditPost from './EditPost'
@@ -27,7 +28,9 @@ class SinglePost extends Component {
             <div className="singlePost-view">
                 { !this.props.editable &&
                     <div>
-                        <button className="btn btn-sm" onClick={this.props.closeSinglePost}>X</button>
+                        <Link to="/">
+                            <button className="btn btn-sm" onClick={this.props.closeSinglePost}>X</button>
+                        </Link>
 
                         <table className="table table-sm table-responsive">
                         <thead>

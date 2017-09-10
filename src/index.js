@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import './styles/index.css';
-// fontawesone sprite sheet
-import './sprites/regular.svg'
 import App from './components/App';
-import { BrowserRouter } from 'react-router-dom';
+import Main from './components/main-layout'
+import Posts from "./components/Posts";
+
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import thunk from 'redux-thunk'
 import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from './reducers'
@@ -34,7 +35,8 @@ const store = createStore(
 ReactDOM.render(
     <Provider  store={store}>
         <BrowserRouter>
-            <App />
+            <Route path="/" component={App}/>
+
         </BrowserRouter>
     </Provider>,
         document.getElementById('root')
