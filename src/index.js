@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import './styles/index.css';
 import App from './components/App';
-import Main from './components/main-layout'
 import Posts from "./components/Posts";
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
