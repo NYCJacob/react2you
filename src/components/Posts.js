@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Route, Link } from 'react-router-dom';
-import { getPostDetails, newPost, SendNewPost, sendVote, setSortKey, receivePosts} from "../actions/index"
+import {
+    getPostDetails, newPost, SendNewPost, createPost, sendVote, setSortKey, receivePosts,
+    editPost
+} from "../actions/index"
 import SinglePost from './SinglePost'
 import EditPost from './EditPost'
 
@@ -16,6 +19,7 @@ class Posts extends Component {
         this.props.sendNewPost(data);
     }
 
+
     render() {
         return (
             <div>
@@ -23,7 +27,7 @@ class Posts extends Component {
                          <div className="row">
                              <div className="col-sm text-left">
                                  <Link to="/newpost">
-                                    <button className="btn btn-sm btn-primary" onClick={() => this.props.newPost()}>New Post</button>
+                                    <button className="btn btn-sm btn-primary" onClick={() => this.props.createPost()}>New Post</button>
                                  </Link>
                              </div>
                              <div className="col-sm">Title</div>
@@ -33,7 +37,7 @@ class Posts extends Component {
                                  <span>|</span>
                                  <span className="voting" onClick={() => this.props.sorter( -2, this.props.items)}>&#9660;</span>
                              </div>
-                             <div className="col-sm">
+                             <div className="col-sm text-left">
                                  <span>Votes</span>
                                  <span className="voting" onClick={() => this.props.sorter( 1, this.props.items)}>&#9650;</span>
                                  <span>|</span>
@@ -47,11 +51,16 @@ class Posts extends Component {
                                     <div className="col-sm-7 text-left">
                                         <Link to={`/${post.category}/${post.id}`} onClick={() => this.props.openPost(post.id)} >{post.title}</Link>
                                     </div>
-                                    <div className="col-sm-2 text-left">{post.category}</div>
-                                    <div className="col-sm-2 text-right">{post.voteScore}</div>
+                                    <div className="col-sm-1 text-left">{post.category}</div>
+                                    <div className="col-sm-1 text-right">{post.voteScore}</div>
                                     <div className="col-sm-1">
                                         <span onClick={() => this.props.vote(post.id, 1)}>&#9650;</span>
                                         <span onClick={() => this.props.vote(post.id, -1)}>&#9660;</span>
+                                    </div>
+                                    <div className="col-sm-1">
+                                        <Link to="/editpost" onClick={() => this.props.editPost(post)}>
+                                            [Edit]
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +87,9 @@ function mapDispatchToProps(dispatch) {
     return{
         openPost : (postId) => dispatch(getPostDetails(postId)),
         newPost : () => dispatch(newPost()),
-        sendNewPost : (data) => dispatch(SendNewPost(data)),
+        // sendNewPost : (data) => dispatch(SendNewPost(data)),
+        createPost : () => dispatch(createPost()),
+        editPost : (post) => dispatch(editPost(post)),
         vote : (postId, vote) => dispatch( sendVote(postId, vote)),
         sorter : (sortKey, posts) => {
             dispatch( setSortKey(sortKey));  // setting sort key did not trigger a render

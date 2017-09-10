@@ -19,6 +19,7 @@ export const POST_VOTE = 'POST_VOTE'
 export const SORTER = 'SORTER'
 export const SET_SORTKEY = 'SET_SORTKEY'
 export const MASTER_FETCH = 'MASTER_FETCH'
+export const CREATE_POST = 'CREATE_POST'
 
 export function allPosts () {
     return {
@@ -117,15 +118,23 @@ export function cancelEdit() {
     }
 }
 
-export function editPost() {
+export function editPost(post) {
+    console.log(post)
     return {
-        type: EDIT_POST
+        type: EDIT_POST,
+        postData: post
     }
 }
 
 export function newPost() {
     return {
         type: NEW_POST
+    }
+}
+
+export function createPost(){
+    return {
+        type: CREATE_POST
     }
 }
 
@@ -237,7 +246,7 @@ export function sendVote(postId, vote) {
 }
 
 export function updatePost(data) {
-    console.log(data);
+    console.log( data );
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');

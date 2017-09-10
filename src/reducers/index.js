@@ -18,7 +18,8 @@ import {
     DELETE_POST,
     POST_VOTE,
     SET_SORTKEY,
-    MASTER_FETCH
+    MASTER_FETCH,
+    CREATE_POST
 } from '../actions'
 
 
@@ -45,6 +46,16 @@ function categoryReducer(state = {}, action) {
 }
 
 function postReducer( state = {
+    target : {
+        title: '',
+        author: '',
+        category: '',
+        voteScore: '',
+        deleted: false,
+        body: '',
+        id: '',
+        timestamp: null
+    },
     openPost : false,
     editing : false,
     newPostForm : false,
@@ -142,8 +153,12 @@ function postReducer( state = {
         case NEW_POST :
             return Object.assign({}, state, {newPostForm: true });
 
+        case CREATE_POST :
+            return Object.assign({}, state, {newPostForm: true });
+
+
         case EDIT_POST :
-            return Object.assign({}, state,  { editing : true } );
+            return Object.assign({}, state,  { editing : true, target: action.postData } );
 
         case UPDATED_POST :
             console.log(action);
