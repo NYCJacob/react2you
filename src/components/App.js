@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 // App.css imports Bootsrap4 css files
 import '../styles/App.css';
 import { connect } from 'react-redux'
@@ -21,6 +21,7 @@ class App extends Component {
 
         return (
             <div className="App">
+
                 <div>
                     <h1>Post, listen, react</h1>
                     <Categories/>
