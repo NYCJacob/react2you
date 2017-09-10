@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getPostDetails, newPost, SendNewPost, sendVote, setSortKey, receivePosts} from "../actions/index"
 import SinglePost from './SinglePost'
 import EditPost from './EditPost'
@@ -42,8 +43,9 @@ class Posts extends Component {
                             this.props.items.map((post) => (
                             <div className="post-listing container-fluid" key={post.id}>
                                 <div className="row">
-                                    <div className="col-sm-7 text-left"><a href="#"
-                                    onClick={() => this.props.openPost(post.id)}>{post.title}</a>
+                                    <div className="col-sm-7 text-left">
+                                        <Link to={`${post.category}/${post.id}`}>{post.title}</Link>
+                                        {/*<Link to='/singlepost'  onClick={() => this.props.openPost(post.id)}>{post.title}</Link>*/}
                                     </div>
                                     <div className="col-sm-2 text-left">{post.category}</div>
                                     <div className="col-sm-2 text-right">{post.voteScore}</div>

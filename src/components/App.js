@@ -16,20 +16,19 @@ class App extends Component {
         this.props.dispatch(fetchCategories())
     }
 
-
     render() {
 
         return (
             <div className="App">
 
-                <Route exact path="/" render{() => (
+                <Route exact path='/' render={() => (
                     <div>
                         <div>
                             <h1>Post, listen, react</h1>
                             <Categories/>
                         </div>
                         <div>
-                        <Posts/>
+                            <Posts/>
                         </div>
                     </div>
                 )}/>
@@ -40,9 +39,6 @@ class App extends Component {
         );
     }
 }
-
-
-// const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchPosts }, dispatch);
 
 
 export default connect()(App);
