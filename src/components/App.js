@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter } from 'react-router-dom'
+import { Route, BrowserRouter, Switch } from 'react-router-dom'
 // App.css imports Bootsrap4 css files
 import '../styles/App.css';
 import { connect } from 'react-redux'
@@ -27,12 +27,16 @@ class App extends Component {
                     <h1>Post, listen, react</h1>
                     <Categories/>
                 </div>
-                    <Route exact path="/" component={Posts}/>
-                    <Route path="/:category/:postId" component={SinglePost} />
-                    <Route path="/newpost" component={EditPost} />
-                    <Route path="/editpost" component={EditPost} />
-                {/*cagtegory views routes*/}
-                    {/*<Route path="/:category"  />*/}
+                    {/*switch forces only matching first child*/}
+                    <Switch>
+                        <Route exact path="/newpost" component={EditPost} />
+                        <Route path="/editpost" component={EditPost} />
+                        <Route exact path="/" component={Posts}/>
+                        <Route path="/:category/:postId" component={SinglePost} />
+
+                        {/*cagtegory views routes*/}
+                        <Route path="/:category" component={Posts} />
+                    </Switch>
 
             </div>
         );
