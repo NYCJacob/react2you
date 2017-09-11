@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import {fetchCategoryPosts, fetchPosts, masterFetchPosts} from "../actions/index"
@@ -23,14 +24,14 @@ class Categories extends Component {
             <div id="cat-view">
                 <div>
                     <nav id="cat-list" className="nav nav-pills flex-column flex-sm-row">
-                        <a className="flex-sm-fill text-sm-center nav-link" href="#" onClick={() => this.props.handleCategoryPosts(null)}>
+                        <NavLink to="/" className="flex-sm-fill text-sm-center nav-link" href="#" onClick={() => this.props.handleCategoryPosts(null)}>
                             All
-                        </a>
+                        </NavLink>
                         {
                             this.props.categories.map( (category, idx) => (
-                                <a key={idx} className="flex-sm-fill text-sm-center nav-link" href="#" onClick={() => this.props.handleCategoryPosts(category.name)}>
+                                <NavLink to={`/${category.name}`} key={idx} className="flex-sm-fill text-sm-center nav-link" href="#" onClick={() => this.props.handleCategoryPosts(category.name)}>
                                     { category.name }
-                                </a>
+                                </NavLink>
                             ) )
                         }
                     </nav>

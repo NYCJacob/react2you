@@ -1,9 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import {cancelEdit, SendNewPost, updatePost} from "../actions/index"
 // redux form import
 import { Field, reduxForm } from 'redux-form'
+
+
+// form client side validation function
+const validate = values => {
+    const errors = {}
+    if (!values.author) {
+        errors.username = 'Required'
+    } else if (values.username.length > 15) {
+        errors.username = 'Must be 15 characters or less'
+    }
+    if (!values.body) {
+        errors.body = 'Required'
+    } else if (values.body.length < 10) {
+        errors.username = 'Must be 10 characters or more'
+    }
+    if (!values.category) {
+        errors.category = 'Required'
+    }
+    return errors
+}
 
 
 /**
@@ -74,7 +95,11 @@ class EditPost extends Component {
                                     }
                                     <tr>
                                         <td><button type="submit">Save</button></td>
-                                        <td><button onClick={this.props.cancelEdit}>Cancel</button></td>
+                                        <td>
+                                            <Link to="/">
+                                                <button onClick={this.props.cancelEdit}>Cancel</button>
+                                            </Link>
+                                        </td>
                                     </tr>
                                 </tbody>
 
@@ -93,7 +118,7 @@ function mapStateToProps(state) {
     return { editable : state.posts.editing,
         // initialValues :  state.posts.items.find((item) => item.id === state.posts.openTarget),
         initialValues :  state.posts.target,
-        categories: Object.keys( state.categories ).map(key => state.categories[key])
+        categories: Object.keys( state.categories ).map(key => state.categories[key]),
     }
 }
 
@@ -107,7 +132,7 @@ function mapDispatchToProps(dispatch){
 
 EditPost = reduxForm({
     // a unique name for the form
-    form: 'EditPostForm',
+    form: 'EditPostForm'
 })(EditPost)
 
 

@@ -31,6 +31,8 @@ class App extends Component {
                     <Route path="/:category/:postId" component={SinglePost} />
                     <Route path="/newpost" component={EditPost} />
                     <Route path="/editpost" component={EditPost} />
+                {/*cagtegory views routes*/}
+                    {/*<Route path="/:category"  />*/}
 
             </div>
         );
