@@ -20,6 +20,7 @@ export const SORTER = 'SORTER'
 export const SET_SORTKEY = 'SET_SORTKEY'
 export const MASTER_FETCH = 'MASTER_FETCH'
 export const CREATE_POST = 'CREATE_POST'
+export const CLEAR_TARGET = 'CLEAR_TARGET'
 
 export function allPosts () {
     return {
@@ -205,6 +206,12 @@ function  updatedPost( updated ) {
         updatedAt : Date.now()
     }
 
+}
+
+function clearTarget(){
+    return {
+        type: CLEAR_TARGET
+    }
 }
 
 //

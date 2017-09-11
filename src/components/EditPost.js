@@ -20,7 +20,7 @@ class EditPost extends Component {
             <div className="editPost-view">
                 {    <div className="container-fluid">
 
-                        <form  onSubmit={this.props.handleSubmit}>
+                        <form  onSubmit={this.props.handleSubmit(data => this.props.submitData(data))}>
 
                             <table className="table table-sm table-responsive">
                                 <thead>
@@ -101,13 +101,13 @@ function mapDispatchToProps(dispatch){
     return {
         cancelEdit : () => dispatch(cancelEdit()),
         sendNewPost : (data) => dispatch(SendNewPost(data)),
-        handleSubmit : ( data ) => dispatch(updatePost(data)),
+        submitData : ( data ) => dispatch(updatePost(data)),
     }
 }
 
 EditPost = reduxForm({
     // a unique name for the form
-    form: 'EditPostForm'
+    form: 'EditPostForm',
 })(EditPost)
 
 
