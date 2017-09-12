@@ -60,7 +60,6 @@ function postReducer( state = {
     openPost : false,
     editing : false,
     newPostForm : false,
-    openTarget : null,
     sortKey : 1,    // 1 is default voteScore, 2 is by category, negative reverses sort
     items : [],
     postView : -1      //postView -1=all posts
@@ -70,14 +69,6 @@ function postReducer( state = {
         case ALL_POSTS :
             return state;
 
-        case MASTER_FETCH :
-            if (action.categoryView === null){
-                // fetch all posts
-
-            }else {
-                // fetch category posts
-
-            }
 
         case RECEIVE_POSTS :
             // sort logic
@@ -145,7 +136,7 @@ function postReducer( state = {
             return {...state, sortKey : action.key };
 
         case GET_POST_DETAILS :
-            return Object.assign({}, state,  { openPost : true , openTarget : action.openTarget} );
+            return Object.assign({}, state,  { openPost : true , target : action.target} );
 
         //    close post also resets openTarget to prevent populating newPost form with data
         case CLOSE_POST :

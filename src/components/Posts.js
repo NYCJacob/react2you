@@ -49,7 +49,7 @@ class Posts extends Component {
                             <div className="post-listing container-fluid" key={post.id}>
                                 <div className="row">
                                     <div className="col-sm-7 text-left">
-                                        <Link to={`/${post.category}/${post.id}`} onClick={() => this.props.openPost(post.id)} >{post.title}</Link>
+                                        <Link to={`/${post.category}/${post.id}`} onClick={() => this.props.openPost(post)} >{post.title}</Link>
                                     </div>
                                     <div className="col-sm-1 text-left">{post.category}</div>
                                     <div className="col-sm-1 text-right">{post.voteScore}</div>
@@ -90,7 +90,7 @@ function mapStateToProps({ posts, categories }) {
 
 function mapDispatchToProps(dispatch) {
     return{
-        openPost : (postId) => dispatch(getPostDetails(postId)),
+        openPost : (post) => dispatch(getPostDetails(post)),
         newPost : () => dispatch(newPost()),
         // sendNewPost : (data) => dispatch(SendNewPost(data)),
         createPost : () => dispatch(createPost()),

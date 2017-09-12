@@ -146,10 +146,10 @@ export function closePost() {
 }
 
 // dispatched by openPost
-export function getPostDetails(postId) {
+export function getPostDetails(post) {
     return {
         type: GET_POST_DETAILS,
-        openTarget : postId
+        target : post
     }
 }
 

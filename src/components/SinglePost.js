@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom'
-
 import Comments from './Comments'
-import EditPost from './EditPost'
-import { closePost, editPost, updatePost, deletePostAction, sendVote} from '../actions'
+import { closePost, editPost, deletePostAction, sendVote} from '../actions'
 
 
 /**
@@ -14,19 +12,14 @@ import { closePost, editPost, updatePost, deletePostAction, sendVote} from '../a
  */
 class SinglePost extends Component {
 
-    handleSubmit = (data) => {
-        console.log(data);
-        this.props.updatePost(data);
-    }
 
 
     render() {
-        const { title, author, category, voteScore, body, id, timestamp } = this.props.targetPost;
+        const { title, author, category, voteScore, body, id, timestamp } = this.props.target;
 
         return (
 
             <div className="singlePost-view">
-                { !this.props.editable &&
                     <div>
                         <Link to="/">
                             <button className="btn btn-sm" onClick={this.props.closeSinglePost}>X</button>
@@ -44,39 +37,29 @@ class SinglePost extends Component {
                             <span className="voting" onClick={() => this.props.vote(id, -1)}>&#9660;</span>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr><td colSpan={3} className="post-body">{body}</td></tr>
-                        <tr>
-                            <td><button className="btn-sm" onClick={this.props.editPost}>Edit</button> </td>
-                            <td><button className="btn-sm" onClick={() => this.props.deletePost(id)}>Delete</button> </td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr className="table-info">
-                        <td colSpan={2}>{id}</td><td>{timestamp}</td>
-                        </tr>
-                        </tfoot>
+                            <tbody>
+                            <tr>
+                                <td colSpan={3} className="post-body">{body}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Link to="/editpost" onClick={this.props.editPost(this.props.targetPost)}>
+                                        <button className="btn-sm" >Edit</button>
+                                        {/*<button className="btn-sm" onClick={this.props.editPost}>Edit</button> */}
+                                    </Link>
+                                </td>
+                                <td><button className="btn-sm" onClick={() => this.props.deletePost(id)}>Delete</button> </td>
+                            </tr>
+                            <tr className="table-info">
+                                <td colSpan={2}>{id}</td><td>{timestamp}</td>
+                            </tr>
+                            </tbody>
                         </table>
-                    <Comments postId={id}/>
+
+                        <Comments postId={id}/>
 
                     </div>
-                }
 
-                { this.props.editable &&
-                <div>
-
-                    <EditPost onSubmit={this.handleSubmit} postData={ {
-                        title: title,
-                        author: author,
-                        category: category,
-                        voteScore: voteScore,
-                        body: body,
-                        id: id,
-                        timestamp: timestamp
-                    }}/>
-
-                </div>
-                }
             </div>
         )
     }
@@ -95,8 +78,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return{
         closeSinglePost : () => dispatch(closePost()),
-        editPost : () => dispatch(editPost()),
-        updatePost : (data) => dispatch(updatePost(data)),
+        editPost : (targetPost) => dispatch(editPost(targetPost)),
         deletePost : (postId) => dispatch(deletePostAction(postId)),
         vote : (postId, vote) => dispatch( sendVote(postId, vote))
     }
