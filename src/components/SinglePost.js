@@ -43,7 +43,7 @@ class SinglePost extends Component {
                             </tr>
                             <tr>
                                 <td>
-                                    <Link to="/editpost" onClick={this.props.editPost(this.props.targetPost)}>
+                                    <Link to="/editpost">
                                         <button className="btn-sm" >Edit</button>
                                         {/*<button className="btn-sm" onClick={this.props.editPost}>Edit</button> */}
                                     </Link>
@@ -69,10 +69,10 @@ class SinglePost extends Component {
 function mapStateToProps(state) {
     console.log(state);
     // state.posts.openTarget
-    let targetPost =   state.posts.items.find((item) => item.id === state.posts.openTarget)
+    // let targetPost =   state.posts.items.find((item) => item.id === state.posts.openTarget)
     let editable = { editable : state.posts.editing};
     console.log(editable);
-    return { targetPost, editable : state.posts.editing }
+    return { target : state.posts.target, editable : state.posts.editing }
 }
 
 function mapDispatchToProps(dispatch) {

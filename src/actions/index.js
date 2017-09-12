@@ -8,7 +8,6 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const SORT = 'SORT'
-export const GET_POST_DETAILS = 'GET_POST_DETAILS'
 export const CLOSE_POST = 'CLOSE_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const CANCEL_EDIT = 'CANCEL_EDIT'
@@ -21,6 +20,7 @@ export const SET_SORTKEY = 'SET_SORTKEY'
 export const MASTER_FETCH = 'MASTER_FETCH'
 export const CREATE_POST = 'CREATE_POST'
 export const CLEAR_TARGET = 'CLEAR_TARGET'
+export const SET_TARGET = 'SET_TARGET'
 
 export function allPosts () {
     return {
@@ -60,11 +60,9 @@ export function fetchCategories() {
     return dispatch => {
         return fetch('http://localhost:5001/categories', fetchParams)
             .then(response => {
-                console.log( response );
                 return response.json()
             })
             .then(data => {
-                console.log(data)
                 dispatch(receiveCategories( data ))
             })
     }
@@ -86,16 +84,13 @@ export function fetchCategoryPosts(category) {
     return dispatch => {
         return fetch(`http://localhost:5001/${category}/posts`, fetchParams)
             .then(response => {
-                console.log( response );
                 return response.json()
             })
             .then(data => {
-                console.log(data)
                 dispatch(receivePosts( data ))
             })
     }
 }
-
 
 export function postVoting(postId, vote) {
     return {
@@ -146,9 +141,16 @@ export function closePost() {
 }
 
 // dispatched by openPost
-export function getPostDetails(post) {
-    return {
-        type: GET_POST_DETAILS,
+// export function getPostDetails(post) {
+//     return {
+//         type: GET_POST_DETAILS,
+//         target : post
+//     }
+// }
+
+export function setTargetAction( post ) {
+    return{
+        type: SET_TARGET,
         target : post
     }
 }

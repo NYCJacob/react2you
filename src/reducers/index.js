@@ -9,7 +9,6 @@ import {
     RECEIVE_POSTS,
     RECEIVE_CATEGORIES,
     RECEIVE_COMMENTS,
-    GET_POST_DETAILS,
     CLOSE_POST,
     EDIT_POST,
     CANCEL_EDIT,
@@ -18,9 +17,9 @@ import {
     DELETE_POST,
     POST_VOTE,
     SET_SORTKEY,
-    MASTER_FETCH,
     CREATE_POST,
-    CLEAR_TARGET
+    CLEAR_TARGET,
+    SET_TARGET
 } from '../actions'
 
 
@@ -135,7 +134,10 @@ function postReducer( state = {
         case SET_SORTKEY :
             return {...state, sortKey : action.key };
 
-        case GET_POST_DETAILS :
+        // case GET_POST_DETAILS :
+        //     return Object.assign({}, state,  { openPost : true , target : action.target} );
+        //
+        case SET_TARGET:
             return Object.assign({}, state,  { openPost : true , target : action.target} );
 
         //    close post also resets openTarget to prevent populating newPost form with data
