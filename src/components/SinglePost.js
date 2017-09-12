@@ -55,7 +55,7 @@ class SinglePost extends Component {
                             </tbody>
                         </table>
 
-                        <Comments postId={id}/>
+                        <Comments postId={id} category={category}/>
 
                     </div>
 

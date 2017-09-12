@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Switch} from 'react-router-dom'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchComments} from "../actions/index"
@@ -18,13 +18,16 @@ class Comments extends Component {
     }
 
     render() {
+        const {category, postId} = this.props;
 
         return (
             <div className="commentsDiv">
-                <Link to="/:category/:postId/newcomment">
+                <Link to={`/${category}/${postId}/newcomment`}>
                     <button className="btn btn-sm">New Comment</button>
                 </Link>
-                <Route path="/:category/:postId/newcomment" component={CommentForm} />
+                <Switch>
+                    <Route path={`/${category}/${postId}/newcomment`} component={CommentForm}/>
+                </Switch>
                 {
                    this.props.comments.length !== 0 ? this.props.comments.map( (comment,idx) => (
                         <SingleComment comment={comment} key={idx} />

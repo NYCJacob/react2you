@@ -23,19 +23,7 @@ class CommentForm extends Component {
 
                     <form>
 
-                        <table className="table table-sm table-responsive">
-                            <thead>
-                                <tr>
-                                    <th colSpan={3}>thead </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-
-                                </tr>
-
-                            </tbody>
-                        </table>
+                       <h1>Comment form</h1>
                     </form>
                 </div>
 
