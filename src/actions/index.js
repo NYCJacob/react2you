@@ -324,7 +324,6 @@ export function deletePostAction( postId) {
         mode : 'cors',
         cache : 'default',
     }
-
     let url = `http://localhost:5001/posts/${postId}`;
     return dispatch => {
         return fetch(url, fetchParams)
@@ -332,7 +331,7 @@ export function deletePostAction( postId) {
                 console.log("will deletPost", postId);
                 dispatch(deletePost( postId))
             })
-            .then(dispatch(fetchPosts()))   // fetch returns saved object and re-writes store so need to fetch again
+            // .then(dispatch(fetchPosts()))   // fetch returns saved object and re-writes store so need to fetch again
     }
 }
 

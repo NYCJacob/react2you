@@ -48,11 +48,11 @@ class Posts extends Component {
                             this.props.items.map((post) => (
                             <div className="post-listing container-fluid" key={post.id}>
                                 <div className="row">
-                                    <div className="col-sm-7 text-left">
+                                    <div className="col-sm-6 text-left">
                                         <Link to={`/${post.category}/${post.id}`} onClick={() => this.props.setTarget(post)} >{post.title}</Link>
                                         {/*<Link to={`/${post.category}/${post.id}`} onClick={() => this.props.openPost(post)} >{post.title}</Link>*/}
                                     </div>
-                                    <div className="col-sm-1 text-left">{post.category}</div>
+                                    <div className="col-sm-2 text-left">{post.category}</div>
                                     <div className="col-sm-1 text-right">{post.voteScore}</div>
                                     <div className="col-sm-1">
                                         <span onClick={() => this.props.vote(post.id, 1)}>&#9650;</span>
