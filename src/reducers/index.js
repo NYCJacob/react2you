@@ -129,7 +129,7 @@ function postReducer( state = {
 
                 }
                 // end switch
-            return Object.assign({}, state,  { openPost : false, items : sortingPosts, newPostForm : false, openTarget: null } );
+            return Object.assign({}, state,  { openPost : false, items : sortingPosts, newPostForm : false } );
 
         case SET_SORTKEY :
             return {...state, sortKey : action.key };
@@ -142,7 +142,7 @@ function postReducer( state = {
 
         //    close post also resets openTarget to prevent populating newPost form with data
         case CLOSE_POST :
-            return Object.assign({}, state,  { openPost : false, openTarget : null } );
+            return Object.assign({}, state,  { openPost : false } );
 
         case NEW_POST :
             return Object.assign({}, state, {newPostForm: true });

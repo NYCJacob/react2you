@@ -190,16 +190,6 @@ export function fetchPosts() {
 // end fetchPosts()
 
 
-//  https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-export function masterFetchPosts(category) {
-    return {
-        type : MASTER_FETCH,
-        categoryView : category,
-        updatedAt : Date.now()
-    }
-
-}
-
 // updatedPost is dispatached by updatePost
 function  updatedPost( updated ) {
     return {
@@ -254,7 +244,7 @@ export function sendVote(postId, vote) {
 
 }
 
-function updatePost(data) {
+export function updatePost(data) {
     console.log( data );
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");
@@ -281,7 +271,7 @@ function updatePost(data) {
 }
 
 
-function SendNewPost(data) {
+export function SendNewPost(data) {
     console.log( data );
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");

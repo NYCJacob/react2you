@@ -14,10 +14,10 @@ import EditPost from './EditPost'
  * @constructor
  */
 class Posts extends Component {
-    handleSubmit = (data) => {
-        console.log(data);
-        this.props.sendNewPost(data);
-    }
+    // handleSubmit = (data) => {
+    //     console.log(data);
+    //     this.props.sendNewPost(data);
+    // }
 
 
     render() {

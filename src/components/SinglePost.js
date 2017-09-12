@@ -45,7 +45,6 @@ class SinglePost extends Component {
                                 <td>
                                     <Link to="/editpost">
                                         <button className="btn-sm" >Edit</button>
-                                        {/*<button className="btn-sm" onClick={this.props.editPost}>Edit</button> */}
                                     </Link>
                                 </td>
                                 <td><button className="btn-sm" onClick={() => this.props.deletePost(id)}>Delete</button> </td>

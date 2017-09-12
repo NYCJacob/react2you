@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
-import {cancelEdit, handleSubmit} from "../actions/index"
+import {cancelEdit, handleSubmit, updatePost, SendNewPost} from "../actions/index"
 // redux form import
 import { Field, reduxForm } from 'redux-form'
 import {renderField, required, maxLength15, minLength2, alphaNumeric} from "../utils/formValidation"
@@ -27,7 +27,6 @@ class EditPost extends Component {
                                 <thead>
                                     <tr>
                                         <th colSpan={3}>
-                                            {/*<label htmlFor="title">Post Title</label>*/}
                                             <Field
                                                 name="title"
                                                 type="text"
@@ -114,7 +113,10 @@ function mapDispatchToProps(dispatch){
     return {
         cancelEdit : () => dispatch(cancelEdit()),
         // sendNewPost : (data) => dispatch(SendNewPost(data)),
-        submitData : ( data, editing ) => dispatch(handleSubmit(data, editing)),
+        submitData : ( data, editing ) => {
+            editing ? dispatch(updatePost(data)) : dispatch(SendNewPost(data))
+        }
+        // submitData : ( data ) => dispatch(handleSubmit(data))
     }
 }
 
