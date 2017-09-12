@@ -27,6 +27,9 @@
   font-size: smaller;
 }
 
+.btn:hover {
+  cursor: pointer;
+}
 
 
 /*.editPost-view {*/

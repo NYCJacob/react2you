@@ -66,11 +66,6 @@ class SinglePost extends Component {
 
 
 function mapStateToProps(state) {
-    console.log(state);
-    // state.posts.openTarget
-    // let targetPost =   state.posts.items.find((item) => item.id === state.posts.openTarget)
-    let editable = { editable : state.posts.editing};
-    console.log(editable);
     return { target : state.posts.target, editable : state.posts.editing }
 }
 

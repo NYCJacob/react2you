@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchComments} from "../actions/index"
 import SingleComment from './SingleComment'
+import CommentForm from './CommentForm'
 
 
 /**
- * @description Creates a list of all posts ordered by voteScore (highest score first)
+ * @description
  * @constructor
  */
 
@@ -19,6 +21,10 @@ class Comments extends Component {
 
         return (
             <div className="commentsDiv">
+                <Link to="/:category/:postId/newcomment">
+                    <button className="btn btn-sm">New Comment</button>
+                </Link>
+                <Route path="/:category/:postId/newcomment" component={CommentForm} />
                 {
                    this.props.comments.length !== 0 ? this.props.comments.map( (comment,idx) => (
                         <SingleComment comment={comment} key={idx} />
