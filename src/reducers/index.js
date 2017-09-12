@@ -71,9 +71,7 @@ function postReducer( state = {
 
         case RECEIVE_POSTS :
             // sort logic
-                console.log( action );
-                let sortingPosts = action.posts;
-                console.log(sortingPosts);
+                let sortingPosts = action.posts.filter((post) => post.deleted !== true);
                 switch (state.sortKey) {
                     // by vote descending
                     case 1:
