@@ -2,29 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
-import {cancelEdit, SendNewPost, updatePost} from "../actions/index"
+import {cancelEdit, handleSubmit} from "../actions/index"
 // redux form import
 import { Field, reduxForm } from 'redux-form'
-
-
-// form client side validation function
-const validate = values => {
-    const errors = {}
-    if (!values.author) {
-        errors.username = 'Required'
-    } else if (values.username.length > 15) {
-        errors.username = 'Must be 15 characters or less'
-    }
-    if (!values.body) {
-        errors.body = 'Required'
-    } else if (values.body.length < 10) {
-        errors.username = 'Must be 10 characters or more'
-    }
-    if (!values.category) {
-        errors.category = 'Required'
-    }
-    return errors
-}
+import {renderField, required, maxLength15, minLength2, alphaNumeric} from "../utils/formValidation"
 
 
 /**
@@ -33,7 +14,6 @@ const validate = values => {
  */
 class EditPost extends Component {
 
-
     render() {
 
         return (
@@ -41,14 +21,21 @@ class EditPost extends Component {
             <div className="editPost-view">
                 {    <div className="container-fluid">
 
-                        <form  onSubmit={this.props.handleSubmit(data => this.props.submitData(data))}>
+                        <form  onSubmit={this.props.handleSubmit(data => this.props.submitData(data, this.props.editable))}>
 
                             <table className="table table-sm table-responsive">
                                 <thead>
                                     <tr>
                                         <th colSpan={3}>
-                                            <label htmlFor="title">Post Title</label>
-                                            <Field name="title" component="input" size="50" type="text"/>
+                                            {/*<label htmlFor="title">Post Title</label>*/}
+                                            <Field
+                                                name="title"
+                                                type="text"
+                                                component={renderField}
+                                                label="title"
+                                                validate={[required, maxLength15, minLength2]}
+                                                warn={alphaNumeric}
+                                            />
                                         </th>
                                     </tr>
                                     <tr>
@@ -116,6 +103,7 @@ class EditPost extends Component {
 //TODO: figure out how to use tenary statment for returns
 function mapStateToProps(state) {
     return { editable : state.posts.editing,
+            newPost : state.posts.newPostForm,
         // initialValues :  state.posts.items.find((item) => item.id === state.posts.openTarget),
         initialValues :  state.posts.target,
         categories: Object.keys( state.categories ).map(key => state.categories[key]),
@@ -125,8 +113,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch){
     return {
         cancelEdit : () => dispatch(cancelEdit()),
-        sendNewPost : (data) => dispatch(SendNewPost(data)),
-        submitData : ( data ) => dispatch(updatePost(data)),
+        // sendNewPost : (data) => dispatch(SendNewPost(data)),
+        submitData : ( data, editing ) => dispatch(handleSubmit(data, editing)),
     }
 }
 

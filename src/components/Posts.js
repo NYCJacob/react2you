@@ -27,7 +27,7 @@ class Posts extends Component {
                          <div className="row">
                              <div className="col-sm text-left">
                                  <Link to="/newpost">
-                                    <button className="btn btn-sm btn-primary" onClick={() => this.props.createPost()}>New Post</button>
+                                    <button className="btn btn-sm btn-outline-success" onClick={() => this.props.createPost()}>New Post</button>
                                  </Link>
                              </div>
                              <div className="col-sm">Title</div>

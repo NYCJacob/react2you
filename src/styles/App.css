@@ -12,6 +12,10 @@
 /*}*/
 
 /*why does bootstrap4 set nav to block y default?*/
+#cat-view {
+  padding-bottom: 3vh;
+  margin: auto;
+}
 #cat-view .nav-link {
   display: inline;
   margin: auto;
