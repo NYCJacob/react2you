@@ -21,6 +21,8 @@ import {
     CLEAR_TARGET,
     SET_TARGET,
     NEW_COMMENT,
+    ADD_COMMENT,
+    DELETE_COMMENT,
     CLOSE_COMMENT_FORM
 } from '../actions'
 
@@ -219,13 +221,31 @@ function postReducer( state = {
     }
 }
 
-
+// let newPostsState = priorPosts.filter( post => post.id !== action.deletePostId);
+// return Object.assign({}, state, { openTarget : null, items: newPostsState} );
 
 function commentsReducer( state = {}, action) {
     switch (action.type) {
         case RECEIVE_COMMENTS:
             let commentKey = action.parentId +  '-comments';
             return Object.assign({}, state,  { [commentKey] : action.comments} );
+
+        case ADD_COMMENT :
+            console.log(action);
+            let newCommentKey = action.comment.parentId +  '-comments';
+            return {
+                ...state,
+                ...state[newCommentKey].push(action.comment)
+            }
+
+        case DELETE_COMMENT :
+            let deleteKey = action.parentId + '-comments';
+            console.log(state[deleteKey].filter((comment) => comment.deleted === false));
+            // return Object.assign({}, state,  state[deleteKey].filter((comment) => comment.id !== action.id )  )
+            let deletedCommentArray = state[deleteKey].filter((comment) => comment.id !== action.id);
+            return {
+                ...state, [deleteKey] : state[deleteKey].filter((comment) => comment.id !== action.id)
+            }
 
         default :
             return state;

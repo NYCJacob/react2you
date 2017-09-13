@@ -76,8 +76,8 @@ function mapDispatchToProps(dispatch){
     return {
         closeCommentForm : () => dispatch(closeCommentForm()),
         submitCommentData : ( data, parentId ) => {
-            console.log(data);
-            // dispatch(sendNewComment(data, parentId))
+            // console.log(data, parentId);
+            dispatch(sendNewComment(data, parentId))
         }
     }
 }

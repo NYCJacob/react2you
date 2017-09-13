@@ -1,7 +1,6 @@
 const uuidv4 = require('uuid/v4');
 
 export const ALL_POSTS = 'ALL_POSTS'
-export const ALL_CATEGORIES = 'ALL_CATEGORIES'
 export const ADD_CATEGORY = 'ADD_CATEGORY'
 export const FETCH_POSTS = 'FETCH_POSTS'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
@@ -17,11 +16,12 @@ export const DELETE_POST = 'DELETE_POST'
 export const POST_VOTE = 'POST_VOTE'
 export const SORTER = 'SORTER'
 export const SET_SORTKEY = 'SET_SORTKEY'
-export const MASTER_FETCH = 'MASTER_FETCH'
 export const CREATE_POST = 'CREATE_POST'
 export const CLEAR_TARGET = 'CLEAR_TARGET'
 export const SET_TARGET = 'SET_TARGET'
 export const NEW_COMMENT = 'NEW_COMMENT'
+export const ADD_COMMENT = 'ADD_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const CLOSE_COMMENT_FORM = 'CLOSE_COMMENT_FORM'
 
 export function allPosts () {
@@ -342,7 +342,7 @@ function receiveComments(id, comments) {
     console.log('received comments', comments)
     return {
         type: RECEIVE_COMMENTS,
-        comments : comments,
+        comments : comments.filter((comment) => comment.deleted === false),
         parentId : id,
         receivedAt: Date.now()
     }
@@ -385,12 +385,78 @@ export function newComment() {
     }
 }
 
+function addComment(comment) {
+    return {
+        type : ADD_COMMENT,
+        comment : comment
+    }
+}
+
+function deleteComment(id, parentId) {
+    return {
+        type : DELETE_COMMENT,
+        id: id,
+        parentId : parentId
+    }
+}
+
 export function closeCommentForm(){
     return {
         type: CLOSE_COMMENT_FORM
     }
 }
 
+export function sendDeleteComment(id, parentId) {
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+
+    const fetchParams = {
+        method : 'DELETE',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default',
+    }
+    return dispatch => {
+        return fetch(`http://localhost:5001/comments/${id}`, fetchParams)
+            .then( dispatch(deleteComment(id, parentId)))
+    }
+}
+
 export function sendNewComment( data, parentId ) {
     console.log(data, parentId);
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+
+    const dataBody = {
+        id : uuidv4(),
+        timestamp : Date.now(),
+        body : data.body,
+        author : data.author,
+        parentId : parentId
+    }
+
+    const fetchParams = {
+        method : 'POST',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default',
+        body : JSON.stringify( dataBody)
+
+    }
+
+    return dispatch => {
+        return fetch(`http://localhost:5001/comments`, fetchParams)
+            .then(response => {
+                console.log( response );
+                return response.json()
+            })
+            .then(data => {
+                console.log(data);
+                dispatch(addComment(data))
+            })
+    }
+
+
 }
