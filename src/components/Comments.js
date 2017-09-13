@@ -15,7 +15,6 @@ class Comments extends Component {
     //TODO: somehow I could not dispatch in componentDidMount when using mapdispatchtoprops
     componentDidMount() {
         this.props.dispatch(fetchComments(this.props.postId))
-        // this.getComments(this.props.postId);
     }
 
 
@@ -24,7 +23,6 @@ class Comments extends Component {
 
         return (
             <div className="commentsDiv">
-
                 { this.props.commentForm ? <CommentForm /> :
                     <div className="row">
                         {(this.props.comments.length !== 0) && `${this.props.comments.length} comments`}
@@ -38,7 +36,7 @@ class Comments extends Component {
 
                 {
                    this.props.comments.length !== 0 ? this.props.comments.map( (comment,idx) => (
-                        <SingleComment comment={comment} key={idx} />
+                        <SingleComment comment={comment} editing={false} key={idx} />
                     )) : <p>no comments</p>
                 }
 
@@ -49,7 +47,6 @@ class Comments extends Component {
 
 function mapStateToProps( state, props ) {
     let commentsKey = props.postId + '-comments';
-    console.log( state.comments[commentsKey] );
     let postComments = [];
     if (state.comments[commentsKey]){
         postComments = state.comments[commentsKey];

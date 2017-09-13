@@ -23,6 +23,7 @@ import {
     NEW_COMMENT,
     ADD_COMMENT,
     DELETE_COMMENT,
+    EDIT_COMMENT,
     CLOSE_COMMENT_FORM
 } from '../actions'
 
@@ -224,7 +225,8 @@ function postReducer( state = {
 // let newPostsState = priorPosts.filter( post => post.id !== action.deletePostId);
 // return Object.assign({}, state, { openTarget : null, items: newPostsState} );
 
-function commentsReducer( state = {}, action) {
+function commentsReducer( state = {commentEditing: false},
+                          action) {
     switch (action.type) {
         case RECEIVE_COMMENTS:
             let commentKey = action.parentId +  '-comments';
@@ -246,6 +248,9 @@ function commentsReducer( state = {}, action) {
             return {
                 ...state, [deleteKey] : state[deleteKey].filter((comment) => comment.id !== action.id)
             }
+
+        case EDIT_COMMENT :
+            return { ...state, commentEditing : true }
 
         default :
             return state;

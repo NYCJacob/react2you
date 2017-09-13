@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { sendDeleteComment} from "../actions/index"
+import CommentForm from './CommentForm'
+import { sendDeleteComment, editComment, sendEditComment} from "../actions/index"
 
 
 /**
@@ -9,18 +10,22 @@ import { sendDeleteComment} from "../actions/index"
  * @constructor
  *
  */
-
 class SingleComment extends Component {
 
     render() {
         const {id, parentId, voteScore,author, body} = this.props.comment;
+
+
         return (
             <div>
-                {
+                { this.props.editing ? <CommentForm/> :
                    <div className="comment-text">
                        <div className="row">
                            <div className="col-sm text-left">
-                               <button className="btn btn-sm btn-outline-danger" onClick={() => this.props.deleteComment(id, parentId)}>Delete Comment</button>
+                               <button className="btn btn-sm btn-outline-danger" onClick={() => this.props.deleteComment(id, parentId)}>Delete</button>
+                           </div>
+                           <div className="col-sm ">
+                               <button className="btn btn-sm btn-outline-warning" onClick={() => this.props.editComment()}>Edit</button>
                            </div>
                            <div>
                                <span>Score: {voteScore}</span>
@@ -33,20 +38,21 @@ class SingleComment extends Component {
                        <div className="comment-author">By: {author}</div>
                        <div className="comment-body" >{body}</div>
                    </div>
-
                 }
+
             </div>
         )
     }
 }
 
+function mapStateToProps(state) {
+    return { editing : state.comments.commentEditing }
+}
+
 function mapDispatchToProps(dispatch) {
     return{
-        // closeSinglePost : () => dispatch(closePost()),
-        // editPost : (targetPost) => dispatch(editPost(targetPost)),
-        // deletePost : (postId) => dispatch(deletePostAction(postId)),
-        // vote : (postId, vote) => dispatch( sendVote(postId, vote))
-        deleteComment : (id, parentId) => dispatch(sendDeleteComment(id, parentId))
+        deleteComment : (id, parentId) => dispatch(sendDeleteComment(id, parentId)),
+        editComment : () => dispatch(editComment())
     }
 }
 

@@ -22,6 +22,7 @@ export const SET_TARGET = 'SET_TARGET'
 export const NEW_COMMENT = 'NEW_COMMENT'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const CLOSE_COMMENT_FORM = 'CLOSE_COMMENT_FORM'
 
 export function allPosts () {
@@ -400,6 +401,12 @@ function deleteComment(id, parentId) {
     }
 }
 
+export function editComment() {
+    return {
+        type : EDIT_COMMENT
+    }
+}
+
 export function closeCommentForm(){
     return {
         type: CLOSE_COMMENT_FORM
@@ -436,14 +443,12 @@ export function sendNewComment( data, parentId ) {
         author : data.author,
         parentId : parentId
     }
-
     const fetchParams = {
         method : 'POST',
         headers : fetchHeaders,
         mode : 'cors',
         cache : 'default',
         body : JSON.stringify( dataBody)
-
     }
 
     return dispatch => {
@@ -458,6 +463,9 @@ export function sendNewComment( data, parentId ) {
             })
             .then(dispatch(closeCommentForm()))
     }
+}
 
 
+export function sendEditComment() {
+    
 }
