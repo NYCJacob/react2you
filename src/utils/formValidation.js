@@ -81,7 +81,7 @@ export const renderFieldcommentAuthor = ({
 )
 
 export const renderFieldcommentBody = ({
-                                           textarea,
+                                           input,
                                            label,
                                            type,
                                            meta: { touched, error, warning }
@@ -89,7 +89,7 @@ export const renderFieldcommentBody = ({
     <div>
 
         <div>
-            <textarea {...textarea} placeholder={label} type={type} cols={50} rows={5}/>
+            <textarea {...input} placeholder={label} type={type} cols={50} rows={10}/>
             {touched &&
             ((error &&
                 <span>

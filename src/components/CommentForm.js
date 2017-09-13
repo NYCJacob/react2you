@@ -37,7 +37,7 @@ class CommentForm extends Component {
                                 <div className="row">
                                     <div className="col-sm comment-author">
                                         <Field
-                                            name="comment author"
+                                            name="author"
                                             label="comment author"
                                             component={renderFieldcommentAuthor}
                                             type="text"
@@ -47,8 +47,8 @@ class CommentForm extends Component {
                                 <div className="row">
                                     <div className="col-sm comment-body">
                                         <Field
-                                            name="comment body"
-                                            label="comment body"
+                                            name="body"
+                                            label="body"
                                             component={renderFieldcommentBody}
                                             type="text"
                                         />
