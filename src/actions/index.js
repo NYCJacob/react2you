@@ -21,6 +21,8 @@ export const MASTER_FETCH = 'MASTER_FETCH'
 export const CREATE_POST = 'CREATE_POST'
 export const CLEAR_TARGET = 'CLEAR_TARGET'
 export const SET_TARGET = 'SET_TARGET'
+export const NEW_COMMENT = 'NEW_COMMENT'
+export const CLOSE_COMMENT_FORM = 'CLOSE_COMMENT_FORM'
 
 export function allPosts () {
     return {
@@ -376,5 +378,17 @@ export function fetchComments(id) {
 }
 // end fetchComments()
 
+
+export function newComment() {
+    return {
+        type : NEW_COMMENT
+    }
+}
+
+export function closeCommentForm(){
+    return {
+        type: CLOSE_COMMENT_FORM
+    }
+}
 
 

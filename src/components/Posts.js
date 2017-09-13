@@ -14,22 +14,36 @@ import EditPost from './EditPost'
  * @constructor
  */
 class Posts extends Component {
-    // handleSubmit = (data) => {
-    //     console.log(data);
-    //     this.props.sendNewPost(data);
-    // }
 
+    calcAge = (timeStamp) => {
+        let timeDiff = Date.now() - timeStamp;
+        let totalHours = Math.floor(timeDiff/(1000*60*60));
+        let days = Math.trunc(totalHours/24);
+        let hours = totalHours % 24;
+        if (days > 365) {
+            let years = Math.trunc(days/365);
+            days = years % 365;
+            return `${years}+ year(s)`
+        } else {
+            return `${days} days ${hours} hour(s)`
+        }
+
+
+    }
 
     render() {
         return (
             <div>
                 <div id="posts-view">
-                         <div className="row">
-                             <div className="col-sm text-left">
-                                 <Link to="/newpost">
+                        <div className="row">
+                            <div className="col-sm text-left">
+                                <Link to="/newpost">
                                     <button className="btn btn-sm btn-outline-success" onClick={() => this.props.createPost()}>New Post</button>
-                                 </Link>
-                             </div>
+                                </Link>
+                            </div>
+                        </div>
+
+                         <div className="row">
                              <div className="col-sm">Title</div>
                              <div className="col-sm text-right">
                                  <span>Category</span>
@@ -43,12 +57,18 @@ class Posts extends Component {
                                  <span>|</span>
                                  <span className="voting" onClick={() => this.props.sorter( -1, this.props.items)}>&#9660;</span>
                              </div>
+                             <div className="col-sm text-left">
+                                 <span>Posted</span>
+                                 <span className="posted">&#9650;</span>
+                                 <span>|</span>
+                                 <span className="posted">&#9660;</span>
+                             </div>
                          </div>
                         {
                             this.props.items.map((post) => (
                             <div className="post-listing container-fluid" key={post.id}>
                                 <div className="row">
-                                    <div className="col-sm-6 text-left">
+                                    <div className="col-sm-4 text-left">
                                         <Link to={`/${post.category}/${post.id}`} onClick={() => this.props.setTarget(post)} >{post.title}</Link>
                                         {/*<Link to={`/${post.category}/${post.id}`} onClick={() => this.props.openPost(post)} >{post.title}</Link>*/}
                                     </div>
@@ -57,6 +77,9 @@ class Posts extends Component {
                                     <div className="col-sm-1">
                                         <span onClick={() => this.props.vote(post.id, 1)}>&#9650;</span>
                                         <span onClick={() => this.props.vote(post.id, -1)}>&#9660;</span>
+                                    </div>
+                                    <div className="col-sm-2">
+                                        {this.calcAge(post.timestamp)}
                                     </div>
                                     <div className="col-sm-1">
                                         <Link to="/editpost" onClick={() => this.props.editPost(post)}>

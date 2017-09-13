@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
-import { } from "../actions/index"
+import { closeCommentForm } from "../actions/index"
 // redux form import
 import { Field, reduxForm } from 'redux-form'
 import {renderField, required, maxLength15, minLength2, alphaNumeric} from "../utils/formValidation"
@@ -12,6 +12,18 @@ import {renderField, required, maxLength15, minLength2, alphaNumeric} from "../u
  * @description
  * @constructor
  */
+
+// POST /comments
+// USAGE:
+//     Add a comment to a post
+//
+// PARAMS:
+//     id: Any unique ID. As with posts, UUID is probably the best here.
+//     timestamp: timestamp. Get this however you want.
+//     body: String
+// author: String
+// parentId: Should match a post id in the database.
+
 class CommentForm extends Component {
 
     render() {
@@ -21,9 +33,26 @@ class CommentForm extends Component {
             <div className="commentForm-view">
                     <div className="container-fluid">
 
-                    <form>
-
-                       <h1>Comment form</h1>
+                        <form>
+                       <h3>Comment form</h3>
+                            <div className="row comment-text">
+                                <div className="col-sm comment-author">By: </div>
+                                <div className="col-sm comment-body" > -body- </div>
+                                <div>
+                                    <button className="btn btn-sm btn-outline-dark" onClick={() => this.props.closeCommentForm()}>X</button>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div>
+                                    id
+                                </div>
+                                <div>
+                                    parentId
+                                </div>
+                                <div>
+                                    timestamp
+                                </div>
+                            </div>
                     </form>
                 </div>
 
@@ -43,7 +72,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
     return {
-
+        closeCommentForm : () => dispatch(closeCommentForm())
     }
 }
 

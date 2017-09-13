@@ -19,7 +19,9 @@ import {
     SET_SORTKEY,
     CREATE_POST,
     CLEAR_TARGET,
-    SET_TARGET
+    SET_TARGET,
+    NEW_COMMENT,
+    CLOSE_COMMENT_FORM
 } from '../actions'
 
 
@@ -57,6 +59,7 @@ function postReducer( state = {
         timestamp: null
     },
     openPost : false,
+    commentForm : false,
     editing : false,
     newPostForm : false,
     sortKey : 1,    // 1 is default voteScore, 2 is by category, negative reverses sort
@@ -205,6 +208,12 @@ function postReducer( state = {
             return Object.assign({}, state, {items: currStateItems}  );
             // return state;
 
+        case NEW_COMMENT :
+            return {...state, commentForm: true };
+
+        case CLOSE_COMMENT_FORM :
+            return {...state, commentForm: false};
+
         default :
             return state;
     }
@@ -215,9 +224,9 @@ function postReducer( state = {
 function commentsReducer( state = {}, action) {
     switch (action.type) {
         case RECEIVE_COMMENTS:
-            console.log('commentReducer RECEIVE:  ',  action.comments );
             let commentKey = action.parentId +  '-comments';
             return Object.assign({}, state,  { [commentKey] : action.comments} );
+
         default :
             return state;
     }

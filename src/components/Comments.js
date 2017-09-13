@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch} from 'react-router-dom'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchComments} from "../actions/index"
+import { fetchComments, newComment} from "../actions/index"
 import SingleComment from './SingleComment'
 import CommentForm from './CommentForm'
 
@@ -13,21 +12,21 @@ import CommentForm from './CommentForm'
  */
 
 class Comments extends Component {
+    //TODO: somehow I could not dispatch in componentDidMount when using mapdispatchtoprops
     componentDidMount() {
         this.props.dispatch(fetchComments(this.props.postId))
+        // this.getComments(this.props.postId);
     }
+
 
     render() {
         const {category, postId} = this.props;
 
         return (
             <div className="commentsDiv">
-                <Link to={`/${category}/${postId}/newcomment`}>
-                    <button className="btn btn-sm">New Comment</button>
-                </Link>
-                <Switch>
-                    <Route path={`/${category}/${postId}/newcomment`} component={CommentForm}/>
-                </Switch>
+
+                { this.props.commentForm ? <CommentForm /> : <button className="btn btn-sm" onClick={() => this.props.dispatch(newComment())}>New Comment</button> }
+
                 {
                    this.props.comments.length !== 0 ? this.props.comments.map( (comment,idx) => (
                         <SingleComment comment={comment} key={idx} />
@@ -48,8 +47,15 @@ function mapStateToProps( state, props ) {
     } else {
         postComments.push({'body': 'no comments'});
     }
-    console.log( postComments);
-    return { comments : postComments };
+
+    return { comments : postComments, commentForm : state.posts.commentForm };
 }
+
+// function mapDispatchToProps(dispatch) {
+//     return{
+//         getComments : (id) => fetchComments(id),
+//         newComment : () => dispatch(newComment())
+//     }
+// }
 
 export default connect(mapStateToProps)(Comments)

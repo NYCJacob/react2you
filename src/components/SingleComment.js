@@ -9,17 +9,6 @@ import PropTypes from 'prop-types';
  *
  */
 
-// POST /comments
-// USAGE:
-//     Add a comment to a post
-//
-// PARAMS:
-//     id: Any unique ID. As with posts, UUID is probably the best here.
-//     timestamp: timestamp. Get this however you want.
-//     body: String
-// author: String
-// parentId: Should match a post id in the database.
-
 class SingleComment extends Component {
 
     render() {
