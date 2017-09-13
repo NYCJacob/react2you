@@ -5,13 +5,7 @@
 
 
 /* my custom styles*/
-/*#cat-list li {*/
-  /*display: inline;*/
-  /*list-style-type: none;*/
-  /*padding-right: 20px;*/
-/*}*/
 
-/*why does bootstrap4 set nav to block y default?*/
 #cat-view {
   padding-bottom: 3vh;
   margin: auto;
@@ -27,21 +21,15 @@
   font-size: smaller;
 }
 
+.commentForm-view {
+  padding-bottom: 5vh;
+  background-color: #9fcdff;
+}
+
 .btn:hover {
   cursor: pointer;
 }
 
-
-/*.editPost-view {*/
-  /*width: 75vw;*/
-  /*margin: auto;*/
-  /*font-size: smaller;*/
-/*}*/
-/*.newPostForm-container {*/
-  /*width: 75vw;*/
-  /*margin: auto;*/
-  /*font-size: smaller;*/
-/*}*/
 
 .singlePost-view {
   width: 75vw;
@@ -57,10 +45,9 @@
   font-size: x-small;
 }
 
-
 .comment-text {
   font-size: small;
-  border-bottom: dashed;
+  border-top: dashed;
 }
 
 .comment-text > .comment-author {

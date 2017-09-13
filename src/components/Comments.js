@@ -25,7 +25,9 @@ class Comments extends Component {
         return (
             <div className="commentsDiv">
 
-                { this.props.commentForm ? <CommentForm /> : <button className="btn btn-sm" onClick={() => this.props.dispatch(newComment())}>New Comment</button> }
+                { this.props.commentForm ? <CommentForm /> :
+                    <button className="btn btn-sm btn-outline-success" onClick={() => this.props.dispatch(newComment())}>Add Comment</button>
+                }
 
                 {
                    this.props.comments.length !== 0 ? this.props.comments.map( (comment,idx) => (
@@ -51,11 +53,6 @@ function mapStateToProps( state, props ) {
     return { comments : postComments, commentForm : state.posts.commentForm };
 }
 
-// function mapDispatchToProps(dispatch) {
-//     return{
-//         getComments : (id) => fetchComments(id),
-//         newComment : () => dispatch(newComment())
-//     }
-// }
+
 
 export default connect(mapStateToProps)(Comments)

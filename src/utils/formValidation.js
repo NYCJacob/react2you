@@ -38,7 +38,7 @@ export const renderField = ({
                          label,
                          type,
                          meta: { touched, error, warning }
-                     }) =>
+                     }) => (
     <div>
         <label>
             {label}
@@ -56,3 +56,49 @@ export const renderField = ({
             </span>))}
         </div>
     </div>
+)
+
+export const renderFieldcommentAuthor = ({
+                                input,
+                                label,
+                                type,
+                                meta: { touched, error, warning }
+                            }) => (
+    <div>
+        <div>
+            <input {...input} placeholder={label} type={type} size={30}/>
+            {touched &&
+            ((error &&
+                <span>
+            {error}
+          </span>) ||
+                (warning &&
+                    <span>
+              {warning}
+            </span>))}
+        </div>
+    </div>
+)
+
+export const renderFieldcommentBody = ({
+                                           textarea,
+                                           label,
+                                           type,
+                                           meta: { touched, error, warning }
+                                       }) => (
+    <div>
+
+        <div>
+            <textarea {...textarea} placeholder={label} type={type} cols={50} rows={5}/>
+            {touched &&
+            ((error &&
+                <span>
+            {error}
+          </span>) ||
+                (warning &&
+                    <span>
+              {warning}
+            </span>))}
+        </div>
+    </div>
+)

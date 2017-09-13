@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
-import { closeCommentForm } from "../actions/index"
+import { closeCommentForm, sendNewComment } from "../actions/index"
 // redux form import
 import { Field, reduxForm } from 'redux-form'
-import {renderField, required, maxLength15, minLength2, alphaNumeric} from "../utils/formValidation"
+import {renderField, renderFieldcommentBody, renderFieldcommentAuthor, required, maxLength15, minLength2, alphaNumeric} from "../utils/formValidation"
 
 
 /**
@@ -13,47 +13,49 @@ import {renderField, required, maxLength15, minLength2, alphaNumeric} from "../u
  * @constructor
  */
 
-// POST /comments
-// USAGE:
-//     Add a comment to a post
-//
-// PARAMS:
-//     id: Any unique ID. As with posts, UUID is probably the best here.
-//     timestamp: timestamp. Get this however you want.
-//     body: String
-// author: String
-// parentId: Should match a post id in the database.
-
 class CommentForm extends Component {
 
     render() {
-
+        const  parentId  = this.props.parentId;
         return (
 
             <div className="commentForm-view">
                     <div className="container-fluid">
-
-                        <form>
-                       <h3>Comment form</h3>
-                            <div className="row comment-text">
-                                <div className="col-sm comment-author">By: </div>
-                                <div className="col-sm comment-body" > -body- </div>
-                                <div>
-                                    <button className="btn btn-sm btn-outline-dark" onClick={() => this.props.closeCommentForm()}>X</button>
+                        {
+                            <form
+                                onSubmit={this.props.handleSubmit(data => this.props.submitCommentData(data, parentId))}>
+                                <div className="row">
+                                    <div className="col-sm-8 text-left">
+                                        <button type="submit" className="btn btn-sm btn-outline-success">Submit</button>
+                                    </div>
+                                    <div className="col-sm-4 text-right">
+                                        <button className="btn btn-sm btn-outline-dark"
+                                                onClick={() => this.props.closeCommentForm()}>X
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div>
-                                    id
+                                <div className="row">
+                                    <div className="col-sm comment-author">
+                                        <Field
+                                            name="comment author"
+                                            label="comment author"
+                                            component={renderFieldcommentAuthor}
+                                            type="text"
+                                        />
+                                    </div>
                                 </div>
-                                <div>
-                                    parentId
+                                <div className="row">
+                                    <div className="col-sm comment-body">
+                                        <Field
+                                            name="comment body"
+                                            label="comment body"
+                                            component={renderFieldcommentBody}
+                                            type="text"
+                                        />
+                                    </div>
                                 </div>
-                                <div>
-                                    timestamp
-                                </div>
-                            </div>
-                    </form>
+                            </form>
+                        }
                 </div>
 
             </div>
@@ -65,14 +67,18 @@ class CommentForm extends Component {
 function mapStateToProps(state) {
     return {
         // initialValues :  state.posts.items.find((item) => item.id === state.posts.openTarget),
-        initialValues :  state.posts.target,
-
+        // initialValues :  state.posts.target,
+        parentId : state.posts.target.id
     }
 }
 
 function mapDispatchToProps(dispatch){
     return {
-        closeCommentForm : () => dispatch(closeCommentForm())
+        closeCommentForm : () => dispatch(closeCommentForm()),
+        submitCommentData : ( data, parentId ) => {
+            console.log(data);
+            // dispatch(sendNewComment(data, parentId))
+        }
     }
 }
 

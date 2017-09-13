@@ -391,4 +391,6 @@ export function closeCommentForm(){
     }
 }
 
-
+export function sendNewComment( data, parentId ) {
+    console.log(data, parentId);
+}

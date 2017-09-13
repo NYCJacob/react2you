@@ -99,24 +99,20 @@ class EditPost extends Component {
     }
 }
 
-//TODO: figure out how to use tenary statment for returns
 function mapStateToProps(state) {
     return { editable : state.posts.editing,
             newPost : state.posts.newPostForm,
-        // initialValues :  state.posts.items.find((item) => item.id === state.posts.openTarget),
-        initialValues :  state.posts.target,
-        categories: Object.keys( state.categories ).map(key => state.categories[key]),
+            initialValues :  state.posts.target,
+            categories: Object.keys( state.categories ).map(key => state.categories[key]),
     }
 }
 
 function mapDispatchToProps(dispatch){
     return {
         cancelEdit : () => dispatch(cancelEdit()),
-        // sendNewPost : (data) => dispatch(SendNewPost(data)),
         submitData : ( data, editing ) => {
             editing ? dispatch(updatePost(data)) : dispatch(SendNewPost(data))
         }
-        // submitData : ( data ) => dispatch(handleSubmit(data))
     }
 }
 
