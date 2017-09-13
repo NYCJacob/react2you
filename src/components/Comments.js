@@ -26,7 +26,14 @@ class Comments extends Component {
             <div className="commentsDiv">
 
                 { this.props.commentForm ? <CommentForm /> :
-                    <button className="btn btn-sm btn-outline-success" onClick={() => this.props.dispatch(newComment())}>Add Comment</button>
+                    <div className="row">
+                        {(this.props.comments.length !== 0) && `${this.props.comments.length} comments`}
+
+                        <div className="col-sm">
+                            <button className="btn btn-sm btn-outline-success" onClick={() => this.props.dispatch(newComment())}>Add Comment</button>
+                        </div>
+
+                    </div>
                 }
 
                 {

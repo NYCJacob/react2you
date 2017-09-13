@@ -456,6 +456,7 @@ export function sendNewComment( data, parentId ) {
                 console.log(data);
                 dispatch(addComment(data))
             })
+            .then(dispatch(closeCommentForm()))
     }
 
 
