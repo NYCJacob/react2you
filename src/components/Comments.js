@@ -15,9 +15,9 @@ import CommentForm from './CommentForm'
 class Comments extends Component {
     //TODO: somehow I could not dispatch in componentDidMount when using mapdispatchtoprops
     componentDidMount() {
-        //TODO: find why fetch throws error for missing postId on refresh sometimes--using match didn't work
-         this.props.dispatch(fetchComments(this.props.postId))
-         // this.props.dispatch(fetchComments(this.props.match.params.postId))
+        //  this.props.dispatch(fetchComments(this.props.postId))
+        //TODO: this still does not solve refresh error for comments
+         this.props.dispatch(fetchComments(this.props.match.params.postId))
         {console.log(this.props.match.params)}
     }
 

@@ -15,7 +15,6 @@ class SingleComment extends Component {
     render() {
         const {id, parentId, voteScore,author, body} = this.props.comment;
 
-
         return (
             <div>
                 { ( this.props.editing === id )? <CommentForm/> :
@@ -46,10 +45,11 @@ class SingleComment extends Component {
     }
 }
 
+
 function mapStateToProps(state, props) {
     return {
         editing : state.comments.commentEditing,
-        commentStore : state.comments[props.comment.parentId + '-comments']
+        // commentStore : state.comments[props.comment.parentId + '-comments'].find( (obj) => obj.id === this.props.comment.id)
     }
 }
 

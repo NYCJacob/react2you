@@ -58,9 +58,9 @@ class Posts extends Component {
                              </div>
                              <div className="col-sm text-left">
                                  <span>Posted</span>
-                                 <span className="posted">&#9650;</span>
+                                 <span className="posted" onClick={() => this.props.sorter( 3, this.props.items)}>&#9650;</span>
                                  <span>|</span>
-                                 <span className="posted">&#9660;</span>
+                                 <span className="posted" onClick={() => this.props.sorter( -3, this.props.items)}>&#9660;</span>
                              </div>
                          </div>
                         {

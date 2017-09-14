@@ -130,6 +130,30 @@ function postReducer( state = {
                         sortingPosts.sort(compareCategoryDescending);
                         break;
 
+                    case 3:
+                        // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript#1129270
+                    function compareTimeStampAscending(a,b) {
+                        if (a.timestamp < b.timestamp)
+                            return 1;
+                        if (a.timestamp > b.timestamp)
+                            return -1;
+                        return 0;
+                    }
+                        sortingPosts.sort(compareTimeStampAscending);
+                        break;
+
+                    case -3:
+                        // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript#1129270
+                    function compareTimeStampDscending(a,b) {
+                        if (b.timestamp < a.timestamp)
+                            return 1;
+                        if (b.timestamp > a.timestamp)
+                            return -1;
+                        return 0;
+                    }
+                        sortingPosts.sort(compareTimeStampDscending);
+                        break;
+
                     default :
                         return 0;
 
@@ -140,9 +164,7 @@ function postReducer( state = {
         case SET_SORTKEY :
             return {...state, sortKey : action.key };
 
-        // case GET_POST_DETAILS :
-        //     return Object.assign({}, state,  { openPost : true , target : action.target} );
-        //
+
         case SET_TARGET:
             return Object.assign({}, state,  { openPost : true , target : action.target} );
 

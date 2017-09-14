@@ -72,6 +72,11 @@
   cursor: pointer;
 }
 
+.posted:hover {
+  background-color: #28a745;
+  cursor: pointer;
+}
+
 .sorting:hover {
   background-color: #17a2b8;
   cursor: pointer;
