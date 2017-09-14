@@ -225,7 +225,7 @@ function postReducer( state = {
 // let newPostsState = priorPosts.filter( post => post.id !== action.deletePostId);
 // return Object.assign({}, state, { openTarget : null, items: newPostsState} );
 
-function commentsReducer( state = {commentEditing: false},
+function commentsReducer( state = {commentEditing: null},
                           action) {
     switch (action.type) {
         case RECEIVE_COMMENTS:
@@ -250,7 +250,7 @@ function commentsReducer( state = {commentEditing: false},
             }
 
         case EDIT_COMMENT :
-            return { ...state, commentEditing : true }
+            return { ...state, commentEditing : action.id }
 
         default :
             return state;

@@ -18,14 +18,14 @@ class SingleComment extends Component {
 
         return (
             <div>
-                { this.props.editing ? <CommentForm/> :
+                { ( this.props.editing === id )? <CommentForm/> :
                    <div className="comment-text">
                        <div className="row">
                            <div className="col-sm text-left">
                                <button className="btn btn-sm btn-outline-danger" onClick={() => this.props.deleteComment(id, parentId)}>Delete</button>
                            </div>
                            <div className="col-sm ">
-                               <button className="btn btn-sm btn-outline-warning" onClick={() => this.props.editComment()}>Edit</button>
+                               <button className="btn btn-sm btn-outline-warning" onClick={() => this.props.editComment(id)}>Edit</button>
                            </div>
                            <div>
                                <span>Score: {voteScore}</span>
@@ -52,9 +52,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return{
         deleteComment : (id, parentId) => dispatch(sendDeleteComment(id, parentId)),
-        editComment : () => dispatch(editComment())
+        editComment : (id) => dispatch(editComment(id))
     }
 }
 
 
-export default connect(null, mapDispatchToProps)(SingleComment)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleComment)

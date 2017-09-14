@@ -401,9 +401,10 @@ function deleteComment(id, parentId) {
     }
 }
 
-export function editComment() {
+export function editComment(id) {
     return {
-        type : EDIT_COMMENT
+        type : EDIT_COMMENT,
+        id : id
     }
 }
 
