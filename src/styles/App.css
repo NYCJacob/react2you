@@ -6,6 +6,12 @@
 
 /* my custom styles*/
 
+#overlay {
+  position: fixed;
+  width: 10%;
+  height: 10%;
+}
+
 #cat-view {
   padding-bottom: 3vh;
   margin: auto;

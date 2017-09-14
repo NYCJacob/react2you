@@ -17,3 +17,5 @@ the post id is not being passed to the fetchComments action resulting in a bad a
         (anonymous function)
         src/actions/index.js:370
         
+    - tried wrapping withRouter getting id in match.params.url but also does not work
+    

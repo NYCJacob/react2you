@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter } from 'react-router-dom'
+import {Spinner} from 'react-spinner'
 import PropTypes from 'prop-types';
 import { fetchComments, newComment} from "../actions/index"
 import SingleComment from './SingleComment'
@@ -26,6 +27,7 @@ class Comments extends Component {
         const {category, postId} = this.props;
 
         return (
+
             <div className="commentsDiv">
                 { this.props.commentForm ? <CommentForm /> :
                     <div className="row comments-info">

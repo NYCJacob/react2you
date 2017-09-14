@@ -11,12 +11,13 @@ import { sendDeleteComment, editComment, sendVoteComment, sendEditComment} from 
  *
  */
 class SingleComment extends Component {
-
     render() {
-        const {id, parentId, voteScore,author, body} = this.props.comment;
+        const {id, parentId, voteScore,author, body} = this.props.comment
 
         return (
             <div>
+                {console.log(this.props.commentStore.voteScore)}
+
                 { ( this.props.editing === id )? <CommentForm/> :
                    <div className="comment-text">
                        <div className="row">
@@ -49,7 +50,7 @@ class SingleComment extends Component {
 function mapStateToProps(state, props) {
     return {
         editing : state.comments.commentEditing,
-        // commentStore : state.comments[props.comment.parentId + '-comments'].find( (obj) => obj.id === this.props.comment.id)
+        commentStore : (state.comments[props.comment.parentId + '-comments'] || []).find( (obj) => obj.id === props.comment.id)
     }
 }
 

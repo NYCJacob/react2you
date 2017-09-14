@@ -34,7 +34,7 @@ class Posts extends Component {
         return (
             <div>
                 <div id="posts-view">
-                        <div className="row">
+                    <div className="row">
                             <div className="col-sm text-left">
                                 <Link to="/newpost">
                                     <button className="btn btn-sm btn-outline-success" onClick={() => this.props.createPost()}>New Post</button>

@@ -9,6 +9,7 @@ import Posts from './Posts';
 import EditPost  from './EditPost'
 import {fetchCategories} from "../actions/index";
 import SinglePost from "./SinglePost";
+var Spinner = require('react-spinkit');
 
 
 class App extends Component {
@@ -27,16 +28,15 @@ class App extends Component {
                     <h1>Post, listen, react</h1>
                     <Categories/>
                 </div>
-                    {/*switch forces only matching first child*/}
-                    <Switch>
-                        <Route exact path="/newpost" component={EditPost} />
-                        <Route path="/editpost" component={EditPost} />
-                        <Route exact path="/" component={Posts}/>
-                        <Route path="/:category/:postId" component={SinglePost} />
-
-                        {/*cagtegory views routes*/}
-                        <Route path="/:category" component={Posts} />
-                    </Switch>
+                {/*switch forces only matching first child*/}
+                <Switch>
+                    <Route exact path="/newpost" component={EditPost} />
+                    <Route path="/editpost" component={EditPost} />
+                    <Route exact path="/" component={Posts}/>
+                    <Route path="/:category/:postId" component={SinglePost} />
+                    {/*cagtegory views routes*/}
+                    <Route path="/:category" component={Posts} />
+                </Switch>
 
             </div>
         );
