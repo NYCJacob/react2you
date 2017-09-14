@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CommentForm from './CommentForm'
-import { sendDeleteComment, editComment, sendEditComment} from "../actions/index"
+import { sendDeleteComment, editComment, sendVoteComment, sendEditComment} from "../actions/index"
 
 
 /**

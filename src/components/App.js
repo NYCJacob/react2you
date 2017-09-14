@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 // App.css imports Bootsrap4 css files
 import '../styles/App.css';
 import { connect } from 'react-redux'

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
     setTargetAction, newPost, SendNewPost, createPost, sendVote, setSortKey, receivePosts,
     editPost, deletePostAction
 } from "../actions/index"
-import SinglePost from './SinglePost'
-import EditPost from './EditPost'
+
 
 /**
  * @description Creates a list of all posts ordered by voteScore (highest score first)

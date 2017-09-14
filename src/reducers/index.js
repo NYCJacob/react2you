@@ -242,9 +242,6 @@ function commentsReducer( state = {commentEditing: null, targetComment:null},
 
         case DELETE_COMMENT :
             let deleteKey = action.parentId + '-comments';
-            console.log(state[deleteKey].filter((comment) => comment.deleted === false));
-            // return Object.assign({}, state,  state[deleteKey].filter((comment) => comment.id !== action.id )  )
-            let deletedCommentArray = state[deleteKey].filter((comment) => comment.id !== action.id);
             return {
                 ...state, [deleteKey] : state[deleteKey].filter((comment) => comment.id !== action.id)
             }

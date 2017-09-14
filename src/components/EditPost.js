@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
-import {cancelEdit, handleSubmit, updatePost, SendNewPost} from "../actions/index"
+import {cancelEdit, updatePost, SendNewPost} from "../actions/index"
 // redux form import
 import { Field, reduxForm } from 'redux-form'
 import {renderField, required, maxLength15, minLength2, alphaNumeric} from "../utils/formValidation"

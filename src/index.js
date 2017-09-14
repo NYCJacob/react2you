@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import './styles/index.css';
 import App from './components/App';
-import Posts from "./components/Posts";
 
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import thunk from 'redux-thunk'
 import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from './reducers'

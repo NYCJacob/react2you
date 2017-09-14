@@ -221,7 +221,6 @@ function  deletePost( postId ) {
 }
 
 export function sendVote(postId, vote) {
-    console.log( 'sendVote action');
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
@@ -249,7 +248,6 @@ export function sendVote(postId, vote) {
 }
 
 export function updatePost(data) {
-    console.log( data );
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
@@ -423,16 +421,30 @@ export function closeCommentEditForm() {
 
 }
 
-export function sendVoteComment(comment, increment) {
+export function sendVoteComment(comment, vote) {
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
+
+    let {commentId} = comment;
+    let dataBody;
+    vote === 1 ? dataBody = {option : 'upVote'} : dataBody = {option: 'downVote'};
 
     const fetchParams = {
         method : 'POST',
         headers : fetchHeaders,
         mode : 'cors',
         cache : 'default',
+        body : JSON.stringify( dataBody )
+    };
+    let url = `http://localhost:5001/comments/${commentId}`;
+    return dispatch => {
+        return fetch(url, fetchParams)
+            .then((comment) => {
+                console.log('comment vote success', comment);
+                // dispatch(commentVoting(comment))
+            })
+            // .then(dispatch(fetchPosts()))
     }
 
 }

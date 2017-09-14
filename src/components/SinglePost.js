@@ -32,9 +32,11 @@ class SinglePost extends Component {
                             <th className="post-author">By: {author}</th>
                             <th className="post-category">Category: {category}</th>
                             <th className="post-votes">Votes: {voteScore} </th>
-                            <span className="voting" onClick={() => this.props.vote(id, 1)}>&#9650;</span>
-                            <span>||</span>
-                            <span className="voting" onClick={() => this.props.vote(id, -1)}>&#9660;</span>
+                            <th>
+                                <span className="voting" onClick={() => this.props.vote(id, 1)}>&#9650;</span>
+                                <span>||</span>
+                                <span className="voting" onClick={() => this.props.vote(id, -1)}>&#9660;</span>
+                            </th>
                         </tr>
                         </thead>
                             <tbody>
