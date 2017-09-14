@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
-import { closeCommentForm, sendNewComment } from "../actions/index"
+import { closeCommentForm, closeCommentEditForm, sendNewComment } from "../actions/index"
 // redux form import
 import { Field, reduxForm } from 'redux-form'
 import {renderField, renderFieldcommentBody, renderFieldcommentAuthor, required, maxLength15, minLength2, alphaNumeric} from "../utils/formValidation"
@@ -74,7 +74,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
     return {
-        closeCommentForm : () => dispatch(closeCommentForm()),
+        closeCommentForm : () => {dispatch(closeCommentForm());
+                                    dispatch(closeCommentEditForm()) },
         submitCommentData : ( data, parentId ) => {
             dispatch(sendNewComment(data, parentId))
         }

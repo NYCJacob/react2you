@@ -24,7 +24,8 @@ import {
     ADD_COMMENT,
     DELETE_COMMENT,
     EDIT_COMMENT,
-    CLOSE_COMMENT_FORM
+    CLOSE_COMMENT_FORM,
+    CLOSE_COMMENT_EDIT
 } from '../actions'
 
 
@@ -251,6 +252,10 @@ function commentsReducer( state = {commentEditing: null},
 
         case EDIT_COMMENT :
             return { ...state, commentEditing : action.id }
+
+        case CLOSE_COMMENT_EDIT :
+            return { ...state, commentEditing : null }
+
 
         default :
             return state;

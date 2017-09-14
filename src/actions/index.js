@@ -24,6 +24,7 @@ export const ADD_COMMENT = 'ADD_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const CLOSE_COMMENT_FORM = 'CLOSE_COMMENT_FORM'
+export const CLOSE_COMMENT_EDIT = 'CLOSE_COMMENT_EDIT'
 
 export function allPosts () {
     return {
@@ -412,6 +413,13 @@ export function closeCommentForm(){
     return {
         type: CLOSE_COMMENT_FORM
     }
+}
+
+export function closeCommentEditForm() {
+    return {
+        type : CLOSE_COMMENT_EDIT
+    }
+
 }
 
 export function sendDeleteComment(id, parentId) {
