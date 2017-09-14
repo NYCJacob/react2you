@@ -31,8 +31,8 @@ class SingleComment extends Component {
                                <span>Score: {voteScore}</span>
                            </div>
                            <div className="col-sm-1">
-                               <span onClick={() => this.props.voteComment(this.props.comment, 1)}>&#9650;</span>
-                               <span onClick={() => this.props.voteComment(this.props.comment, -1)}>&#9660;</span>
+                               <span className="voting" onClick={() => this.props.voteComment(this.props.comment, 1)}>&#9650;</span>
+                               <span className="voting" onClick={() => this.props.voteComment(this.props.comment, -1)}>&#9660;</span>
                            </div>
                        </div>
                        <div className="comment-author">By: {author}</div>

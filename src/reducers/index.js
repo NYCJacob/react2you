@@ -25,7 +25,8 @@ import {
     DELETE_COMMENT,
     EDIT_COMMENT,
     CLOSE_COMMENT_FORM,
-    CLOSE_COMMENT_EDIT
+    CLOSE_COMMENT_EDIT,
+    COMMENT_VOTE
 } from '../actions'
 
 
@@ -201,13 +202,9 @@ function postReducer( state = {
         case CANCEL_EDIT :
             return Object.assign({}, state,  { editing : false, newPostForm : false } );
 
-
         case POST_VOTE :
-            // let votedPost =  state.items.find( post => post.id === action.postId);
             let currStateItems = state.items;
-            console.log( currStateItems);
             let indexVoted = currStateItems.findIndex( (item) => item.id === action.postId);
-            console.log(indexVoted);
             currStateItems[indexVoted].voteScore += action.vote;
             return Object.assign({}, state, {items: currStateItems}  );
             // return state;
@@ -223,12 +220,17 @@ function postReducer( state = {
     }
 }
 
-// let newPostsState = priorPosts.filter( post => post.id !== action.deletePostId);
-// return Object.assign({}, state, { openTarget : null, items: newPostsState} );
-
 function commentsReducer( state = {commentEditing: null, targetComment:null},
                           action) {
     switch (action.type) {
+        case COMMENT_VOTE :
+            let parentId = action.votedComment.parentId;
+            let parentKey = parentId + '-comments';
+            let currComments = state[parentKey];
+            let indexVoted = currComments.findIndex( (item) => item.id === action.votedComment.id);
+            currComments[indexVoted].voteScore = action.votedComment.voteScore;
+            return Object.assign({}, state, {[parentKey]: currComments} );
+
         case RECEIVE_COMMENTS:
             let commentKey = action.parentId +  '-comments';
             return Object.assign({}, state,  { [commentKey] : action.comments} );
@@ -251,7 +253,6 @@ function commentsReducer( state = {commentEditing: null, targetComment:null},
 
         case CLOSE_COMMENT_EDIT :
             return { ...state, commentEditing : null, targetComment : null }
-
 
         default :
             return state;

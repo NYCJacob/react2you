@@ -25,6 +25,7 @@ export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const CLOSE_COMMENT_FORM = 'CLOSE_COMMENT_FORM'
 export const CLOSE_COMMENT_EDIT = 'CLOSE_COMMENT_EDIT'
+export const COMMENT_VOTE = 'COMMENT_VOTE'
 
 export function allPosts () {
     return {
@@ -421,12 +422,20 @@ export function closeCommentEditForm() {
 
 }
 
+function commentVote(votedComment) {
+    return {
+        type : COMMENT_VOTE,
+        votedComment : votedComment
+    }
+    
+}
+
 export function sendVoteComment(comment, vote) {
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
 
-    let {commentId} = comment;
+    let {id} = comment;
     let dataBody;
     vote === 1 ? dataBody = {option : 'upVote'} : dataBody = {option: 'downVote'};
 
@@ -437,14 +446,11 @@ export function sendVoteComment(comment, vote) {
         cache : 'default',
         body : JSON.stringify( dataBody )
     };
-    let url = `http://localhost:5001/comments/${commentId}`;
+    let url = `http://localhost:5001/comments/${id}`;
     return dispatch => {
         return fetch(url, fetchParams)
-            .then((comment) => {
-                console.log('comment vote success', comment);
-                // dispatch(commentVoting(comment))
-            })
-            // .then(dispatch(fetchPosts()))
+            .then((data) => data.json())
+            .then((data) => dispatch(commentVote(data)))
     }
 
 }
