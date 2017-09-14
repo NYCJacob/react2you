@@ -66,8 +66,7 @@ class CommentForm extends Component {
 //TODO: figure out how to use tenary statment for returns
 function mapStateToProps(state) {
     return {
-        // initialValues :  state.posts.items.find((item) => item.id === state.posts.openTarget),
-        // initialValues :  state.posts.target,
+        initialValues :  state.comments.targetComment,
         parentId : state.posts.target.id
     }
 }

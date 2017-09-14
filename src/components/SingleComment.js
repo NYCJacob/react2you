@@ -25,7 +25,7 @@ class SingleComment extends Component {
                                <button className="btn btn-sm btn-outline-danger" onClick={() => this.props.deleteComment(id, parentId)}>Delete</button>
                            </div>
                            <div className="col-sm ">
-                               <button className="btn btn-sm btn-outline-warning" onClick={() => this.props.editComment(id)}>Edit</button>
+                               <button className="btn btn-sm btn-outline-warning" onClick={() => this.props.editComment(this.props.comment)}>Edit</button>
                            </div>
                            <div>
                                <span>Score: {voteScore}</span>
@@ -52,7 +52,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return{
         deleteComment : (id, parentId) => dispatch(sendDeleteComment(id, parentId)),
-        editComment : (id) => dispatch(editComment(id))
+        editComment : (comment) => dispatch(editComment(comment))
     }
 }
 
