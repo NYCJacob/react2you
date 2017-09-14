@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { fetchComments, newComment} from "../actions/index"
 import SingleComment from './SingleComment'
@@ -15,8 +16,9 @@ class Comments extends Component {
     //TODO: somehow I could not dispatch in componentDidMount when using mapdispatchtoprops
     componentDidMount() {
         //TODO: find why fetch throws error for missing postId on refresh sometimes--using match didn't work
-         // this.props.dispatch(fetchComments(this.props.match.params.postId))
          this.props.dispatch(fetchComments(this.props.postId))
+         // this.props.dispatch(fetchComments(this.props.match.params.postId))
+        {console.log(this.props.match.params)}
     }
 
 
@@ -62,4 +64,4 @@ function mapStateToProps( state, props ) {
 
 
 
-export default connect(mapStateToProps)(Comments)
+export default connect(mapStateToProps)(withRouter(Comments))

@@ -29,6 +29,7 @@ class SingleComment extends Component {
                            </div>
                            <div>
                                <span>Score: {voteScore}</span>
+                               {/*<span>Score: {this.props.commentStore.voteScore}</span>*/}
                            </div>
                            <div className="col-sm-1">
                                <span className="voting" onClick={() => this.props.voteComment(this.props.comment, 1)}>&#9650;</span>
@@ -45,8 +46,11 @@ class SingleComment extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return { editing : state.comments.commentEditing }
+function mapStateToProps(state, props) {
+    return {
+        editing : state.comments.commentEditing,
+        commentStore : state.comments[props.comment.parentId + '-comments']
+    }
 }
 
 function mapDispatchToProps(dispatch) {
