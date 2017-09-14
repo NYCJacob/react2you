@@ -253,7 +253,7 @@ function commentsReducer( state = {commentEditing: null, targetComment:null},
             return { ...state, commentEditing : action.id, targetComment : action.comment }
 
         case CLOSE_COMMENT_EDIT :
-            return { ...state, commentEditing : null }
+            return { ...state, commentEditing : null, targetComment : null }
 
 
         default :
