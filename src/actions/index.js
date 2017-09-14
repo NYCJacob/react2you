@@ -423,6 +423,20 @@ export function closeCommentEditForm() {
 
 }
 
+export function sendVoteComment(comment, increment) {
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+
+    const fetchParams = {
+        method : 'POST',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default',
+    }
+
+}
+
 export function sendDeleteComment(id, parentId) {
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");

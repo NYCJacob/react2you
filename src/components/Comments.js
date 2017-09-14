@@ -14,7 +14,9 @@ import CommentForm from './CommentForm'
 class Comments extends Component {
     //TODO: somehow I could not dispatch in componentDidMount when using mapdispatchtoprops
     componentDidMount() {
-        this.props.dispatch(fetchComments(this.props.postId))
+        //TODO: find why fetch throws error for missing postId on refresh sometimes--using match didn't work
+         // this.props.dispatch(fetchComments(this.props.match.params.postId))
+         this.props.dispatch(fetchComments(this.props.postId))
     }
 
 
@@ -24,10 +26,11 @@ class Comments extends Component {
         return (
             <div className="commentsDiv">
                 { this.props.commentForm ? <CommentForm /> :
-                    <div className="row">
-                        {(this.props.comments.length !== 0) && `${this.props.comments.length} comments`}
-
-                        <div className="col-sm">
+                    <div className="row comments-info">
+                        <div className="comments-total text-right">
+                            {(this.props.comments.length !== 0) && `${this.props.comments.length} comments`}
+                        </div>
+                        <div className="col-sm text-right">
                             <button className="btn btn-sm btn-outline-success" onClick={() => this.props.dispatch(newComment())}>Add Comment</button>
                         </div>
 

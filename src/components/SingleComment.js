@@ -31,8 +31,8 @@ class SingleComment extends Component {
                                <span>Score: {voteScore}</span>
                            </div>
                            <div className="col-sm-1">
-                               <span>&#9650;</span>
-                               <span>&#9660;</span>
+                               <span onClick={() => this.props.voteComment(this.props.comment, 1)}>&#9650;</span>
+                               <span onClick={() => this.props.voteComment(this.props.comment, -1)}>&#9660;</span>
                            </div>
                        </div>
                        <div className="comment-author">By: {author}</div>
@@ -52,7 +52,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return{
         deleteComment : (id, parentId) => dispatch(sendDeleteComment(id, parentId)),
-        editComment : (comment) => dispatch(editComment(comment))
+        editComment : (comment) => dispatch(editComment(comment)),
+        voteComment : (comment, increment) => dispatch(sendVoteComment(comment, increment))
     }
 }
 

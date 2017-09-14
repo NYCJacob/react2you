@@ -37,6 +37,10 @@
   font-size: smaller;
 }
 
+.comments-total {
+  color: #007bff;
+}
+
 .post-votes {
   text-align: right;
 }
@@ -45,7 +49,12 @@
   font-size: x-small;
 }
 
+.comments-info {
+  margin-bottom: 2vh;
+}
+
 .comment-text {
+  padding-top: 1vh;
   font-size: small;
   border-top: dashed;
 }

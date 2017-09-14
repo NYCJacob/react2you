@@ -42,12 +42,14 @@ class SinglePost extends Component {
                                 <td colSpan={3} className="post-body">{body}</td>
                             </tr>
                             <tr>
-                                <td>
+                                <td colSpan={2} className="text-left">
                                     <Link to="/editpost">
-                                        <button className="btn-sm" >Edit</button>
+                                        <button className="btn btn-sm btn-outline-warning" >Edit</button>
                                     </Link>
                                 </td>
-                                <td><button className="btn-sm" onClick={() => this.props.deletePost(id)}>Delete</button> </td>
+                                <td colSpan={2} className="text-right">
+                                    <button className="btn btn-sm btn-outline-danger" onClick={() => this.props.deletePost(id)}>Delete</button>
+                                </td>
                             </tr>
                             <tr className="table-info">
                                 <td colSpan={2}>{id}</td><td>{timestamp}</td>
