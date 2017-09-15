@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as _ from "lodash";
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom'
 import Comments from './Comments'
@@ -13,14 +14,14 @@ import { closePost, editPost, deletePostAction, sendVote} from '../actions'
 class SinglePost extends Component {
 
     render() {
-        const { title, author, category, voteScore, body, id, timestamp } = this.props.target;
+        const { title, author, category, voteScore, body, id, timestamp } = this.props.thisPost;
 
         return (
 
             <div className="singlePost-view">
                     <div>
                         <Link to="/">
-                            <button className="btn btn-sm" onClick={this.props.closeSinglePost}>X</button>
+                            <button className="btn btn-sm btn-outline-dark" onClick={this.props.closeSinglePost}>X</button>
                         </Link>
 
                         <table className="table table-sm table-responsive">
@@ -66,9 +67,13 @@ class SinglePost extends Component {
     }
 }
 
+// commentStore : _.cloneDeep((state.comments[props.comment.parentId + '-comments'] || []).find( (obj) => obj.id === props.comment.id))
+// target : _.cloneDeep((state.posts.items || []).find( (obj) => obj.id === state.posts.target.id))
+// target : _.cloneDeep(state.posts.target)
 
-function mapStateToProps(state) {
-    return { target : state.posts.target, editable : state.posts.editing }
+function mapStateToProps(state, props) {
+    return { thisPost : _.cloneDeep((state.posts.items || []).find( (obj) => obj.id === state.posts.target.id)),
+            editable : state.posts.editing }
 }
 
 function mapDispatchToProps(dispatch) {
