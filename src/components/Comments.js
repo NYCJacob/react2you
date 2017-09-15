@@ -16,12 +16,11 @@ import CommentForm from './CommentForm'
 class Comments extends Component {
     //TODO: somehow I could not dispatch in componentDidMount when using mapdispatchtoprops
     componentDidMount() {
-        //  this.props.dispatch(fetchComments(this.props.postId))
+         this.props.dispatch(fetchComments(this.props.postId))
         //TODO: this still does not solve refresh error for comments
-         this.props.dispatch(fetchComments(this.props.match.params.postId))
-        {console.log(this.props.match.params)}
+        //  this.props.dispatch(fetchComments(this.props.match.params.postId))
+        {console.log(this.props.match.params.postId)}
     }
-
 
     render() {
         const {category, postId} = this.props;

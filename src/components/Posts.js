@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import * as _ from "lodash";
+
 import {
     setTargetAction, newPost, SendNewPost, createPost, sendVote, setSortKey, receivePosts,
     editPost, deletePostAction
@@ -108,7 +110,7 @@ function mapStateToProps({ posts, categories }) {
     // https://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array#26166303
     // let postsArray =  Object.keys( posts ).map(key => posts[key]);
 
-    return  { 'sortKey' : posts.sortKey, 'open' : posts.openPost, 'newPostForm' : posts.newPostForm, 'items': posts.items}
+    return  { 'sortKey' : posts.sortKey, 'open' : posts.openPost, 'newPostForm' : posts.newPostForm, 'items': _.cloneDeep(posts.items)}
 }
 
 function mapDispatchToProps(dispatch) {

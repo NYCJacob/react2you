@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Children} from 'react';
 
 
 
@@ -33,21 +33,89 @@ export const phoneNumber = value =>
         ? 'Invalid phone number, must be 10 digits'
         : undefined
 
-export const renderField = ({
-                         input,
-                         label,
-                         type,
-                         meta: { touched, error, warning }
-                     }) => (
+
+export const renderFieldTitle = ({
+                                input,
+                                label,
+                                type,
+                                meta: { touched, error, warning }
+                            }) => (
     <div>
-        <label>
-            {label}
-        </label>
         <div>
             <input {...input} placeholder={label} type={type} size={50}/>
             {touched &&
             ((error &&
-                <span>
+                <span className="formError">
+            {error}
+          </span>) ||
+                (warning &&
+                    <span>
+              {warning}
+            </span>))}
+        </div>
+    </div>
+)
+
+export const renderFieldSelect = ({
+                                     input,
+                                     label,
+                                     type,
+                                    children,
+                                     meta: { touched, error, warning }
+                                 }) => (
+    <div>
+        <div>
+            <select {...input} >
+                {children}
+            </select>
+            {touched &&
+            ((error &&
+                <span className="formError">
+            {error}
+          </span>) ||
+                (warning &&
+                    <span>
+              {warning}
+            </span>))}
+        </div>
+    </div>
+)
+
+export const renderFieldAuthor = ({
+                                     input,
+                                     label,
+                                     type,
+                                     meta: { touched, error, warning }
+                                 }) => (
+    <div>
+        <div>
+            <input {...input} placeholder={label} type={type} size={50}/>
+            {touched &&
+            ((error &&
+                <span className="formError">
+            {error}
+          </span>) ||
+                (warning &&
+                    <span>
+              {warning}
+            </span>))}
+        </div>
+    </div>
+)
+
+export const renderFieldBody = ({
+                                           input,
+                                           label,
+                                           type,
+                                           meta: { touched, error, warning }
+                                       }) => (
+    <div>
+
+        <div>
+            <textarea {...input} placeholder={label} type={type} cols={60} rows={10}/>
+            {touched &&
+            ((error &&
+                <span className="formError">
             {error}
           </span>) ||
                 (warning &&
@@ -69,7 +137,7 @@ export const renderFieldcommentAuthor = ({
             <input {...input} placeholder={label} type={type} size={30}/>
             {touched &&
             ((error &&
-                <span>
+                <span className="formError">
             {error}
           </span>) ||
                 (warning &&
@@ -92,7 +160,7 @@ export const renderFieldcommentBody = ({
             <textarea {...input} placeholder={label} type={type} cols={50} rows={10}/>
             {touched &&
             ((error &&
-                <span>
+                <span className="formError">
             {error}
           </span>) ||
                 (warning &&

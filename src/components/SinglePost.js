@@ -12,8 +12,6 @@ import { closePost, editPost, deletePostAction, sendVote} from '../actions'
  */
 class SinglePost extends Component {
 
-
-
     render() {
         const { title, author, category, voteScore, body, id, timestamp } = this.props.target;
 

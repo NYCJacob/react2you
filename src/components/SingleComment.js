@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import * as _ from "lodash";
 import CommentForm from './CommentForm'
 import { sendDeleteComment, editComment, sendVoteComment, sendEditComment} from "../actions/index"
 
@@ -16,7 +17,6 @@ class SingleComment extends Component {
 
         return (
             <div>
-                {console.log(this.props.commentStore.voteScore)}
 
                 { ( this.props.editing === id )? <CommentForm/> :
                    <div className="comment-text">
@@ -28,8 +28,8 @@ class SingleComment extends Component {
                                <button className="btn btn-sm btn-outline-warning" onClick={() => this.props.editComment(this.props.comment)}>Edit</button>
                            </div>
                            <div>
-                               <span>Score: {voteScore}</span>
-                               {/*<span>Score: {this.props.commentStore.voteScore}</span>*/}
+                               {/*<span>Score: {voteScore}</span>*/}
+                               <span>Store Score: { (this.props.commentStore || {}).voteScore }</span>
                            </div>
                            <div className="col-sm-1">
                                <span className="voting" onClick={() => this.props.voteComment(this.props.comment, 1)}>&#9650;</span>
@@ -50,7 +50,7 @@ class SingleComment extends Component {
 function mapStateToProps(state, props) {
     return {
         editing : state.comments.commentEditing,
-        commentStore : (state.comments[props.comment.parentId + '-comments'] || []).find( (obj) => obj.id === props.comment.id)
+        commentStore : _.cloneDeep((state.comments[props.comment.parentId + '-comments'] || []).find( (obj) => obj.id === props.comment.id))
     }
 }
 

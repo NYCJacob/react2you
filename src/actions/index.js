@@ -304,6 +304,7 @@ export function SendNewPost(data) {
                 console.log('post new post success');
             })
             .then(dispatch(fetchPosts()))
+            .then(dispatch(cancelEdit()))
     }
 
 }
