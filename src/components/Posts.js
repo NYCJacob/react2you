@@ -45,27 +45,28 @@ class Posts extends Component {
                         </div>
 
                          <div className="row">
-                             <div className="col-sm">Title</div>
-                             <div className="col-sm">Author</div>
-                             <div className="col-sm">Comments</div>
-                             <div className="col-sm text-right">
-                                 <span>Category</span>
+                             <div className="col-sm-2"><u>Title</u></div>
+
+                             <div className="col-sm-2 text-left">
+                                 <span><u>Category</u></span>
                                  <span className="voting" onClick={() => this.props.sorter( 2, this.props.items)}>&#9650;</span>
                                  <span>|</span>
                                  <span className="voting" onClick={() => this.props.sorter( -2, this.props.items)}>&#9660;</span>
                              </div>
-                             <div className="col-sm text-left">
-                                 <span>Votes</span>
+                             <div className="col-sm-2 text-left">
+                                 <span><u>Votes</u></span>
                                  <span className="voting" onClick={() => this.props.sorter( 1, this.props.items)}>&#9650;</span>
                                  <span>|</span>
                                  <span className="voting" onClick={() => this.props.sorter( -1, this.props.items)}>&#9660;</span>
                              </div>
-                             <div className="col-sm text-left">
-                                 <span>Posted</span>
+                             <div className="col-sm-2 text-left">
+                                 <span><u>Posted</u></span>
                                  <span className="posted" onClick={() => this.props.sorter( 3, this.props.items)}>&#9650;</span>
                                  <span>|</span>
                                  <span className="posted" onClick={() => this.props.sorter( -3, this.props.items)}>&#9660;</span>
                              </div>
+                             <div className="col-sm-1"><u>Author</u></div>
+                             <div className="col-sm-1"><u>Comments</u></div>
                          </div>
                         {
                             this.props.items.map((post) => (
@@ -75,10 +76,8 @@ class Posts extends Component {
                                         <Link to={`/${post.category}/${post.id}`} onClick={() => this.props.setTarget(post)} >{post.title}</Link>
                                         {/*<Link to={`/${post.category}/${post.id}`} onClick={() => this.props.openPost(post)} >{post.title}</Link>*/}
                                     </div>
-                                    <div className="col-sm-2 text-left">{post.author}</div>
-                                    <div className="col-sm-2 text-left">{post.commentTotal}</div>
-                                    <div className="col-sm-2 text-left">{post.category}</div>
-                                    <div className="col-sm-1 text-right">{post.voteScore}</div>
+                                    <div className="col-sm-1 text-left">{post.category}</div>
+                                    <div className="col-sm-2 text-right">{post.voteScore}</div>
                                     <div className="col-sm-1">
                                         <span onClick={() => this.props.vote(post.id, 1)}>&#9650;</span>
                                         <span onClick={() => this.props.vote(post.id, -1)}>&#9660;</span>
@@ -86,6 +85,8 @@ class Posts extends Component {
                                     <div className="col-sm-2">
                                         {this.calcAge(post.timestamp)}
                                     </div>
+                                    <div className="col-sm-1 text-left">{post.author}</div>
+                                    <div className="col-sm-1 text-right">{post.commentTotal}</div>
                                     <div className="col-sm-1">
                                         <Link to="/editpost" onClick={() => this.props.editPost(post)}>
                                             [Edit]
