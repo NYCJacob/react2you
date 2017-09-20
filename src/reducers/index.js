@@ -26,7 +26,8 @@ import {
     EDIT_COMMENT,
     CLOSE_COMMENT_FORM,
     CLOSE_COMMENT_EDIT,
-    COMMENT_VOTE
+    COMMENT_VOTE,
+    POST_COMMENT_TOTAL
 } from '../actions'
 
 
@@ -61,7 +62,8 @@ function postReducer( state = {
         deleted: false,
         body: '',
         id: '',
-        timestamp: null
+        timestamp: null,
+        commentTotal: null
     },
     openPost : false,
     commentForm : false,
@@ -187,7 +189,8 @@ function postReducer( state = {
                         deleted: false,
                         body: '',
                         id: '',
-                        timestamp: null
+                        timestamp: null,
+                        commentTotal:null
                     }
                 }
             );
@@ -236,6 +239,13 @@ function postReducer( state = {
 
         case CLOSE_COMMENT_FORM :
             return {...state, commentForm: false};
+
+        case POST_COMMENT_TOTAL :
+            let statePosts = state.items;
+            let commentTotalIndex = statePosts.findIndex( (post) => post.id === action.id );
+            statePosts[commentTotalIndex].commentTotal = action.commentTotal;
+            return Object.assign({}, state, {items: statePosts})
+
 
         default :
             return state;

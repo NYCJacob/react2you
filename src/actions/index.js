@@ -26,6 +26,7 @@ export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const CLOSE_COMMENT_FORM = 'CLOSE_COMMENT_FORM'
 export const CLOSE_COMMENT_EDIT = 'CLOSE_COMMENT_EDIT'
 export const COMMENT_VOTE = 'COMMENT_VOTE'
+export const POST_COMMENT_TOTAL = 'POST_COMMENT_TOTAL'
 
 export function allPosts () {
     return {
@@ -145,13 +146,6 @@ export function closePost() {
     }
 }
 
-// dispatched by openPost
-// export function getPostDetails(post) {
-//     return {
-//         type: GET_POST_DETAILS,
-//         target : post
-//     }
-// }
 
 export function setTargetAction( post ) {
     return{
@@ -161,12 +155,22 @@ export function setTargetAction( post ) {
 }
 
 export function receivePosts(posts) {
+
     return {
         type: RECEIVE_POSTS,
         posts: posts,
         receivedAt: Date.now()
     }
 }
+
+function postCommentTotal( id, commentTotal) {
+    return {
+        type: POST_COMMENT_TOTAL,
+        id : id,
+        commentTotal : commentTotal
+    }
+}
+
 
 //  https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 export function fetchPosts() {
@@ -186,11 +190,16 @@ export function fetchPosts() {
                 return response.json()
             })
             .then(data => {
+                console.log(data);
+                data.forEach(post => dispatch(fetchComments(post.id)))
+                return data;
+            })
+            .then(data => {
                 console.log( data );
-                dispatch(receivePosts( data ))
+                dispatch(receivePosts( data ));
+                return data;
             })
     }
-
 }
 // end fetchPosts()
 
@@ -351,9 +360,6 @@ function receiveComments(id, comments) {
 }
 
 
-/*
-*  GET /posts/:id/comments
- */
 export function fetchComments(id) {
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");
@@ -369,11 +375,11 @@ export function fetchComments(id) {
     return dispatch => {
         return fetch(`http://localhost:5001/posts/${id}/comments`, fetchParams)
             .then(response => {
-                console.log( response );
                 return response.json()
             })
             .then(data => {
-                dispatch(receiveComments( id, data ))
+                dispatch(receiveComments( id, data ));
+                dispatch(postCommentTotal( id, data.length))
             })
     }
 

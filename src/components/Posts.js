@@ -46,6 +46,8 @@ class Posts extends Component {
 
                          <div className="row">
                              <div className="col-sm">Title</div>
+                             <div className="col-sm">Author</div>
+                             <div className="col-sm">Comments</div>
                              <div className="col-sm text-right">
                                  <span>Category</span>
                                  <span className="voting" onClick={() => this.props.sorter( 2, this.props.items)}>&#9650;</span>
@@ -69,10 +71,12 @@ class Posts extends Component {
                             this.props.items.map((post) => (
                             <div className="post-listing container-fluid" key={post.id}>
                                 <div className="row">
-                                    <div className="col-sm-4 text-left">
+                                    <div className="col-sm-2 text-left">
                                         <Link to={`/${post.category}/${post.id}`} onClick={() => this.props.setTarget(post)} >{post.title}</Link>
                                         {/*<Link to={`/${post.category}/${post.id}`} onClick={() => this.props.openPost(post)} >{post.title}</Link>*/}
                                     </div>
+                                    <div className="col-sm-2 text-left">{post.author}</div>
+                                    <div className="col-sm-2 text-left">{post.commentTotal}</div>
                                     <div className="col-sm-2 text-left">{post.category}</div>
                                     <div className="col-sm-1 text-right">{post.voteScore}</div>
                                     <div className="col-sm-1">
@@ -105,20 +109,15 @@ class Posts extends Component {
 }
 
 
-function mapStateToProps({ posts, categories }) {
-    console.log( posts );
-    // https://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array#26166303
-    // let postsArray =  Object.keys( posts ).map(key => posts[key]);
+function mapStateToProps({ posts }) {
 
     return  { 'sortKey' : posts.sortKey, 'open' : posts.openPost, 'newPostForm' : posts.newPostForm, 'items': _.cloneDeep(posts.items)}
 }
 
 function mapDispatchToProps(dispatch) {
     return{
-        // openPost : (post) => dispatch(getPostDetails(post)),
         setTarget : (post) => dispatch(setTargetAction(post)),
         newPost : () => dispatch(newPost()),
-        // sendNewPost : (data) => dispatch(SendNewPost(data)),
         createPost : () => dispatch(createPost()),
         editPost : (post) => dispatch(editPost(post)),
         deletePost : (postId) => dispatch(deletePostAction( postId )),

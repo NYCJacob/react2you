@@ -42,7 +42,7 @@ class EditPost extends Component {
                                                         type="text"
                                                         component={renderFieldTitle}
                                                         label="title"
-                                                        validate={[required, maxLength15, minLength2]}
+                                                        validate={[required, minLength2]}
                                                         warn={alphaNumeric}
                                                     />
                                                 </td>
