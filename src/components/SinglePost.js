@@ -12,7 +12,10 @@ import { closePost, editPost, deletePostAction, sendVote} from '../actions'
  * @constructor
  */
 class SinglePost extends Component {
-
+    static propTypes = {
+        thisPost : PropTypes.array.isRequired,
+        editable: PropTypes.bool.isRequired
+    }
     render() {
         const { title, author, category, voteScore, body, id, timestamp } = this.props.thisPost;
 
@@ -45,7 +48,7 @@ class SinglePost extends Component {
                             <tr>
                                 <td colSpan={2} className="text-left">
                                     <Link to="/editpost">
-                                        <button className="btn btn-sm btn-outline-warning" >Edit</button>
+                                        <button className="btn btn-sm btn-outline-warning" onClick={() => this.props.editPost(this.props.thisPost)}>Edit</button>
                                     </Link>
                                 </td>
                                 <td colSpan={2} className="text-right">
@@ -66,10 +69,6 @@ class SinglePost extends Component {
         )
     }
 }
-
-// commentStore : _.cloneDeep((state.comments[props.comment.parentId + '-comments'] || []).find( (obj) => obj.id === props.comment.id))
-// target : _.cloneDeep((state.posts.items || []).find( (obj) => obj.id === state.posts.target.id))
-// target : _.cloneDeep(state.posts.target)
 
 function mapStateToProps(state, props) {
     return { thisPost : _.cloneDeep((state.posts.items || []).find( (obj) => obj.id === state.posts.target.id)),

@@ -14,6 +14,11 @@ import CommentForm from './CommentForm'
  */
 
 class Comments extends Component {
+    static propTypes = {
+        comments : PropTypes.array.isRequired,
+        commentForm: PropTypes.bool.isRequired
+    }
+
     //TODO: somehow I could not dispatch in componentDidMount when using mapdispatchtoprops
     componentDidMount() {
         this.props.dispatch(fetchComments(this.props.postId))

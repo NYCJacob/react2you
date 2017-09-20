@@ -15,6 +15,15 @@ import {
  * @constructor
  */
 class Posts extends Component {
+    static propTypes = {
+        items : PropTypes.array.isRequired,
+        sorter: PropTypes.func.isRequired,
+        editPost : PropTypes.func.isRequired,
+        deletePost : PropTypes.func.isRequired,
+        createPost : PropTypes.func.isRequired,
+        vote : PropTypes.func.isRequired,
+        setTarget : PropTypes.func.isRequired
+    }
 
     calcAge = (timeStamp) => {
         let timeDiff = Date.now() - timeStamp;
