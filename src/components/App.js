@@ -9,6 +9,8 @@ import Posts from './Posts';
 import EditPost  from './EditPost'
 import {fetchCategories} from "../actions/index";
 import SinglePost from "./SinglePost";
+import { NoMatch } from  './404.js'
+
 var Spinner = require('react-spinkit');
 
 
@@ -36,7 +38,9 @@ class App extends Component {
                     <Route path="/:category/:postId" component={SinglePost} />
                     {/*cagtegory views routes*/}
                     <Route path="/:category" component={Posts} />
+                    <Route component={NoMatch} />
                 </Switch>
+
 
             </div>
         );

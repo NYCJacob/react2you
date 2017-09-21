@@ -16,7 +16,16 @@ class SinglePost extends Component {
         thisPost : PropTypes.array.isRequired,
         editable: PropTypes.bool.isRequired
     }
+
+    componentDidMount() {
+
+    }
+
     render() {
+        if (!this.props.thisPost) {
+            this.props.history.push("/404")
+        }
+
         const { title, author, category, voteScore, body, id, timestamp } = this.props.thisPost;
 
         return (
@@ -78,7 +87,7 @@ function mapStateToProps(state, props) {
 function mapDispatchToProps(dispatch) {
     return{
         closeSinglePost : () => dispatch(closePost()),
-        editPost : (targetPost) => dispatch(editPost(targetPost)),
+        editPost : (post) => dispatch(editPost(post)),
         deletePost : (postId) => dispatch(deletePostAction(postId)),
         vote : (postId, vote) => dispatch( sendVote(postId, vote))
     }

@@ -42,7 +42,6 @@ class EditPost extends Component {
                                                         component={renderFieldTitle}
                                                         label="title"
                                                         validate={[required, minLength2]}
-                                                        warn={alphaNumeric}
                                                     />
                                                 </td>
                                                 { ( this.props.newPostForm === false ) &&
