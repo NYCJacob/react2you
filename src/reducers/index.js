@@ -2,7 +2,8 @@ import { combineReducers } from 'redux'
 
 // redux-form imports
 import { reducer as formReducer } from 'redux-form'
-import '../actions/types'
+import * as ActionType from '../actions/types'
+
 import {
     ADD_CATEGORY,
     ALL_POSTS,
@@ -32,13 +33,13 @@ import {
 
 function categoryReducer(state = {}, action) {
     switch (action.type) {
-        case RECEIVE_CATEGORIES :
+        case ActionType.RECEIVE_CATEGORIES :
             console.log(action.categories.categories)
             let catArray = action.categories.categories.slice(0);
             console.log(catArray)
             return Object.assign({}, state,  action.categories.categories )
 
-        case ADD_CATEGORY :
+        case ActionType.ADD_CATEGORY :
             const { name, pathName } = action.newCategory;
             console.log( name, pathName);
             return Object.assign({}, state, {
@@ -74,11 +75,11 @@ function postReducer( state = {
     }, action) {
 
     switch (action.type) {
-        case ALL_POSTS :
+        case ActionType.ALL_POSTS :
             return state;
 
 
-        case RECEIVE_POSTS :
+        case ActionType.RECEIVE_POSTS :
             // sort logic
                 let sortingPosts = action.posts.filter((post) => post.deleted !== true);
                 switch (state.sortKey) {
@@ -162,21 +163,21 @@ function postReducer( state = {
                 // end switch
             return Object.assign({}, state,  { openPost : false, items : sortingPosts, newPostForm : false } );
 
-        case SET_SORTKEY :
+        case ActionType.SET_SORTKEY :
             return {...state, sortKey : action.key };
 
 
-        case SET_TARGET:
+        case ActionType.SET_TARGET:
             return Object.assign({}, state,  { openPost : true , target : action.target} );
 
         //    close post also resets openTarget to prevent populating newPost form with data
-        case CLOSE_POST :
+        case ActionType.CLOSE_POST :
             return Object.assign({}, state,  { openPost : false } );
 
-        case NEW_POST :
+        case ActionType.NEW_POST :
             return Object.assign({}, state, {newPostForm: true });
 
-        case CREATE_POST :
+        case ActionType.CREATE_POST :
             return Object.assign({}, state,
                 {newPostForm: true },
                 {
@@ -195,14 +196,14 @@ function postReducer( state = {
             );
 
 
-        case EDIT_POST :
+        case ActionType.EDIT_POST :
             return Object.assign({}, state,  { editing : true, target: action.postData } );
 
-        case UPDATED_POST :
+        case ActionType.UPDATED_POST :
             console.log(action);
             return Object.assign({}, state, { items: [ action.updatedPost]} );
 
-        case CLEAR_TARGET :
+        case ActionType.CLEAR_TARGET :
             return {
                 ...state,
                 target: {
@@ -217,29 +218,29 @@ function postReducer( state = {
                 }
             }
 
-        case DELETE_POST :
+        case ActionType.DELETE_POST :
             console.log(action);
             let priorPosts = state.items;
             let newPostsState = priorPosts.filter( post => post.id !== action.deletePostId);
             return Object.assign({}, state, { openTarget : null, items: newPostsState} );
 
-        case CANCEL_EDIT :
+        case ActionType.CANCEL_EDIT :
             return Object.assign({}, state,  { editing : false, newPostForm : false } );
 
-        case POST_VOTE :
+        case ActionType.POST_VOTE :
             let currStateItems = state.items;
             let indexVoted = currStateItems.findIndex( (item) => item.id === action.postId);
             currStateItems[indexVoted].voteScore += action.vote;
             return Object.assign({}, state, {items: currStateItems}  );
             // return state;
 
-        case NEW_COMMENT :
+        case ActionType.NEW_COMMENT :
             return {...state, commentForm: true };
 
-        case CLOSE_COMMENT_FORM :
+        case ActionType.CLOSE_COMMENT_FORM :
             return {...state, commentForm: false};
 
-        case POST_COMMENT_TOTAL :
+        case ActionType.POST_COMMENT_TOTAL :
             let statePosts = state.items;
             let commentTotalIndex = statePosts.findIndex( (post) => post.id === action.id );
             statePosts[commentTotalIndex].commentTotal = action.commentTotal;
@@ -254,7 +255,7 @@ function postReducer( state = {
 function commentsReducer( state = {commentEditing: null, targetComment:null},
                           action) {
     switch (action.type) {
-        case COMMENT_VOTE :
+        case ActionType.COMMENT_VOTE :
             let parentId = action.votedComment.parentId;
             let parentKey = parentId + '-comments';
             let currComments = state[parentKey];
@@ -262,27 +263,27 @@ function commentsReducer( state = {commentEditing: null, targetComment:null},
             currComments[indexVoted].voteScore = action.votedComment.voteScore;
             return Object.assign({}, state, {[parentKey]: currComments} );
 
-        case RECEIVE_COMMENTS:
+        case ActionType.RECEIVE_COMMENTS:
             let commentKey = action.parentId +  '-comments';
             return Object.assign({}, state,  { [commentKey] : action.comments} );
 
-        case ADD_COMMENT :
+        case ActionType.ADD_COMMENT :
             let newCommentKey = action.comment.parentId +  '-comments';
             return {
                 ...state,
                 ...state[newCommentKey].push(action.comment)
             }
 
-        case DELETE_COMMENT :
+        case ActionType.DELETE_COMMENT :
             let deleteKey = action.parentId + '-comments';
             return {
                 ...state, [deleteKey] : state[deleteKey].filter((comment) => comment.id !== action.id)
             }
 
-        case EDIT_COMMENT :
+        case ActionType.EDIT_COMMENT :
             return { ...state, commentEditing : action.id, targetComment : action.comment }
 
-        case CLOSE_COMMENT_EDIT :
+        case ActionType.CLOSE_COMMENT_EDIT :
             return { ...state, commentEditing : null, targetComment : null }
 
         default :

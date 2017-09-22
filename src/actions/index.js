@@ -1,43 +1,46 @@
+import * as ActionType from './types'
+
+
 const uuidv4 = require('uuid/v4');
 
-export const ALL_POSTS = 'ALL_POSTS'
-export const ADD_CATEGORY = 'ADD_CATEGORY'
-export const FETCH_POSTS = 'FETCH_POSTS'
-export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
-export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
-export const SORT = 'SORT'
-export const CLOSE_POST = 'CLOSE_POST'
-export const EDIT_POST = 'EDIT_POST'
-export const CANCEL_EDIT = 'CANCEL_EDIT'
-export const UPDATED_POST = 'UPDATED_POST'
-export const NEW_POST = 'NEW_POST'
-export const DELETE_POST = 'DELETE_POST'
-export const POST_VOTE = 'POST_VOTE'
-export const SORTER = 'SORTER'
-export const SET_SORTKEY = 'SET_SORTKEY'
-export const CREATE_POST = 'CREATE_POST'
-export const CLEAR_TARGET = 'CLEAR_TARGET'
-export const SET_TARGET = 'SET_TARGET'
-export const NEW_COMMENT = 'NEW_COMMENT'
-export const ADD_COMMENT = 'ADD_COMMENT'
-export const DELETE_COMMENT = 'DELETE_COMMENT'
-export const EDIT_COMMENT = 'EDIT_COMMENT'
-export const CLOSE_COMMENT_FORM = 'CLOSE_COMMENT_FORM'
-export const CLOSE_COMMENT_EDIT = 'CLOSE_COMMENT_EDIT'
-export const COMMENT_VOTE = 'COMMENT_VOTE'
-export const POST_COMMENT_TOTAL = 'POST_COMMENT_TOTAL'
+// export const ALL_POSTS = 'ALL_POSTS'
+// export const ADD_CATEGORY = 'ADD_CATEGORY'
+// export const FETCH_POSTS = 'FETCH_POSTS'
+// export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+// export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
+// export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
+// export const SORT = 'SORT'
+// export const CLOSE_POST = 'CLOSE_POST'
+// export const EDIT_POST = 'EDIT_POST'
+// export const CANCEL_EDIT = 'CANCEL_EDIT'
+// export const UPDATED_POST = 'UPDATED_POST'
+// export const NEW_POST = 'NEW_POST'
+// export const DELETE_POST = 'DELETE_POST'
+// export const POST_VOTE = 'POST_VOTE'
+// export const SORTER = 'SORTER'
+// export const SET_SORTKEY = 'SET_SORTKEY'
+// export const CREATE_POST = 'CREATE_POST'
+// export const CLEAR_TARGET = 'CLEAR_TARGET'
+// export const SET_TARGET = 'SET_TARGET'
+// export const NEW_COMMENT = 'NEW_COMMENT'
+// export const ADD_COMMENT = 'ADD_COMMENT'
+// export const DELETE_COMMENT = 'DELETE_COMMENT'
+// export const EDIT_COMMENT = 'EDIT_COMMENT'
+// export const CLOSE_COMMENT_FORM = 'CLOSE_COMMENT_FORM'
+// export const CLOSE_COMMENT_EDIT = 'CLOSE_COMMENT_EDIT'
+// export const COMMENT_VOTE = 'COMMENT_VOTE'
+// export const POST_COMMENT_TOTAL = 'POST_COMMENT_TOTAL'
 
 export function allPosts () {
     return {
-        type: ALL_POSTS
+        type: ActionType.ALL_POSTS
     }
 }
 
 
 export  function addCategory( newCategory) {
     return {
-        type: ADD_CATEGORY,
+        type: ActionType.ADD_CATEGORY,
         newCategory : newCategory,
     }
 }
@@ -45,7 +48,7 @@ export  function addCategory( newCategory) {
 
 function receiveCategories(categories) {
     return {
-        type: RECEIVE_CATEGORIES,
+        type: ActionType.RECEIVE_CATEGORIES,
         categories: categories,
         receivedAt: Date.now()
     }
@@ -100,7 +103,7 @@ export function fetchCategoryPosts(category) {
 
 export function postVoting(postId, vote) {
     return {
-        type : POST_VOTE,
+        type : ActionType.POST_VOTE,
         vote : vote,
         postId : postId
     }
@@ -109,47 +112,47 @@ export function postVoting(postId, vote) {
 
 export function setSortKey(sortKey) {
     return {
-        type: SET_SORTKEY,
+        type: ActionType.SET_SORTKEY,
         key : sortKey
     }
 }
 
 export function cancelEdit() {
     return {
-        type: CANCEL_EDIT
+        type: ActionType.CANCEL_EDIT
     }
 }
 
 export function editPost(post) {
     console.log(post)
     return {
-        type: EDIT_POST,
+        type: ActionType.EDIT_POST,
         postData: post
     }
 }
 
 export function newPost() {
     return {
-        type: NEW_POST
+        type: ActionType.NEW_POST
     }
 }
 
 export function createPost(){
     return {
-        type: CREATE_POST
+        type: ActionType.CREATE_POST
     }
 }
 
 export function closePost() {
     return {
-        type: CLOSE_POST
+        type: ActionType.CLOSE_POST
     }
 }
 
 
 export function setTargetAction( post ) {
     return{
-        type: SET_TARGET,
+        type: ActionType.SET_TARGET,
         target : post
     }
 }
@@ -157,7 +160,7 @@ export function setTargetAction( post ) {
 export function receivePosts(posts) {
 
     return {
-        type: RECEIVE_POSTS,
+        type: ActionType.RECEIVE_POSTS,
         posts: posts,
         receivedAt: Date.now()
     }
@@ -165,7 +168,7 @@ export function receivePosts(posts) {
 
 function postCommentTotal( id, commentTotal) {
     return {
-        type: POST_COMMENT_TOTAL,
+        type: ActionType.POST_COMMENT_TOTAL,
         id : id,
         commentTotal : commentTotal
     }
@@ -190,12 +193,10 @@ export function fetchPosts() {
                 return response.json()
             })
             .then(data => {
-                console.log(data);
                 data.forEach(post => dispatch(fetchComments(post.id)))
                 return data;
             })
             .then(data => {
-                console.log( data );
                 dispatch(receivePosts( data ));
                 return data;
             })
@@ -207,7 +208,7 @@ export function fetchPosts() {
 // updatedPost is dispatached by updatePost
 function  updatedPost( updated ) {
     return {
-        type : UPDATED_POST,
+        type : ActionType.UPDATED_POST,
         updatedPost : updated,
         updatedAt : Date.now()
     }
@@ -216,14 +217,14 @@ function  updatedPost( updated ) {
 
 function clearTarget(){
     return {
-        type: CLEAR_TARGET
+        type: ActionType.CLEAR_TARGET
     }
 }
 
 //
 function  deletePost( postId ) {
     return {
-        type : DELETE_POST,
+        type : ActionType.DELETE_POST,
         deletePostId : postId,
         updatedAt : Date.now()
     }
@@ -249,12 +250,10 @@ export function sendVote(postId, vote) {
     return dispatch => {
         return fetch(url, fetchParams)
             .then(() => {
-                console.log('post vote success');
                 dispatch(postVoting(postId, vote))
             })
             .then(dispatch(fetchPosts()))
     }
-
 }
 
 export function updatePost(data) {
@@ -310,7 +309,6 @@ export function SendNewPost(data) {
     return dispatch => {
         return fetch(url, fetchParams)
             .then(() => {
-                console.log('post new post success');
             })
             .then(dispatch(fetchPosts()))
             .then(dispatch(cancelEdit()))
@@ -352,7 +350,7 @@ export function deletePostAction( postId) {
 function receiveComments(id, comments) {
     console.log('received comments', comments)
     return {
-        type: RECEIVE_COMMENTS,
+        type: ActionType.RECEIVE_COMMENTS,
         comments : comments.filter((comment) => comment.deleted === false),
         parentId : id,
         receivedAt: Date.now()
@@ -389,20 +387,20 @@ export function fetchComments(id) {
 
 export function newComment() {
     return {
-        type : NEW_COMMENT
+        type : ActionType.NEW_COMMENT
     }
 }
 
 function addComment(comment) {
     return {
-        type : ADD_COMMENT,
+        type : ActionType.ADD_COMMENT,
         comment : comment
     }
 }
 
 function deleteComment(id, parentId) {
     return {
-        type : DELETE_COMMENT,
+        type : ActionType.DELETE_COMMENT,
         id: id,
         parentId : parentId
     }
@@ -410,7 +408,7 @@ function deleteComment(id, parentId) {
 
 export function editComment(comment) {
     return {
-        type : EDIT_COMMENT,
+        type : ActionType.EDIT_COMMENT,
         id : comment.id,
         comment : comment
     }
@@ -418,20 +416,20 @@ export function editComment(comment) {
 
 export function closeCommentForm(){
     return {
-        type: CLOSE_COMMENT_FORM
+        type: ActionType.CLOSE_COMMENT_FORM
     }
 }
 
 export function closeCommentEditForm() {
     return {
-        type : CLOSE_COMMENT_EDIT
+        type : ActionType.CLOSE_COMMENT_EDIT
     }
 
 }
 
 function commentVote(votedComment) {
     return {
-        type : COMMENT_VOTE,
+        type : ActionType.COMMENT_VOTE,
         votedComment : votedComment
     }
     
@@ -503,11 +501,9 @@ export function sendNewComment( data, parentId ) {
     return dispatch => {
         return fetch(`http://localhost:5001/comments`, fetchParams)
             .then(response => {
-                console.log( response );
                 return response.json()
             })
             .then(data => {
-                console.log(data);
                 dispatch(addComment(data))
             })
             .then(dispatch(closeCommentForm()))
