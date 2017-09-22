@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 
 // redux-form imports
 import { reducer as formReducer } from 'redux-form'
-
+import '../actions/types'
 import {
     ADD_CATEGORY,
     ALL_POSTS,
@@ -29,7 +29,6 @@ import {
     COMMENT_VOTE,
     POST_COMMENT_TOTAL
 } from '../actions'
-
 
 function categoryReducer(state = {}, action) {
     switch (action.type) {
