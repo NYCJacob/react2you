@@ -13,12 +13,12 @@ import { sendDeleteComment, editComment, sendVoteComment, sendEditComment} from 
  */
 class SingleComment extends Component {
     render() {
-        const {id, parentId, voteScore,author, body} = this.props.comment
+        const {id, parentId, voteScore,author, body} = this.props.commentStore
 
         return (
             <div>
 
-                { ( this.props.editing && id === this.props.target.id ) ? <CommentForm/> :
+                { ( this.props.editing && id === this.props.target.id ) ? <CommentForm initialValues={this.props.commentStore}/> :
                    <div className="comment-text">
                        <div className="row">
                            <div className="col-sm text-left">

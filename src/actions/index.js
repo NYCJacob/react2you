@@ -398,6 +398,13 @@ function addComment(comment) {
     }
 }
 
+function updateComment( comment ) {
+    return {
+        type : ActionType.UPDATE_COMMENT,
+        comment : comment
+    }
+}
+
 function deleteComment(id, parentId) {
     return {
         type : ActionType.DELETE_COMMENT,
@@ -511,6 +518,24 @@ export function sendNewComment( data, parentId ) {
 }
 
 
-export function sendEditComment() {
-    
+export function sendEditComment( data ) {
+    const fetchHeaders = new Headers();
+    fetchHeaders.append("Content-Type", "application/json");
+    fetchHeaders.append('Authorization', 'whatever-you-want');
+    let dataBody = { timestamp: Date.now(), body: data.body };
+    const fetchParams = {
+        method : 'PUT',
+        headers : fetchHeaders,
+        mode : 'cors',
+        cache : 'default',
+        body : JSON.stringify( dataBody)
+    }
+    let url = `http://localhost:5001/comments/${data.id}`;
+    return dispatch => {
+        return fetch(url, fetchParams)
+            .then(() => {
+                dispatch(updateComment( data ))
+            })
+            .then(dispatch(closeCommentEditForm()))
+    }
 }

@@ -78,7 +78,6 @@ function postReducer( state = {
         case ActionType.ALL_POSTS :
             return state;
 
-
         case ActionType.RECEIVE_POSTS :
             // sort logic
                 let sortingPosts = action.posts.filter((post) => post.deleted !== true);
@@ -200,7 +199,6 @@ function postReducer( state = {
             return Object.assign({}, state,  { editing : true, target: action.postData } );
 
         case ActionType.UPDATED_POST :
-            console.log(action);
             return Object.assign({}, state, { items: [ action.updatedPost]} );
 
         case ActionType.CLEAR_TARGET :
@@ -274,17 +272,25 @@ function commentsReducer( state = {commentEditing: false, targetComment:{}},
                 ...state[newCommentKey].push(action.comment)
             }
 
+        case ActionType.EDIT_COMMENT :
+            return { ...state, commentEditing : true, targetComment : action.comment }
+
+        case ActionType.UPDATE_COMMENT :
+            let postCommentsKey = `${action.comment.parentId}-comments`;
+            let currCommentsArray = state[postCommentsKey];
+            let commentIndex = currCommentsArray.findIndex( (item) => item.id === action.comment.id )
+            currCommentsArray[commentIndex] = action.comment;
+            return Object.assign({}, state, { [postCommentsKey]: currCommentsArray})
+
+
         case ActionType.DELETE_COMMENT :
             let deleteKey = action.parentId + '-comments';
             return {
                 ...state, [deleteKey] : state[deleteKey].filter((comment) => comment.id !== action.id)
             }
 
-        case ActionType.EDIT_COMMENT :
-            return { ...state, commentEditing : true, targetComment : action.comment }
-
         case ActionType.CLOSE_COMMENT_EDIT :
-            return { ...state, commentEditing : false, targetComment : null }
+            return { ...state, commentEditing : false, targetComment : {} }
 
         default :
             return state;
