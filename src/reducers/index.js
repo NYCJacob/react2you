@@ -252,7 +252,7 @@ function postReducer( state = {
     }
 }
 
-function commentsReducer( state = {commentEditing: null, targetComment:null},
+function commentsReducer( state = {commentEditing: false, targetComment:{}},
                           action) {
     switch (action.type) {
         case ActionType.COMMENT_VOTE :
@@ -281,10 +281,10 @@ function commentsReducer( state = {commentEditing: null, targetComment:null},
             }
 
         case ActionType.EDIT_COMMENT :
-            return { ...state, commentEditing : action.id, targetComment : action.comment }
+            return { ...state, commentEditing : true, targetComment : action.comment }
 
         case ActionType.CLOSE_COMMENT_EDIT :
-            return { ...state, commentEditing : null, targetComment : null }
+            return { ...state, commentEditing : false, targetComment : null }
 
         default :
             return state;

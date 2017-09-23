@@ -18,7 +18,7 @@ class SingleComment extends Component {
         return (
             <div>
 
-                { ( this.props.editing === id )? <CommentForm/> :
+                { ( this.props.editing && id === this.props.target.id ) ? <CommentForm/> :
                    <div className="comment-text">
                        <div className="row">
                            <div className="col-sm text-left">
@@ -50,6 +50,7 @@ class SingleComment extends Component {
 function mapStateToProps(state, props) {
     return {
         editing : state.comments.commentEditing,
+        target : _.cloneDeep( state.comments.targetComment ),
         commentStore : _.cloneDeep((state.comments[props.comment.parentId + '-comments'] || []).find( (obj) => obj.id === props.comment.id))
     }
 }
