@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import * as _ from "lodash";
 
 import {
-    setTargetAction, newPost, SendNewPost, createPost, sendVote, setSortKey, receivePosts,
+    setTargetAction, newPost, createPost, sendVote, setSortKey, receivePosts,
     editPost, deletePostAction
 } from "../actions/index"
 

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types';
-import { closeCommentForm, closeCommentEditForm, sendNewComment, sendEditComment } from "../actions/index"
+import { closeCommentEditForm, sendNewComment, sendEditComment } from "../actions/index"
 // redux form import
 import { Field, reduxForm } from 'redux-form'
-import {renderField, renderFieldcommentBody, renderFieldcommentAuthor, required, maxLength15, minLength2, alphaNumeric} from "../utils/formValidation"
+import {renderField, renderFieldcommentBody, renderFieldcommentAuthor, required} from "../utils/formValidation"
 
 
 /**

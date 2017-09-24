@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as _ from "lodash";
 import CommentForm from './CommentForm'
-import { sendDeleteComment, editComment, sendVoteComment, sendEditComment} from "../actions/index"
+import { sendDeleteComment, editComment, sendVoteComment} from "../actions/index"
 
 
 /**
@@ -12,6 +12,15 @@ import { sendDeleteComment, editComment, sendVoteComment, sendEditComment} from 
  *
  */
 class SingleComment extends Component {
+    static propTypes = {
+        deleteComment : PropTypes.func.isRequired,
+        editComment : PropTypes.func.isRequired,
+        voteComment : PropTypes.func.isRequired,
+        editing: PropTypes.bool.isRequired,
+        commentStore: PropTypes.object.isRequired,
+        target: PropTypes.object.isRequired
+    }
+
     render() {
         const {id, parentId, voteScore,author, body} = this.props.commentStore
 

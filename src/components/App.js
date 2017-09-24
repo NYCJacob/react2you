@@ -11,7 +11,6 @@ import {fetchCategories} from "../actions/index";
 import SinglePost from "./SinglePost";
 import { NoMatch } from  './404.js'
 
-var Spinner = require('react-spinkit');
 
 
 class App extends Component {

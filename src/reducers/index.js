@@ -4,32 +4,6 @@ import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import * as ActionType from '../actions/types'
 
-import {
-    ADD_CATEGORY,
-    ALL_POSTS,
-    RECEIVE_POSTS,
-    RECEIVE_CATEGORIES,
-    RECEIVE_COMMENTS,
-    CLOSE_POST,
-    EDIT_POST,
-    CANCEL_EDIT,
-    UPDATED_POST,
-    NEW_POST,
-    DELETE_POST,
-    POST_VOTE,
-    SET_SORTKEY,
-    CREATE_POST,
-    CLEAR_TARGET,
-    SET_TARGET,
-    NEW_COMMENT,
-    ADD_COMMENT,
-    DELETE_COMMENT,
-    EDIT_COMMENT,
-    CLOSE_COMMENT_FORM,
-    CLOSE_COMMENT_EDIT,
-    COMMENT_VOTE,
-    POST_COMMENT_TOTAL
-} from '../actions'
 
 function categoryReducer(state = {}, action) {
     switch (action.type) {

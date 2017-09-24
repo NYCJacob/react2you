@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter } from 'react-router-dom'
-import {Spinner} from 'react-spinner'
 import PropTypes from 'prop-types';
 import { fetchComments, newComment} from "../actions/index"
 import SingleComment from './SingleComment'
@@ -23,17 +22,16 @@ class Comments extends Component {
     componentDidMount() {
         if (this.props.postId) {
             this.props.dispatch(fetchComments(this.props.postId))
-            //TODO: this still does not solve refresh error for comments, shows no comments and lists number of comment as 1
             // {console.log(this.props.match.params.postId)}
             //  this.props.dispatch(fetchComments(this.props.match.params.postId))
         } else {
+            //TODO: this still does not solve refresh error show empty page rather than component in route
             this.props.history.push("/404.html")
         }
 
     }
 
     render() {
-        const {category, postId} = this.props;
 
         return (
 

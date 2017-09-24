@@ -1,4 +1,4 @@
-import React, {Children} from 'react';
+import React from 'react';
 
 
 
@@ -9,10 +9,7 @@ export const maxLength15 = maxLength(15)
 export const minLength = min => value =>
     value && value.length < min ? `Must be ${min} characters or more` : undefined
 export const minLength2 = minLength(2)
-const number = value =>
-    value && isNaN(Number(value)) ? 'Must be a number' : undefined
-const minValue = min => value =>
-    value && value < min ? `Must be at least ${min}` : undefined
+
 export const alphaNumeric = value =>
     value && /[^a-zA-Z0-9 ]/i.test(value)
         ? 'Only alphanumeric characters'

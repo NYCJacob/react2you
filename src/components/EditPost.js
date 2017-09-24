@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom'
-import {cancelEdit, updatePost, SendNewPost} from "../actions/index"
+import {updatePost, SendNewPost} from "../actions/index"
 // redux form import
 import { Field, reduxForm } from 'redux-form'
 import {
-    renderField, renderFieldcommentBody, renderFieldTitle, renderFieldcommentAuthor, required, maxLength15, minLength2,
+    renderFieldTitle, required, maxLength15, minLength2,
     alphaNumeric, renderFieldAuthor, renderFieldBody, renderFieldSelect
 } from "../utils/formValidation"
 
