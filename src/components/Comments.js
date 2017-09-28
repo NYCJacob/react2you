@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import * as _ from "lodash";
+
 import { connect } from 'react-redux';
 import {withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
@@ -63,7 +65,7 @@ function mapStateToProps( state, props ) {
     let commentsKey = props.postId + '-comments';
     let postComments = [];
     if (state.comments[commentsKey]){
-        postComments = state.comments[commentsKey];
+        postComments = _.cloneDeep(state.comments[commentsKey]) ;
     } else {
         postComments.push({'body': 'no comments'});
     }
