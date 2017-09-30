@@ -18,9 +18,9 @@ class SinglePost extends Component {
     }
 
     componentDidMount() {
-        // if (!this.props.thisPost) {
-        //     this.props.history.push("/404")
-        // }
+        if (!this.props.thisPost) {
+            this.props.history.push("/404")
+        }
     }
 
     render() {

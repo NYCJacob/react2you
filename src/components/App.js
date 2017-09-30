@@ -9,7 +9,7 @@ import Posts from './Posts';
 import EditPost  from './EditPost'
 import {fetchCategories} from "../actions/index";
 import SinglePost from "./SinglePost";
-import { NoMatch } from  './404.js'
+import { NoMatch} from "./404"
 
 
 
@@ -37,7 +37,8 @@ class App extends Component {
                     <Route path="/:category/:postId" component={SinglePost} />
                     {/*cagtegory views routes*/}
                     <Route path="/:category" component={Posts} />
-                    <Route component={NoMatch} />
+                    {/*<Route component={NoMatch} />*/}
+                    <Route exact path="/404" component= {NoMatch} />
                 </Switch>
 
 
