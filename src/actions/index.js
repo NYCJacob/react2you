@@ -126,13 +126,6 @@ export function receivePosts(posts) {
     }
 }
 
-function postCommentTotal( id, commentTotal) {
-    return {
-        type: ActionType.POST_COMMENT_TOTAL,
-        id : id,
-        commentTotal : commentTotal
-    }
-}
 
 
 //  https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
@@ -153,8 +146,10 @@ export function fetchPosts() {
                 return response.json()
             })
             .then(data => {
-                data.forEach(post => dispatch(fetchComments(post.id)))
-                return data;
+                // filter out deleted = true posts   //////////////////////////////////////////
+                let notDeletedPost = data.filter( (post) => post.deleted === false);
+                notDeletedPost.forEach(post => dispatch(fetchComments(post.id)))
+                return notDeletedPost;
             })
             .then(data => {
                 dispatch(receivePosts( data ));
@@ -329,6 +324,13 @@ function receiveComments(id, comments) {
     }
 }
 
+function postCommentTotal( id, commentTotal) {
+    return {
+        type: ActionType.POST_COMMENT_TOTAL,
+        id : id,
+        commentTotal : commentTotal
+    }
+}
 
 export function fetchComments(id) {
     const fetchHeaders = new Headers();
