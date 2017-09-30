@@ -13,18 +13,17 @@ import { closePost, editPost, deletePostAction, sendVote} from '../actions'
  */
 class SinglePost extends Component {
     static propTypes = {
-        thisPost : PropTypes.array.isRequired,
+        thisPost : PropTypes.object.isRequired,
         editable: PropTypes.bool.isRequired
     }
 
     componentDidMount() {
-
+        // if (!this.props.thisPost) {
+        //     this.props.history.push("/404")
+        // }
     }
 
     render() {
-        if (!this.props.thisPost) {
-            this.props.history.push("/404")
-        }
 
         const { title, author, category, voteScore, body, id, timestamp } = this.props.thisPost;
 

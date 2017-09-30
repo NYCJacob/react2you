@@ -102,17 +102,6 @@ export function editPost(post) {
     }
 }
 
-export function newPost() {
-    return {
-        type: ActionType.NEW_POST
-    }
-}
-
-export function createPost(){
-    return {
-        type: ActionType.CREATE_POST
-    }
-}
 
 export function closePost() {
     return {
@@ -248,12 +237,29 @@ export function updatePost(data) {
 }
 
 
+export function newPost(data) {
+    return {
+        type: ActionType.NEW_POST
+    }
+}
+
+export function createPost( data ){
+    return {
+        type: ActionType.CREATE_POST,
+        newPost : data
+    }
+}
+
 export function SendNewPost(data) {
     console.log( data );
     const fetchHeaders = new Headers();
     fetchHeaders.append("Content-Type", "application/json");
     fetchHeaders.append('Authorization', 'whatever-you-want');
 
+    // when user does not make a selection eventhough react selected in ui by default empty string is passed
+    if (data.category === "") {
+        data.category = "react";
+    }
     const dataBody = {
         id : uuidv4(),
         timestamp : Date.now(),
@@ -274,8 +280,8 @@ export function SendNewPost(data) {
     let url = `http://localhost:5001/posts`;
     return dispatch => {
         return fetch(url, fetchParams)
-            .then(() => {
-            })
+            // .then(dispatch(newPost(data)))
+            .then(dispatch( createPost( data )))
             .then(dispatch(fetchPosts()))
             .then(dispatch(cancelEdit()))
     }

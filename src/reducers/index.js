@@ -37,7 +37,7 @@ function postReducer( state = {
         body: '',
         id: '',
         timestamp: null,
-        commentTotal: null
+        commentTotal: 0
     },
     openPost : false,
     commentForm : false,
@@ -151,6 +151,8 @@ function postReducer( state = {
             return Object.assign({}, state, {newPostForm: true });
 
         case ActionType.CREATE_POST :
+            let currPosts = state.items;
+            let newPosts = currPosts.push(action.newPost)
             return Object.assign({}, state,
                 {newPostForm: true },
                 {
@@ -163,8 +165,9 @@ function postReducer( state = {
                         body: '',
                         id: '',
                         timestamp: null,
-                        commentTotal:null
-                    }
+                        commentTotal: 0
+                    },
+                    items: [...newPosts]
                 }
             );
 
