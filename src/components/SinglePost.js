@@ -18,12 +18,17 @@ class SinglePost extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.thisPost) {
-            this.props.history.push("/404")
-        }
+        // if (!this.props.thisPost) {
+        //     this.props.history.push("/404")
+        // }
+
     }
 
     render() {
+        if (!this.props.thisPost) {
+            return <div>Sorry that post no longer exists, check out the current posts <Link to="/">here </Link></div>
+        }
+
 
         const { title, author, category, voteScore, body, id, timestamp } = this.props.thisPost;
 
@@ -76,6 +81,8 @@ class SinglePost extends Component {
             </div>
         )
     }
+
+
 }
 
 function mapStateToProps(state, props) {
