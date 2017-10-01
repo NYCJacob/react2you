@@ -184,7 +184,7 @@ function postReducer( state = {
                 target: {
                     title: '',
                     author: '',
-                    category: '',
+                    category: 'react',
                     voteScore: '',
                     deleted: false,
                     body: '',
