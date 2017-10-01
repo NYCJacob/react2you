@@ -4,6 +4,7 @@ import * as _ from "lodash";
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom'
 import Comments from './Comments'
+import { NoMatch } from './404'
 import { closePost, editPost, deletePostAction, sendVote} from '../actions'
 
 
@@ -26,7 +27,9 @@ class SinglePost extends Component {
 
     render() {
         if (!this.props.thisPost) {
-            return <div>Sorry that post no longer exists, check out the current posts <Link to="/">here </Link></div>
+            return (
+                <NoMatch/>
+            )
         }
 
 
@@ -65,7 +68,7 @@ class SinglePost extends Component {
                                     </Link>
                                 </td>
                                 <td colSpan={2} className="text-right">
-                                    <button className="btn btn-sm btn-outline-danger" onClick={() => this.props.deletePost(id)}>Delete</button>
+                                    <button className="btn btn-sm btn-outline-danger" onClick={() => {this.props.deletePost(id); this.props.history.push("/")} }>Delete</button>
                                 </td>
                             </tr>
                             <tr className="table-info">

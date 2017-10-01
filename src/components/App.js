@@ -38,7 +38,7 @@ class App extends Component {
                     {/*cagtegory views routes*/}
                     <Route path="/:category" component={Posts} />
                     {/*<Route component={NoMatch} />*/}
-                    <Route exact path="/404" component= {NoMatch} />
+                    {/*<Route exact path="/404" component= {NoMatch} />*/}
                 </Switch>
 
 

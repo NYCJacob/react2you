@@ -1,7 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
-export const NoMatch = ({ location }) => (
+
+
+export const NoMatch = () => (
     <div>
-        <h3>Sorry your page could not be found <code>{location.pathname}</code></h3>
+        <div>Sorry your page could not be found. Check out the current posts <Link to="/">here.</Link></div>
     </div>
 )
